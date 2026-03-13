@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOP: PerfoTec Liner</title>
+    <!-- Fonts from Google: League Spartan (Headings) and Inter (Body) as per Brand Guidelines -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=League+Spartan:wght@500;700;800&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            /* PerfoTec Brand Colors */
+            --pt-green: #007C27;
+            --pt-blue: #054E9A;
+            --pt-dark: #211A1A;
+            --pt-gray: #E9E9E9;
+            --pt-white: #ffffff;
+            --pt-alert: #D32F2F;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--pt-dark);
+            background-color: #F4F6F8;
+            margin: 0;
+            padding: 0;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'League Spartan', sans-serif;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        /* --- LAYOUT & CONTAINER --- */
+        .container {
+            max-width: 210mm; /* A4 width approx */
+            margin: 20px auto;
+            background: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            padding: 40px;
+            position: relative;
+        }
+
+        /* --- HEADER --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-bottom: 3px solid var(--pt-green);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .logo-img {
+            height: 55px;
+            width: auto;
+            object-fit: contain;
+            margin-bottom: 5px;
+        }
+
+        .header-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            padding-right: 0;
+            margin-top: 20px;
+        }
+
+        /* Language Select Styling - ABSOLUTE POSITIONING */
+        .lang-wrapper {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            z-index: 100;
+        }
+
+        .lang-select {
+            background: var(--pt-blue);
+            color: white;
+            border: none;
+            padding: 6px 10px;
+            cursor: pointer;
+            font-family: 'League Spartan', sans-serif;
+            font-weight: bold;
+            border-radius: 4px;
+            font-size: 11px;
+            outline: none;
+            appearance: none;
+            -webkit-appearance: none;
+            text-align: center;
+        }
+        
+        .lang-select option {
+            background: white;
+            color: black;
+        }
+
+        /* --- INTRO --- */
+        .intro-box {
+            background: linear-gradient(to right, var(--pt-gray), white);
+            padding: 12px 15px;
+            border-left: 5px solid var(--pt-blue);
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            font-size: 13px;
+        }
+
+        .objective {
+            font-weight: 600;
+            color: var(--pt-blue);
+        }
+
+        /* --- PROCESS BANNER --- */
+        .process-banner {
+            width: 100%;
+            text-align: center;
+            margin: 0 0 25px 0;
+            padding: 15px 20px;
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            box-sizing: border-box;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+        
+        .process-banner img {
+            width: 100%;
+            max-height: 65px;
+            object-fit: contain;
+        }
+
+        /* --- GRID LAYOUT FOR STEPS --- */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 280px;
+            gap: 20px;
+            align-items: start;
+        }
+
+        .steps-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        /* --- STEP CARDS --- */
+        .phase-title {
+            color: var(--pt-green);
+            font-size: 15px;
+            font-weight: 800;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 3px;
+            margin-top: 5px;
+            margin-bottom: 3px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .step-card {
+            background: white;
+            border: 1px solid #eee;
+            border-radius: 6px;
+            padding: 8px 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-left: 4px solid transparent;
+            position: relative;
+        }
+
+        .step-card:hover {
+            background: #f9f9f9;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--pt-green);
+        }
+        
+        .step-card.active {
+            background: #f0f7f2;
+            border-left: 4px solid var(--pt-green);
+            border-color: var(--pt-green);
+        }
+
+        .step-header {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 700;
+            margin-bottom: 2px;
+            color: var(--pt-dark);
+            font-size: 14px;
+        }
+
+        .step-instruction {
+            font-size: 12px;
+            color: #222;
+            line-height: 1.35;
+        }
+
+        .step-icon {
+            color: var(--pt-blue);
+            margin-right: 5px;
+        }
+
+        .warning-text {
+            color: var(--pt-alert);
+            font-weight: 700;
+            font-size: 11px;
+            display: block;
+            margin-top: 2px;
+        }
+
+        /* --- RIGHT SIDEBAR (STICKY) --- */
+        .right-sidebar {
+            position: sticky;
+            top: 20px;
+            background: var(--pt-gray);
+            border-radius: 8px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            /* Prevent overflow/scrollbars inside the box itself if possible */
+            box-sizing: border-box;
+            overflow: visible; 
+        }
+
+        /* STATIC IMAGE - FIXED STYLE */
+        .pallet-overview-img {
+            width: 100%;
+            height: auto;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 4px;
+            background: #fff; 
+            border: 1px solid #ddd; 
+            flex-shrink: 0;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* MEDIA PLACEHOLDER (VIDEO) */
+        .media-container {
+            width: 100%;
+            position: relative;
+        }
+
+        .media-placeholder {
+            width: 100%;
+            height: 150px;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden; /* Ensures no scrollbars inside video box */
+            background-size: cover;
+            background-position: center;
+            border: 1px solid #ccc;
+            cursor: pointer;
+        }
+        
+        .media-placeholder::before {
+            content: '';
+            position: absolute;
+            top:0; left:0; right:0; bottom:0;
+            background: rgba(0,0,0,0.05);
+            transition: background 0.2s;
+        }
+        
+        .media-placeholder:hover::before {
+            background: rgba(0,0,0,0.1);
+        }
+
+        .play-btn {
+            width: 40px;
+            height: 40px;
+            background: var(--pt-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 16px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 2;
+            transition: transform 0.2s;
+        }
+        
+        .media-placeholder:hover .play-btn {
+            transform: scale(1.1);
+        }
+
+        /* FIXED OVERLAP */
+        .media-caption {
+            font-size: 11px;
+            color: #666;
+            margin-top: 8px; /* Positive margin to prevent overlap */
+            margin-bottom: 0px;
+            font-style: italic;
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        /* --- TIPS BOX --- */
+        .tips-box {
+            text-align: left;
+            background: white;
+            padding: 10px;
+            border-radius: 4px;
+            border-left: 3px solid var(--pt-green);
+        }
+
+        /* --- LIGHTBOX / MODAL STYLES --- */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1000; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgba(0,0,0,0.8); 
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s;
+        }
+
+        .modal-content-wrapper {
+            position: relative;
+            width: 80%;
+            max-width: 800px;
+            background: black;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            overflow: hidden;
+            animation: zoomIn 0.3s;
+        }
+
+        .modal-video-display {
+            width: 100%;
+            height: 450px;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-family: 'League Spartan', sans-serif;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Simulation Progress Bar */
+        .progress-bar-bg {
+            width: 60%;
+            height: 6px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: var(--pt-green);
+            transition: width 0.1s linear;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            color: #f1f1f1;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .close-modal:hover,
+        .close-modal:focus {
+            color: var(--pt-green);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
+        @keyframes zoomIn { from {transform: scale(0.9);} to {transform: scale(1);} }
+
+
+        /* --- CHECKLIST --- */
+        .checklist-section {
+            margin-top: 20px;
+            background: var(--pt-dark);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        
+        .checklist-section h3 {
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .checklist-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .check-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+        }
+
+        .check-box {
+            min-width: 14px;
+            height: 14px;
+            border: 1px solid white;
+            border-radius: 2px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            margin-top: 20px;
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 9px;
+            color: #888;
+        }
+
+        /* --- RTL OVERRIDES --- */
+        [dir="rtl"] .header-info { align-items: flex-start; padding-right: 0; padding-left: 0; }
+        [dir="rtl"] .lang-wrapper { right: 40px; left: auto; }
+        [dir="rtl"] .intro-box { border-left: none; border-right: 5px solid var(--pt-blue); background: linear-gradient(to left, var(--pt-gray), white); }
+        [dir="rtl"] .step-card { border-left: 1px solid #eee; border-right: 4px solid transparent; }
+        [dir="rtl"] .step-card:hover, [dir="rtl"] .step-card.active { border-left: 1px solid #eee; border-right: 4px solid var(--pt-green); }
+        [dir="rtl"] .step-icon { margin-right: 0; margin-left: 5px; }
+        [dir="rtl"] .intro-box div[style="text-align: right;"] { text-align: left !important; }
+        [dir="rtl"] .media-caption { text-align: center; }
+        [dir="rtl"] .tips-box { text-align: right; border-left: none; border-right: 3px solid var(--pt-green); }
+        [dir="rtl"] .tips-box ul { padding-left: 0; padding-right: 15px; }
+        [dir="rtl"] .protection-list { margin: 5px 15px 5px 0 !important; }
+
+        /* --- PRINT STYLES --- */
+        @media print {
+            body { background: white; -webkit-print-color-adjust: exact; font-size: 11px; }
+            .container { box-shadow: none; padding: 0; width: 100%; max-width: 100%; margin: 0; }
+            .lang-wrapper { display: none; }
+            .process-banner { border: none; padding: 5px 0; margin: 10px 0; box-shadow: none; }
+            .process-banner img { max-height: 50px; }
+            .main-content { display: block; }
+            .right-sidebar { display: none; } 
+            
+            .intro-box { padding: 8px; margin-bottom: 10px; background: #eee !important; border-left: 5px solid var(--pt-blue) !important; }
+            [dir="rtl"] .intro-box { border-left: none !important; border-right: 5px solid var(--pt-blue) !important; }
+            .step-card { border: none; border-bottom: 1px dotted #ccc; padding: 4px 0; page-break-inside: avoid; }
+            .step-card:hover { background: none; border-left: none; border-right: none;}
+            .phase-title { margin-top: 10px; font-size: 13px; color: var(--pt-green) !important; }
+            .checklist-section { background: #333 !important; color: white !important; padding: 10px; margin-top: 10px; page-break-inside: avoid; }
+            h1 { font-size: 20px; color: var(--pt-green) !important; }
+            .steps-container { gap: 5px; }
+            .step-header { font-size: 12px; margin-bottom: 1px;}
+            .step-instruction { font-size: 11px; display: block !important; }
+            header { align-items: center; }
+            .header-info { padding-right: 0; align-items: flex-end; }
+            [dir="rtl"] .header-info { align-items: flex-start; }
+            footer { display: flex; margin-top: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    
+    <!-- Language Dropdown -->
+    <div class="lang-wrapper">
+        <select id="langSelect" onchange="changeLanguage(this.value)" class="lang-select">
+            <option value="en">English (US)</option>
+            <option value="nl" selected>Nederlands</option>
+            <option value="es">Español</option>
+            <option value="fr">Français</option>
+            <option value="pt">Português</option>
+            <option value="ar">العربية</option>
+        </select>
+    </div>
+
+    <header>
+        <div class="logo-area">
+            <img src="https://cdn.prod.website-files.com/68b594c756c22085ddc6c1ea/68b59ba2f027bfeecd25261b_PerfoTec%20logo.png" alt="PerfoTec Logo" class="logo-img">
+        </div>
+        <div class="header-info">
+            <h1 data-key="title">LINER - INPAK PROTOCOL</h1>
+        </div>
+    </header>
+
+    <div class="intro-box">
+        <div>
+            <div class="objective"><i class="fa-solid fa-bullseye"></i> <span data-key="objectiveLabel">DOEL:</span></div>
+            <span data-key="objectiveText">Correct gebruik van de PerfoTec Liner voor maximale product houdbaarheid.</span>
+        </div>
+        <div style="text-align: right;">
+            <i class="fa-solid fa-temperature-arrow-down" style="color:var(--pt-blue)"></i> <b data-key="tempAlert">DIRECT TERUGKOELEN IS CRUCIAAL</b>
+        </div>
+    </div>
+
+    <!-- VERPAKKINGSPROCES SVG BANNER -->
+    <div class="process-banner">
+        <img src="https://cdn.prod.website-files.com/68b594c756c22085ddc6c1ea/68cbfe4502f7a82af57f14c4_bulk%20packaging.svg" alt="Verpakkingsproces Overzicht">
+    </div>
+
+    <div class="main-content">
+        <!-- LEFT: STEPS -->
+        <div class="steps-container">
+
+            <!-- PHASE 1 -->
+            <div class="phase-title"><i class="fa-solid fa-clipboard-check"></i> <span data-key="phase1">FASE 1: VOORBEREIDING</span></div>
+            
+            <div class="step-card" onclick="showMedia('materials')">
+                <div class="step-header">
+                    <span>1.1 <span data-key="selectLiner">Juiste Liner Selecteren</span></span>
+                    <i class="fa-solid fa-microscope step-icon"></i>
+                </div>
+                <div class="step-instruction" data-key="selectLinerInst">
+                    Kies de juiste Liner op basis van product, bewaartemperatuur (0-5 °C) en gewicht. Gebruik de <b>Fast Respiration Meter (FRM)</b> om vooraf de correcte transmissie te bepalen.
+                </div>
+            </div>
+
+            <div class="step-card" onclick="showMedia('prep')">
+                <div class="step-header">
+                    <span>1.2 <span data-key="prepProduct">Product Voorbereiding</span></span>
+                    <i class="fa-solid fa-temperature-low step-icon"></i>
+                </div>
+                <div class="step-instruction" data-key="prepProductInst">
+                    Koel het product direct na de oogst zo dicht mogelijk terug naar de opslagtemperatuur. Beperk handling tot een absoluut minimum.
+                </div>
+            </div>
+
+            <!-- PHASE 2 -->
+            <div class="phase-title"><i class="fa-solid fa-box-open"></i> <span data-key="phase2">FASE 2: INPAKKEN</span></div>
+
+            <div class="step-card" onclick="showMedia('place')">
+                <div class="step-header">
+                    <span>2.1 <span data-key="placeLiner">Liner Plaatsen</span></span>
+                    <i class="fa-regular fa-square step-icon"></i>
+                </div>
+                <div class="step-instruction" data-key="placeLinerInst">
+                    Plaats een lege Liner in een krat of doos. Vouw het open uiteinde van de Liner over de buitenste randen van de krat heen.
+                </div>
+            </div>
+
+            <div class="step-card" onclick="showMedia('fill')">
+                <div class="step-header">
+                    <span>2.2 <span data-key="fillLiner">Vullen & Ontluchten</span></span>
+                    <i class="fa-solid fa-leaf step-icon"></i>
+                </div>
+                <div class="step-instruction" data-key="fillLinerInst">
+                    Verpak uitsluitend gezond, vers, droog en gekoeld product. Knijp na het vullen zachtjes in de Liner om alle overtollige lucht te verwijderen.
+                </div>
+            </div>
+
+            <!-- PHASE 3 -->
+            <div class="phase-title"><i class="fa-solid fa-lock"></i> <span data-key="phase3">FASE 3: SLUITEN</span></div>
+
+            <div class="step-card" onclick="showMedia('seal')">
+                <div class="step-header">
+                    <span>3.1 <span data-key="sealLiner">Hermetisch Sluiten</span></span>
+                    <i class="fa-solid fa-link step-icon"></i>
+                </div>
+                <div class="step-instruction" data-key="sealLinerInst">
+                    Sluit het open uiteinde van de Liner luchtdicht af. Gebruik hiervoor een tie-wrap (kabelbinder) of een sealapparaat. Zorg voor een overgebleven 'staart' van circa 15 cm boven de sluiting.
+                </div>
+            </div>
+
+            <div class="step-card" onclick="showMedia('damage')">
+                <div class="step-header">
+                    <span>3.2 <span data-key="checkDamage">Controleer op Schade</span></span>
+                    <i class="fa-solid fa-magnifying-glass step-icon"></i>
+                </div>
+                <div class="step-instruction">
+                    <span data-key="checkDamageInst">Controleer de gesloten Liner nauwkeurig op scheurtjes of gaatjes.</span>
+                    <span class="warning-text" data-key="damageWarning">⚠️ LET OP: Elke beschadiging aan de liner vermindert direct de werking en houdbaarheid!</span>
+                </div>
+            </div>
+
+            <!-- PHASE 4 -->
+            <div class="phase-title"><i class="fa-solid fa-warehouse"></i> <span data-key="phase4">FASE 4: OPSLAG & TRANSPORT</span></div>
+
+            <div class="step-card" onclick="showMedia('temp')">
+                <div class="step-header">
+                    <span>4.1 <span data-key="storageTemp">Temperatuurbeheer</span></span>
+                    <i class="fa-solid fa-temperature-half step-icon"></i>
+                </div>
+                <div class="step-instruction" data-key="storageTempInst">
+                    Bewaar of verzend op een stabiele temperatuur. De Liner is specifiek berekend op uw supply chain. Wordt de verpakking voor langere periode (meerdere uren achtereenvolgend) blootgesteld aan afwijkende, warmere temperaturen, dan kan dit leiden tot schade aan het product. <b>Open in dat geval de liner.</b>
+                </div>
+            </div>
+
+            <div class="step-card" onclick="showMedia('wrap')">
+                <div class="step-header">
+                    <span>4.2 <span data-key="palletWrap">Kratten, Pallet & Atmosfeer</span></span>
+                    <i class="fa-solid fa-ban step-icon"></i>
+                </div>
+                <div class="step-instruction">
+                    <span class="warning-text" data-key="palletWrapInst" style="margin-top:0;">⚠️ Sluit de omverpakking (kratten/dozen) nooit luchtdicht af. Wordt de zending op een pallet opgebouwd? Gebruik dan GEEN dichte rekwikkelfolie (stretch-wrap). Bewaar de liner NIET onder Controlled Atmosphere (CA).</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- RIGHT: MEDIA VISUAL (STICKY SIDEBAR) -->
+        <div class="right-sidebar">
+            <!-- Full Static Image / Placeholder for Liner -->
+            <img src="https://placehold.co/600x400/007C27/ffffff?text=PerfoTec+Liner+in+Crate" class="pallet-overview-img" alt="PerfoTec Liner Overview">
+            
+            <!-- Video Placeholder -->
+            <div class="media-container">
+                <div class="media-placeholder" id="mediaDisplay" onclick="playVideo()" style="background-image: url('https://placehold.co/600x400/e9e9e9/007C27?text=Selecteer+een+Stap');">
+                    <div class="play-btn"><i class="fa-solid fa-play"></i></div>
+                </div>
+                <div class="media-caption" id="mediaCaption" data-key="mediaCaption">Klik op een stap voor instructie video (simulatie)</div>
+            </div>
+            
+            <!-- Quick Tips Box -->
+            <div class="tips-box">
+                <h4 data-key="tipsTitle" style="color:var(--pt-green); margin-bottom: 5px; font-size: 12px; margin-top:0;">AANDACHTSPUNTEN</h4>
+                <ul style="font-size: 11px; padding-left: 15px; margin: 0; color: #555;">
+                    <li data-key="tip1">Wijziging in gewicht of opslagtemperatuur vereist een <b>nieuwe Liner selectie</b>.</li>
+                    <li data-key="tip2">De FRM meet de ademhaling (respiratie) voor de perfecte transmissie.</li>
+                    <li data-key="tip3">Verwijder overtollige lucht voorzichtig om de liner niet te scheuren.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- FINAL CHECKLIST -->
+    <div class="checklist-section">
+        <h3 data-key="checklistTitle">🛑 FINALE CHECKLIST</h3>
+        <div class="checklist-grid">
+            <div class="check-item"><div class="check-box"></div> <span data-key="check1">Is product vers, droog en volledig teruggekoeld?</span></div>
+            <div class="check-item"><div class="check-box"></div> <span data-key="check2">Klopt de transmissie (FRM) met het gewicht/temperatuur?</span></div>
+            <div class="check-item"><div class="check-box"></div> <span data-key="check3">Is overtollige lucht verwijderd voor sluiting?</span></div>
+            <div class="check-item"><div class="check-box"></div> <span data-key="check4">Is de liner hermetisch afgesloten (15cm staart)?</span></div>
+            <div class="check-item"><div class="check-box"></div> <span data-key="check5">Is de liner 100% vrij van schade/scheurtjes?</span></div>
+            <div class="check-item"><div class="check-box"></div> <span data-key="check6">Zijn de kratten, dozen én de pallet vrij van dichte wikkelfolie?</span></div>
+        </div>
+    </div>
+
+    <footer>
+        <div>PerfoTec B.V. | Klompenmakersweg 16, 3449 JB Woerden | The Netherlands</div>
+        <div>Support: +31 (0)297 25 55 70 | support@perfotec.com</div>
+    </footer>
+</div>
+
+<!-- Modal Structure -->
+<div id="videoModal" class="modal">
+    <div class="modal-content-wrapper">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <div id="modalVideoContent" class="modal-video-display">
+            <!-- Simulated Video Content -->
+            <div id="modalText">LOADING SIMULATION...</div>
+            <div class="progress-bar-bg">
+                <div id="modalProgressBar" class="progress-bar-fill"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Content Data for 6 Languages based on Word Document Protocol
+    const content = {
+        nl: {
+            title: "LINER - INPAK PROTOCOL",
+            objectiveLabel: "DOEL:",
+            objectiveText: "Correct gebruik van de PerfoTec Liner voor maximale product houdbaarheid.",
+            tempAlert: "DIRECT TERUGKOELEN IS CRUCIAAL",
+            phase1: "FASE 1: VOORBEREIDING",
+            selectLiner: "Juiste Liner Selecteren",
+            selectLinerInst: "De Liner selectie moet plaatsvinden op basis van het specifieke product, de bewaartemperatuur en het gewicht.",
+            prepProduct: "Product Voorbereiding",
+            prepProductInst: "Koel het product direct na de oogst zo dicht mogelijk terug naar de opslagtemperatuur. Beperk handling tot een absoluut minimum.",
+            phase2: "FASE 2: INPAKKEN",
+            placeLiner: "Liner Plaatsen",
+            placeLinerInst: "Plaats een lege Liner in een krat of doos. Vouw het open uiteinde van de Liner over de buitenste randen van de krat heen.",
+            fillLiner: "Vullen & Ontluchten",
+            fillLinerInst: "Verpak uitsluitend gezond, vers, droog en gekoeld product. Druk na het vullen de overtollige lucht voorzichtig uit de liner.",
+            phase3: "FASE 3: SLUITEN",
+            sealLiner: "Hermetisch Sluiten",
+            sealLinerInst: "Sluit het open uiteinde van de Liner luchtdicht af. <b>Zorg dat de volledige opening goed in de 'staart' zit.</b> Als er een klein stukje buiten de sluiting valt, is het niet hermetisch verpakt. Gebruik een tie-wrap of sealapparaat (ca. 15 cm staart overhouden).",
+            checkDamage: "Controleer op Schade",
+            checkDamageInst: "Controleer de gesloten Liner nauwkeurig op scheurtjes of gaatjes.",
+            damageWarning: "⚠️ LET OP: Elke beschadiging aan de liner vermindert direct de werking en houdbaarheid!",
+            phase4: "FASE 4: OPSLAG & TRANSPORT",
+            storageTemp: "Temperatuurbeheer",
+            storageTempInst: "Bewaar of verzend op een stabiele temperatuur. De Liner is specifiek berekend op uw supply chain. Wordt de verpakking voor langere periode (meerdere uren achtereenvolgend) blootgesteld aan afwijkende, warmere temperaturen, dan kan dit leiden tot schade aan het product. <b>Open in dat geval de liner.</b>",
+            palletWrap: "Kratten, Pallet & Atmosfeer",
+            palletWrapInst: "⚠️ Sluit de omverpakking (kratten/dozen) nooit luchtdicht af. Wordt de zending op een pallet opgebouwd? Gebruik dan GEEN dichte rekwikkelfolie (stretch-wrap). Bewaar de liner NIET onder Controlled Atmosphere (CA).",
+            mediaCaption: "Klik op een stap voor instructie video (simulatie)",
+            tipsTitle: "AANDACHTSPUNTEN",
+            tip1: "Wijziging in gewicht of opslagtemperatuur vereist een <b>nieuwe Liner selectie</b>.",
+            tip2: "Om de liner optimaal af te stemmen op het product, is een ademhalingsmeting in de FRM (Fast Respiration Meter) sterk gewenst.",
+            tip3: "Druk overtollige lucht voorzichtig uit de verpakking om de liner niet te scheuren.",
+            checklistTitle: "🛑 FINALE CHECKLIST",
+            check1: "Is product vers, droog en volledig teruggekoeld?",
+            check2: "Klopt de transmissie (FRM) met het gewicht/temperatuur?",
+            check3: "Is overtollige lucht verwijderd voor sluiting?",
+            check4: "Is de liner hermetisch afgesloten (15cm staart)?",
+            check5: "Is de liner 100% vrij van schade/scheurtjes?",
+            check6: "Zijn de kratten, dozen én de pallet vrij van dichte wikkelfolie?"
+        },
+        en: {
+            title: "LINER - PACKING PROTOCOL",
+            objectiveLabel: "GOAL:",
+            objectiveText: "Correct use of the PerfoTec Liner for maximum product shelf life.",
+            tempAlert: "IMMEDIATE PRE-COOLING IS CRITICAL",
+            phase1: "PHASE 1: PREPARATION",
+            selectLiner: "Select Correct Liner",
+            selectLinerInst: "The Liner selection must be based on the specific product, storage temperature, and weight.",
+            prepProduct: "Product Preparation",
+            prepProductInst: "Chill product as close as possible to storage temperature immediately after harvest. Keep handling to a minimum.",
+            phase2: "PHASE 2: PACKING",
+            placeLiner: "Place Liner",
+            placeLinerInst: "Place an empty Liner in a crate. Fold the open end over the outside edges of the crate.",
+            fillLiner: "Fill & Remove Air",
+            fillLinerInst: "Pack healthy, fresh, dry and chilled produce. After filling, gently press the excess air out of the Liner.",
+            phase3: "PHASE 3: SEALING",
+            sealLiner: "Seal Hermetically",
+            sealLinerInst: "Close the open end of the Liner airtight. <b>Ensure the entire opening is gathered in the seal.</b> If a small part falls outside the closure, it is not hermetically packed. Use a zip-tie or sealer, leaving an approx. 15cm 'tail'.",
+            checkDamage: "Check for Damage",
+            checkDamageInst: "Carefully inspect the closed Liner for tears or holes.",
+            damageWarning: "⚠️ WARNING: Any damage to the liner compromises its performance immediately!",
+            phase4: "PHASE 4: STORAGE & TRANSPORT",
+            storageTemp: "Temperature Control",
+            storageTempInst: "Store or ship at a stable temperature. The Liner is calculated specifically for your supply chain. If exposed to warmer temperatures for a longer period (multiple consecutive hours), product damage may occur. <b>Open the liner in that case.</b>",
+            palletWrap: "Crates, Pallet & Atmosphere",
+            palletWrapInst: "⚠️ Never seal outer packaging (crates/boxes) airtight. If built on a pallet, DO NOT use solid stretch-wrap. DO NOT store under Controlled Atmosphere (CA).",
+            mediaCaption: "Click a step for instruction video (simulation)",
+            tipsTitle: "POINTS OF ATTENTION",
+            tip1: "Different packing weight or storage temperature impacts <b>Liner selection</b>.",
+            tip2: "To optimize the liner for the product, a prior respiration measurement using the FRM (Fast Respiration Meter) is highly recommended.",
+            tip3: "Press excess air out gently to avoid tearing the liner.",
+            checklistTitle: "🛑 FINAL CHECKLIST",
+            check1: "Is product fresh, dry and properly chilled?",
+            check2: "Does transmission (FRM) match weight/temp?",
+            check3: "Is excess air removed before closing?",
+            check4: "Is liner hermetically closed (15cm tail)?",
+            check5: "Is liner 100% free of damage/tears?",
+            check6: "Are crates, boxes, and the pallet free of solid film?"
+        },
+        es: {
+            title: "LINER - PROTOCOLO DE EMPAQUE",
+            objectiveLabel: "OBJETIVO:",
+            objectiveText: "Uso correcto del PerfoTec Liner para la máxima vida útil del producto.",
+            tempAlert: "EL PRE-ENFRIAMIENTO INMEDIATO ES CRÍTICO",
+            phase1: "FASE 1: PREPARACIÓN",
+            selectLiner: "Seleccionar Liner Correcto",
+            selectLinerInst: "La selección del Liner debe basarse en el producto específico, la temperatura y el peso.",
+            prepProduct: "Preparación del Producto",
+            prepProductInst: "Enfríe el producto lo más cerca posible de la temperatura de almacenamiento inmediatamente después de la cosecha. Mantenga la manipulación al mínimo.",
+            phase2: "FASE 2: EMPAQUE",
+            placeLiner: "Colocar el Liner",
+            placeLinerInst: "Coloque un Liner vacío en una caja. Doble el extremo abierto sobre los bordes exteriores de la caja.",
+            fillLiner: "Llenar y Extraer Aire",
+            fillLinerInst: "Empaque productos sanos, frescos, secos y fríos. Después de llenar, presione suavemente el exceso de aire fuera del Liner.",
+            phase3: "FASE 3: SELLADO",
+            sealLiner: "Sellado Hermético",
+            sealLinerInst: "Cierre el Liner herméticamente. <b>Asegúrese de que toda la abertura esté dentro del cierre.</b> Si una pequeña parte queda fuera, no está sellado herméticamente. Use una brida o selladora, dejando una 'cola' de aprox. 15 cm.",
+            checkDamage: "Control de Daños",
+            checkDamageInst: "Inspeccione cuidadosamente el Liner cerrado en busca de rasgaduras o agujeros.",
+            damageWarning: "⚠️ ADVERTENCIA: ¡Cualquier daño al liner compromete su rendimiento!",
+            phase4: "FASE 4: ALMACENAMIENTO Y TRANSPORTE",
+            storageTemp: "Control de Temperatura",
+            storageTempInst: "Almacene o envíe a una temperatura estable. El Liner se calcula específicamente para su cadena de suministro. Si se expone a temperaturas más cálidas por un período prolongado (varias horas consecutivas), puede dañar el producto. <b>En ese caso, abra el liner.</b>",
+            palletWrap: "Cajas, Palet y Atmósfera",
+            palletWrapInst: "⚠️ Nunca selle herméticamente el embalaje exterior (cajas). Si se construye en un palet, NO use film estirable sólido. NO almacene bajo Atmósfera Controlada (CA).",
+            mediaCaption: "Haga clic en un paso para ver el video (simulación)",
+            tipsTitle: "PUNTOS DE ATENCIÓN",
+            tip1: "Diferentes pesos o temperaturas afectan la <b>selección del Liner</b>.",
+            tip2: "Para optimizar el liner según el producto, se recomienda encarecidamente una medición previa en el medidor de respiración (FRM).",
+            tip3: "Presione el exceso de aire suavemente para evitar romper el liner.",
+            checklistTitle: "🛑 LISTA DE VERIFICACIÓN",
+            check1: "¿Producto fresco, seco y bien enfriado?",
+            check2: "¿Transmisión coincide con peso/temp?",
+            check3: "¿Se eliminó el aire antes de cerrar?",
+            check4: "¿Liner cerrado herméticamente (cola 15cm)?",
+            check5: "¿Liner 100% libre de daños/rasgaduras?",
+            check6: "¿Están las cajas y el palet libres de film sólido?"
+        },
+        fr: {
+            title: "LINER - PROTOCOLE D'EMBALLAGE",
+            objectiveLabel: "OBJECTIF:",
+            objectiveText: "Utilisation correcte du PerfoTec Liner pour une durée de conservation maximale.",
+            tempAlert: "LE PRÉ-REFROIDISSEMENT IMMÉDIAT EST CRUCIAL",
+            phase1: "PHASE 1: PRÉPARATION",
+            selectLiner: "Sélectionner le Bon Liner",
+            selectLinerInst: "La sélection du Liner doit être basée sur le produit spécifique, la température de stockage et le poids.",
+            prepProduct: "Préparation du Produit",
+            prepProductInst: "Refroidissez le produit au plus près de la température de stockage immédiatement après récolte. Limitez les manipulations au minimum.",
+            phase2: "PHASE 2: EMBALLAGE",
+            placeLiner: "Placer le Liner",
+            placeLinerInst: "Placez un Liner vide dans une caisse. Repliez l'extrémité ouverte sur les bords extérieurs de la caisse.",
+            fillLiner: "Remplir & Vider l'Air",
+            fillLinerInst: "Emballez des produits sains, frais, secs et réfrigérés. Après remplissage, pressez doucement l'excès d'air hors du Liner.",
+            phase3: "PHASE 3: FERMETURE",
+            sealLiner: "Fermeture Hermétique",
+            sealLinerInst: "Fermez le Liner hermétiquement. <b>Assurez-vous que toute l'ouverture est dans la fermeture.</b> Si une partie reste dehors, ce n'est pas emballé hermétiquement. Utilisez un collier de serrage ou une scelleuse (laissez une queue de ~15 cm).",
+            checkDamage: "Vérifier les Dommages",
+            checkDamageInst: "Inspectez soigneusement le Liner fermé pour détecter toute déchirure ou trou.",
+            damageWarning: "⚠️ ATTENTION: Tout dommage au liner compromet immédiatement ses performances!",
+            phase4: "PHASE 4: STOCKAGE & TRANSPORT",
+            storageTemp: "Contrôle Température",
+            storageTempInst: "Stockez à température stable. Le Liner est calculé spécifiquement pour votre chaîne logistique. S'il est exposé à des températures plus chaudes pendant une longue période (plusieurs heures), le produit peut être endommagé. <b>Dans ce cas, ouvrez le liner.</b>",
+            palletWrap: "Caisses, Palette & Atmosphère",
+            palletWrapInst: "⚠️ Ne scellez jamais l'emballage extérieur (caisses/boîtes) hermétiquement. S'il est monté sur une palette, N'utilisez PAS de film étirable plein. NE PAS stocker sous Atmosphère Contrôlée (CA).",
+            mediaCaption: "Cliquez sur une étape pour la vidéo (simulación)",
+            tipsTitle: "POINTS D'ATTENTION",
+            tip1: "Un poids ou une température différente modifie le <b>choix du Liner</b>.",
+            tip2: "Pour optimiser le liner pour le produit, une mesure de respiration préalable (FRM) est fortement recommandée.",
+            tip3: "Pressez l'air doucement pour ne pas déchirer le liner.",
+            checklistTitle: "🛑 LISTE DE CONTRÔLE",
+            check1: "Produit frais, sec et bien refroidi?",
+            check2: "Transmission correspond au poids/temp?",
+            check3: "Excès d'air éliminé avant fermeture?",
+            check4: "Liner hermétiquement fermé (queue 15cm)?",
+            check5: "Liner 100% sans dommage/déchirure?",
+            check6: "Caisses, boîtes et palette sans film plein?"
+        },
+        pt: {
+            title: "LINER - PROTOCOLO DE EMBALAGEM",
+            objectiveLabel: "OBJETIVO:",
+            objectiveText: "Uso correto do PerfoTec Liner para máxima vida útil do produto.",
+            tempAlert: "O PRÉ-RESFRIAMENTO IMEDIATO É CRÍTICO",
+            phase1: "FASE 1: PREPARAÇÃO",
+            selectLiner: "Selecionar Liner Correto",
+            selectLinerInst: "A seleção do Liner deve basear-se no produto específico, temperatura e peso.",
+            prepProduct: "Preparação do Produto",
+            prepProductInst: "Resfrie o produto o mais próximo possível da temperatura de armazenamento imediatamente após a colheita. Mantenha o manuseio no mínimo.",
+            phase2: "FASE 2: EMBALAGEM",
+            placeLiner: "Colocar o Liner",
+            placeLinerInst: "Coloque um Liner vazio em uma caixa. Dobre a extremidade aberta sobre as bordas externas da caixa.",
+            fillLiner: "Encher e Extrair Ar",
+            fillLinerInst: "Embale produtos saudáveis, frescos, secos e frios. Após o enchimento, pressione suavemente o excesso de ar para fora do Liner.",
+            phase3: "FASE 3: SELAGEM",
+            sealLiner: "Selagem Hermética",
+            sealLinerInst: "Feche o Liner hermeticamente. <b>Certifique-se de que toda a abertura esteja presa no fecho.</b> Se uma pequena parte ficar de fora, não está selado hermeticamente. Deixe uma 'cauda' de aprox. 15 cm.",
+            checkDamage: "Controle de Danos",
+            checkDamageInst: "Inspecione cuidadosamente o Liner fechado em busca de rasgos ou furos.",
+            damageWarning: "⚠️ AVISO: Qualquer dano ao liner compromete seu desempenho!",
+            phase4: "FASE 4: ARMAZENAMENTO E TRANSPORTE",
+            storageTemp: "Controle de Temperatura",
+            storageTempInst: "Armazene ou envie em temperatura estável. O Liner é calculado para sua cadeia de suprimentos. Se exposto a temperaturas mais quentes por um longo período (várias horas), pode ocorrer dano ao produto. <b>Nesse caso, abra o liner.</b>",
+            palletWrap: "Caixas, Palete e Atmosfera",
+            palletWrapInst: "⚠️ Nunca sele hermeticamente a embalagem exterior (caixas). Se montado num palete, NÃO use filme stretch sólido. NÃO armazene em Atmosfera Controlada (CA).",
+            mediaCaption: "Clique em uma etapa para vídeo (simulação)",
+            tipsTitle: "PONTOS DE ATENÇÃO",
+            tip1: "Diferentes pesos ou temperaturas afetam a <b>seleção do Liner</b>.",
+            tip2: "Para otimizar o liner ao produto, recomenda-se vivamente uma medição prévia no medidor de respiração (FRM).",
+            tip3: "Aperte o excesso de ar suavemente para evitar rasgar o liner.",
+            checklistTitle: "🛑 LISTA DE VERIFICAÇÃO",
+            check1: "Produto fresco, seco e bem resfriado?",
+            check2: "Transmissão (FRM) corresponde ao peso/temp?",
+            check3: "Ar removido antes de fechar?",
+            check4: "Liner fechado hermeticamente (cauda 15cm)?",
+            check5: "Liner 100% livre de danos/rasgos?",
+            check6: "As caixas e o palete estão livres de filme sólido?"
+        },
+        ar: {
+            title: "اللاينر (البطانة) - بروتوكول التعبئة",
+            objectiveLabel: "الهدف:",
+            objectiveText: "الاستخدام الصحيح لبطانة PerfoTec لأقصى فترة صلاحية للمنتج.",
+            tempAlert: "التبريد المسبق الفوري أمر بالغ الأهمية",
+            phase1: "المرحلة 1: التحضير",
+            selectLiner: "اختيار البطانة الصحيحة",
+            selectLinerInst: "يجب أن يعتمد اختيار البطانة على المنتج المحدد، درجة الحرارة، والوزن.",
+            prepProduct: "تحضير المنتج",
+            prepProductInst: "برد المنتج لأقرب درجة حرارة تخزين فورًا بعد الحصاد. حافظ على التعامل مع المنتج في حده الأدنى.",
+            phase2: "المرحلة 2: التعبئة",
+            placeLiner: "وضع البطانة",
+            placeLinerInst: "ضع بطانة فارغة في صندوق. اطوِ الطرف المفتوح فوق الحواف الخارجية للصندوق.",
+            fillLiner: "التعبئة وتفريغ الهواء",
+            fillLinerInst: "قم بتعبئة منتجات صحية وطازجة وجافة ومبردة. بعد التعبئة، اضغط برفق لإخراج الهواء الزائد من البطانة.",
+            phase3: "المرحلة 3: الإغلاق",
+            sealLiner: "الإغلاق المحكم",
+            sealLinerInst: "أغلق البطانة بإحكام. <b>تأكد من وجود الفتحة بالكامل داخل مكان الإغلاق.</b> إذا ترك جزء صغير بالخارج، فلن يكون مغلقًا بإحكام. استخدم رباطًا أو آلة لحام واترك 'ذيلاً' بطول 15 سم.",
+            checkDamage: "فحص الأضرار",
+            checkDamageInst: "افحص البطانة المغلقة بعناية بحثًا عن تمزقات أو ثقوب.",
+            damageWarning: "⚠️ تحذير: أي ضرر بالبطانة يضعف أداءها على الفور!",
+            phase4: "المرحلة 4: التخزين والنقل",
+            storageTemp: "التحكم في الحرارة",
+            storageTempInst: "تم حساب البطانة خصيصًا لسلسلة التوريد الخاصة بك. إذا تعرضت العبوة لدرجات حرارة أكثر دفئًا لفترة أطول (عدة ساعات متتالية)، فقد يتلف المنتج. <b>في هذه الحالة، افتح البطانة.</b>",
+            palletWrap: "الصناديق، البليت والغلاف الجوي",
+            palletWrapInst: "⚠️ لا تغلق العبوة الخارجية (الصناديق) بإحكام أبدًا. إذا تم وضعها على بليت، لا تستخدم فيلم التمدد الصلب. لا تخزن في غرفة الغلاف الجوي المتحكم فيه (CA).",
+            mediaCaption: "انقر فوق خطوة للفيديو (محاكاة)",
+            tipsTitle: "نقاط الاهتمام",
+            tip1: "تغيير الوزن أو الحرارة يؤثر على <b>اختيار البطانة</b>.",
+            tip2: "لتحسين البطانة لتناسب المنتج، يُنصح بشدة بإجراء قياس مسبق في مقياس التنفس (FRM).",
+            tip3: "اضغط الهواء برفق لتجنب تمزيق البطانة.",
+            checklistTitle: "🛑 القائمة النهائية",
+            check1: "هل المنتج طازج وجاف ومبرد تمامًا؟",
+            check2: "هل النفاذية تطابق الوزن/الحرارة؟",
+            check3: "هل تم إخراج الهواء قبل الإغلاق؟",
+            check4: "هل البطانة مغلقة بإحكام (ذيل 15 سم)؟",
+            check5: "هل البطانة خالية 100% من التمزقات؟",
+            check6: "هل الصناديق والبليت خالية من فيلم التغليف الصلب؟"
+        }
+    };
+
+    let currentLang = 'nl';
+    let currentStepText = "Selecteer een Stap";
+    let currentStepColor = "007C27";
+
+    // Set auto-load behaviour matching OS or saved default
+    window.onload = function() {
+        // Fallback or exact init matching the HTML selected option
+        const select = document.getElementById('langSelect');
+        currentLang = select.value;
+        applyLanguage(currentLang);
+    };
+
+    function changeLanguage(lang) {
+        currentLang = lang;
+        applyLanguage(lang);
+    }
+
+    function applyLanguage(lang) {
+        // Handle RTL for Arabic
+        if (lang === 'ar') {
+            document.documentElement.setAttribute('dir', 'rtl');
+        } else {
+            document.documentElement.setAttribute('dir', 'ltr');
+        }
+
+        const elements = document.querySelectorAll('[data-key]');
+        elements.forEach(el => {
+            const key = el.getAttribute('data-key');
+            if (content[lang] && content[lang][key]) {
+                el.innerHTML = content[lang][key]; 
+            }
+        });
+    }
+
+    // Interactive Media Simulator
+    function showMedia(step) {
+        // Highlight active step
+        document.querySelectorAll('.step-card').forEach(c => c.classList.remove('active'));
+        event.currentTarget.classList.add('active');
+
+        const display = document.getElementById('mediaDisplay');
+        const caption = document.getElementById('mediaCaption');
+        
+        let text = "";
+        let color = "007C27"; // Green default
+
+        switch(step) {
+            case 'materials': text = "Select Liner Type"; break;
+            case 'prep': text = "Chill Product"; color = "054E9A"; break;
+            case 'place': text = "Place in Crate"; break;
+            case 'fill': text = "Pack & Remove Air"; break;
+            case 'seal': text = "Zip-tie Sealing (15cm)"; break;
+            case 'damage': text = "Inspect for Tears"; color = "D32F2F"; break;
+            case 'temp': text = "Storage Temperature"; color = "054E9A"; break;
+            case 'wrap': text = "NO Stretch Wrap"; color = "D32F2F"; break;
+        }
+
+        currentStepText = text;
+        currentStepColor = color;
+
+        // Visual simulation image update
+        display.style.backgroundImage = `url('https://placehold.co/600x400/e9e9e9/${color}?text=${encodeURIComponent(text)}')`;
+        
+        // Simple translation for "Loading video"
+        let loadingText = "Loading video: ";
+        if(currentLang === 'nl') loadingText = "Video wordt geladen: ";
+        else if(currentLang === 'es') loadingText = "Cargando video: ";
+        else if(currentLang === 'fr') loadingText = "Chargement vidéo: ";
+        else if(currentLang === 'pt') loadingText = "Carregando vídeo: ";
+        else if(currentLang === 'ar') loadingText = "جاري تحميل الفيديو: ";
+
+        caption.innerText = loadingText + text;
+    }
+
+    // MODAL / LIGHTBOX FUNCTIONS
+    function playVideo() {
+        const modal = document.getElementById('videoModal');
+        const modalContent = document.getElementById('modalVideoContent');
+        const modalText = document.getElementById('modalText');
+        const progressBar = document.getElementById('modalProgressBar');
+        
+        // Setup Modal with current step info
+        modal.style.display = "flex";
+        
+        modalContent.style.backgroundImage = `url('https://placehold.co/800x450/222222/${currentStepColor}?text=${encodeURIComponent("PLAYING: " + currentStepText)}')`;
+        
+        modalText.innerText = "SIMULATING VIDEO...";
+        progressBar.style.width = "0%";
+        
+        // Simulate Playing
+        setTimeout(() => { progressBar.style.width = "100%"; }, 100);
+        
+        // Auto Close after 3 seconds
+        setTimeout(() => {
+            closeModal();
+        }, 3000);
+    }
+
+    function closeModal() {
+        document.getElementById('videoModal').style.display = "none";
+        document.getElementById('modalProgressBar').style.width = "0%";
+    }
+
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+        const modal = document.getElementById('videoModal');
+        if (event.target == modal) {
+            closeModal();
+        }
+    }
+</script>
+
+</body>
+</html>
