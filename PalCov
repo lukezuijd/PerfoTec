@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOP: PerfoTec Pallet Cover</title>
+    <!-- Fonts from Google: League Spartan (Headings) and Inter (Body) as per Brand Guidelines -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=League+Spartan:wght@500;700;800&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            /* PerfoTec Brand Colors */
+            --pt-green: #007C27;
+            --pt-blue: #054E9A;
+            --pt-dark: #211A1A;
+            --pt-gray: #E9E9E9;
+            --pt-white: #ffffff;
+            --pt-alert: #D32F2F;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--pt-dark);
+            background-color: #F4F6F8;
+            margin: 0;
+            padding: 0;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'League Spartan', sans-serif;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        /* --- LAYOUT & CONTAINER --- */
+        .container {
+            max-width: 210mm; /* A4 width approx */
+            margin: 20px auto;
+            background: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            padding: 40px;
+            position: relative;
+        }
+
+        /* --- HEADER --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-bottom: 3px solid var(--pt-green);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .logo-img {
+            height: 55px;
+            width: auto;
+            object-fit: contain;
+            margin-bottom: 5px;
+        }
+
+        .header-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end; /* Will flip in RTL */
+            padding-right: 0;
+            margin-top: 20px;
+        }
+
+        /* Language Select Styling - ABSOLUTE POSITIONING */
+        .lang-wrapper {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            z-index: 100;
+        }
+
+        .lang-select {
+            background: var(--pt-blue);
+            color: white;
+            border: none;
+            padding: 6px 10px;
+            cursor: pointer;
+            font-family: 'League Spartan', sans-serif;
+            font-weight: bold;
+            border-radius: 4px;
+            font-size: 11px;
+            outline: none;
+            appearance: none;
+            -webkit-appearance: none;
+            text-align: center;
+        }
+        
+        .lang-select option {
+            background: white;
+            color: black;
+        }
+
+        /* --- INTRO --- */
+        .intro-box {
+            background: linear-gradient(to right, var(--pt-gray), white);
+            padding: 12px 15px;
+            border-left: 5px solid var(--pt-blue);
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            font-size: 13px;
+        }
+
+        .objective {
+            font-weight: 600;
+            color: var(--pt-blue);
+        }
+
+        /* --- TABS NAVIGATION --- */
+        .tabs-nav {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            background: var(--pt-gray);
+            color: #555;
+            border: 2px solid transparent;
+            padding: 12px;
+            font-family: 'League Spartan', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .tab-btn:hover {
+            background: #e0e0e0;
+        }
+
+        .tab-btn.active {
+            background: var(--pt-green);
+            color: white;
+            border-color: var(--pt-green);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* --- GRID LAYOUT FOR STEPS --- */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 280px;
+            gap: 20px;
+            align-items: start;
+        }
+
+        .steps-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        /* --- STEP CARDS --- */
+        .phase-title {
+            color: var(--pt-green);
+            font-size: 15px;
+            font-weight: 800;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 3px;
+            margin-top: 5px;
+            margin-bottom: 3px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .step-card {
+            background: white;
+            border: 1px solid #eee;
+            border-radius: 6px;
+            padding: 8px 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-left: 4px solid transparent;
+            position: relative;
+        }
+
+        .step-card:hover {
+            background: #f9f9f9;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--pt-green);
+        }
+        
+        .step-card.active {
+            background: #f0f7f2;
+            border-left: 4px solid var(--pt-green);
+            border-color: var(--pt-green);
+        }
+
+        .step-header {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 700;
+            margin-bottom: 2px;
+            color: var(--pt-dark);
+            font-size: 14px;
+        }
+
+        .step-instruction {
+            font-size: 12px;
+            color: #222;
+            line-height: 1.35;
+        }
+
+        .step-icon {
+            color: var(--pt-blue);
+            margin-right: 5px;
+        }
+
+        .warning-text {
+            color: var(--pt-alert);
+            font-weight: 700;
+            font-size: 11px;
+            display: block;
+            margin-top: 2px;
+        }
+
+        /* --- RIGHT SIDEBAR (STICKY) --- */
+        .right-sidebar {
+            position: sticky;
+            top: 20px;
+            background: var(--pt-gray);
+            border-radius: 8px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            box-sizing: border-box;
+            overflow: visible; 
+        }
+
+        /* STATIC IMAGE - FIXED STYLE */
+        .pallet-overview-img {
+            width: 100%;
+            height: auto;
+            max-height: 200px;
+            object-fit: contain;
+            background: transparent;
+            border: none;
+            flex-shrink: 0;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* MEDIA PLACEHOLDER (VIDEO) */
+        .media-container {
+            width: 100%;
+            position: relative;
+        }
+
+        .media-placeholder {
+            width: 100%;
+            height: 150px;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+            border: 1px solid #ccc;
+            cursor: pointer;
+        }
+        
+        .media-placeholder::before {
+            content: '';
+            position: absolute;
+            top:0; left:0; right:0; bottom:0;
+            background: rgba(0,0,0,0.05);
+            transition: background 0.2s;
+        }
+        
+        .media-placeholder:hover::before {
+            background: rgba(0,0,0,0.1);
+        }
+
+        .play-btn {
+            width: 40px;
+            height: 40px;
+            background: var(--pt-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 16px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 2;
+            transition: transform 0.2s;
+        }
+        
+        .media-placeholder:hover .play-btn {
+            transform: scale(1.1);
+        }
+
+        /* FIXED OVERLAP */
+        .media-caption {
+            font-size: 11px;
+            color: #666;
+            margin-top: 8px; 
+            margin-bottom: 0px;
+            font-style: italic;
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        /* --- TIPS BOX --- */
+        .tips-box {
+            text-align: left;
+            background: white;
+            padding: 10px;
+            border-radius: 4px;
+            border-left: 3px solid var(--pt-green);
+        }
+
+        /* --- LIGHTBOX / MODAL STYLES --- */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1000; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgba(0,0,0,0.8); 
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s;
+        }
+
+        .modal-content-wrapper {
+            position: relative;
+            width: 80%;
+            max-width: 800px;
+            background: black;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            overflow: hidden;
+            animation: zoomIn 0.3s;
+        }
+
+        .modal-video-display {
+            width: 100%;
+            height: 450px;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-family: 'League Spartan', sans-serif;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .progress-bar-bg {
+            width: 60%;
+            height: 6px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: var(--pt-green);
+            transition: width 0.1s linear;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            color: #f1f1f1;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .close-modal:hover,
+        .close-modal:focus {
+            color: var(--pt-green);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
+        @keyframes zoomIn { from {transform: scale(0.9);} to {transform: scale(1);} }
+
+
+        /* --- CHECKLIST --- */
+        .checklist-section {
+            margin-top: 20px;
+            background: var(--pt-dark);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        
+        .checklist-section h3 {
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .checklist-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .check-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+        }
+
+        .check-box {
+            min-width: 14px;
+            height: 14px;
+            border: 1px solid white;
+            border-radius: 2px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            margin-top: 20px;
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 9px;
+            color: #888;
+        }
+
+        /* --- RTL OVERRIDES --- */
+        [dir="rtl"] .header-info { align-items: flex-start; padding-right: 0; padding-left: 0; }
+        [dir="rtl"] .lang-wrapper { right: 40px; left: auto; }
+        [dir="rtl"] .intro-box { border-left: none; border-right: 5px solid var(--pt-blue); background: linear-gradient(to left, var(--pt-gray), white); }
+        [dir="rtl"] .step-card { border-left: 1px solid #eee; border-right: 4px solid transparent; }
+        [dir="rtl"] .step-card:hover, [dir="rtl"] .step-card.active { border-left: 1px solid #eee; border-right: 4px solid var(--pt-green); }
+        [dir="rtl"] .step-icon { margin-right: 0; margin-left: 5px; }
+        [dir="rtl"] .intro-box div[style="text-align: right;"] { text-align: left !important; }
+        [dir="rtl"] .media-caption { text-align: center; }
+        [dir="rtl"] .tips-box { text-align: right; border-left: none; border-right: 3px solid var(--pt-green); }
+        [dir="rtl"] .tips-box ul { padding-left: 0; padding-right: 15px; }
+        [dir="rtl"] .protection-list { margin: 5px 15px 5px 0 !important; }
+
+        /* --- PRINT STYLES --- */
+        @media print {
+            body { background: white; -webkit-print-color-adjust: exact; font-size: 11px; }
+            .container { box-shadow: none; padding: 0; width: 100%; max-width: 100%; margin: 0; }
+            .lang-wrapper { display: none; }
+            .main-content { display: block; }
+            .right-sidebar { display: none; } 
+            
+            .intro-box { padding: 8px; margin-bottom: 10px; background: #eee !important; border-left: 5px solid var(--pt-blue) !important; }
+            [dir="rtl"] .intro-box { border-left: none !important; border-right: 5px solid var(--pt-blue) !important; }
+            
+            /* Hide tabs UI, only show active tab title */
+            .tabs-nav .tab-btn { display: none; }
+            .tabs-nav .tab-btn.active { 
+                display: block; 
+                background: none; 
+                color: var(--pt-green); 
+                font-size: 18px; 
+                border: none; 
+                padding: 0; 
+                margin-bottom: 10px; 
+                text-align: left; 
+            }
+            [dir="rtl"] .tabs-nav .tab-btn.active { text-align: right; }
+
+            .step-card { border: none; border-bottom: 1px dotted #ccc; padding: 4px 0; page-break-inside: avoid; }
+            .step-card:hover { background: none; border-left: none; border-right: none;}
+            .phase-title { margin-top: 10px; font-size: 13px; color: var(--pt-green) !important; }
+            .checklist-section { background: #333 !important; color: white !important; padding: 10px; margin-top: 10px; page-break-inside: avoid; }
+            h1 { font-size: 20px; color: var(--pt-green) !important; }
+            .steps-container { gap: 5px; }
+            .step-header { font-size: 12px; margin-bottom: 1px;}
+            .step-instruction { font-size: 11px; display: block !important; }
+            header { align-items: center; }
+            .header-info { padding-right: 0; align-items: flex-end; }
+            [dir="rtl"] .header-info { align-items: flex-start; }
+            footer { display: flex; margin-top: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    
+    <!-- Language Dropdown -->
+    <div class="lang-wrapper">
+        <select id="langSelect" onchange="changeLanguage(this.value)" class="lang-select">
+            <option value="en">English (US)</option>
+            <option value="nl">Nederlands</option>
+            <option value="es">Español</option>
+            <option value="fr">Français</option>
+            <option value="pt">Português</option>
+            <option value="ar">العربية</option>
+        </select>
+    </div>
+
+    <header>
+        <div class="logo-area">
+            <img src="https://cdn.prod.website-files.com/68b594c756c22085ddc6c1ea/68b59ba2f027bfeecd25261b_PerfoTec%20logo.png" alt="PerfoTec Logo" class="logo-img">
+        </div>
+        <div class="header-info">
+            <h1 data-key="title">PALLET COVER - INPAK PROTOCOL</h1>
+        </div>
+    </header>
+
+    <div class="intro-box">
+        <div>
+            <div class="objective"><i class="fa-solid fa-bullseye"></i> <span data-key="objectiveLabel">DOEL:</span></div>
+            <span data-key="objectiveText">Correcte installatie van de 40μm pallet cover voor maximale houdbaarheid.</span>
+        </div>
+        <div style="text-align: right;">
+            <i class="fa-solid fa-triangle-exclamation" style="color:var(--pt-blue)"></i> <b data-key="tempAlert">PRE-COOLING IS CRUCIAAL</b>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <!-- LEFT: TABS & STEPS -->
+        <div>
+            <!-- Tabs Navigation -->
+            <div class="tabs-nav">
+                <button class="tab-btn active" id="btn-map" onclick="switchTab('map')" data-key="tabMap">MAP VERPAKKING (Hermetisch)</button>
+                <button class="tab-btn" id="btn-mhp" onclick="switchTab('mhp')" data-key="tabMhp">MHP VERPAKKING (Los)</button>
+            </div>
+
+            <!-- TAB CONTENT: MAP -->
+            <div id="tab-map" class="tab-content active">
+                <div class="steps-container">
+                    <!-- PHASE 1 -->
+                    <div class="phase-title"><i class="fa-solid fa-clipboard-check"></i> <span data-key="phase1">FASE 1: VOORBEREIDING</span></div>
+                    
+                    <div class="step-card" onclick="showMedia('materials')">
+                        <div class="step-header">
+                            <span>1.1 <span data-key="selectCover">Juiste Hoes Selecteren</span></span>
+                            <i class="fa-solid fa-box-open step-icon"></i>
+                        </div>
+                        <div class="step-instruction" data-key="selectCoverInst">
+                            Kijk op het label van de doos. Vergelijk dit met uw pakbon. Gebruik alléén het type dat berekend is.<br>
+                            <i style="color:var(--pt-alert);">Een fout type kan leiden tot productbederf.</i>
+                        </div>
+                    </div>
+
+                    <div class="step-card" onclick="showMedia('quality')">
+                        <div class="step-header">
+                            <span>1.2 <span data-key="qualityCheck">Visuele Controle</span></span>
+                            <i class="fa-solid fa-magnifying-glass step-icon"></i>
+                        </div>
+                        <div class="step-instruction" data-key="qualityCheckInst">
+                            Haal de hoes uit de doos en vouw deze deels uit. Controleer op gaten of scheuren. Ziet u schade of een productiefout? Gebruik deze hoes <b>niet</b> en pak een nieuwe.
+                        </div>
+                    </div>
+
+                    <div class="step-card" onclick="showMedia('temp')">
+                        <div class="step-header">
+                            <span>1.3 <span data-key="tempCheck">Temperatuur Controle</span></span>
+                            <i class="fa-solid fa-temperature-arrow-down step-icon"></i>
+                        </div>
+                        <div class="step-instruction">
+                            <span data-key="tempCheckInst">Het product moet volledig voorgekoeld zijn tot de kern. Meet dit na.</span>
+                            <span class="warning-text" data-key="tempWarning">⚠️ WAARSCHUWING: Warm product inpakken kan leiden tot condens en schimmel!</span>
+                        </div>
+                    </div>
+
+                    <!-- PHASE 2 -->
+                    <div class="phase-title"><i class="fa-solid fa-layer-group"></i> <span data-key="phase2">FASE 2: PALLET OPBOUW</span></div>
+
+                    <div class="step-card" onclick="showMedia('bottomsheet')">
+                        <div class="step-header">
+                            <span>2.1 <span data-key="mapCardboardTitle">Karton & Bodemvel</span></span>
+                            <i class="fa-regular fa-square step-icon"></i>
+                        </div>
+                        <div class="step-instruction" data-key="mapCardboardInst">
+                            Plaats een karton op de lege pallet. Leg het PerfoTec bodemvel plat hierop. <b>Plaats vervolgens nóg een karton op het bodemvel.</b> Dit voorkomt beschadiging van het vel en garandeert een hermetische MAP-sluiting.
+                        </div>
+                    </div>
+
+                    <div class="step-card" onclick="showMedia('stacking')">
+                        <div class="step-header">
+                            <span>2.2 <span data-key="stacking">Stapelen & Datalogger</span></span>
+                            <i class="fa-solid fa-cubes step-icon"></i>
+                        </div>
+                        <div class="step-instruction" data-key="stackingInst">
+                            Stapel dozen recht. Plaats de datalogger <b>in een krat/doos bij het product</b> op 2/3 hoogte. Plak een sticker aan de buitenzijde waar de logger zit voor het uitlezen of terugvinden.
+                        </div>
+                    </div>
+
+                    <!-- PHASE 3 -->
+                    <div class="phase-title"><i class="fa-solid fa-shirt"></i> <span data-key="phase3">FASE 3: COVER AANBRENGEN</span></div>
+
+                    <div class="step-card" onclick="showMedia('apply')">
+                        <div class="step-header">
+                            <span>3.1 <span data-key="applyCover">Hoes Aanbrengen</span></span>
+                            <i class="fa-solid fa-people-carry-box step-icon"></i>
+                        </div>
+                        <div class="step-instruction" data-key="applyCoverInst">
+                            Werk met 2 personen. Pak de hoes vast en rek deze voorzichtig uit. Rol de hoes af naar beneden (zoals een opgerolde kous). Pas op voor scherpe hoeken van dozen.
+                        </div>
+                    </div>
+
+                    <div class="step-card" onclick="showMedia('seal')">
+                        <div class="step-header">
+                            <span>3.2 <span data-key="sealMapTitle">Sluiting (MAP)</span></span>
+                            <i class="fa-solid fa-tape step-icon"></i>
+                        </div>
+                        <div class="step-instruction" data-key="sealMapInst">
+                            Tape de hoes rondom vast aan het bodemvel (10cm overlap bij eindigen). <b>Wrijf de tape stevig aan met de hand</b> om rimpels (luchtlekken) te voorkomen.
+                        </div>
+                    </div>
+
+                    <!-- PHASE 4 -->
+                    <div class="phase-title"><i class="fa-solid fa-truck-fast"></i> <span data-key="phase4">FASE 4: TRANSPORT</span></div>
+
+                    <div class="step-card" onclick="showMedia('protection')">
+                        <div class="step-header">
+                            <span>4.1 <span data-key="protection">Transport Bescherming</span></span>
+                            <i class="fa-solid fa-shield-halved step-icon"></i>
+                        </div>
+                        <div class="step-instruction">
+                            <span data-key="protectionInst">
+                                <ol class="protection-list" style="margin: 5px 0 5px 15px; padding:0;">
+                                    <li>Breng eerst <b>1 laag GAASFOLIE</b> strak aan.</li>
+                                    <li>Plaats daarna de hoeklatten.</li>
+                                    <li>Bevestig tot slot de straps.</li>
+                                </ol>
+                            </span>
+                            <span class="warning-text" data-key="protectionWarning">⚠️ GEBRUIK NOOIT DICHTE REKWIKKELFOLIE! De lasergaatjes moeten kunnen ademen.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB CONTENT: MHP -->
+            <div id="tab-mhp" class="tab-content">
+                <div class="steps-container">
+                    <!-- PHASE 1 (Same as MAP) -->
+                    <div class="phase-title"><i class="fa-solid fa-clipboard-check"></i> <span data-key="phase1">FASE 1: VOORBEREIDING</span></div>
+                    
+                    <div class="step-card" onclick="showMedia('materials')">
+                        <div class="step-header">
+                            <span>1.1 <span data-key="selectCover">Juiste Hoes Selecteren</span></span>
+                            <i class="fa-solid fa-box-open step-icon"></i>
+                        </div>
+                        <div class="step-instruction" data-key="selectCoverInst">
+                            Kijk op het label van de doos. Vergelijk dit met uw pakbon. Gebruik alléén het type dat berekend is.<br>
+                            <i style="color:var(--pt-alert);">Een fout type kan leiden tot productbederf.</i>
+                        </div>
+                    </div>
+
+                    <div class="step-card" onclick="showMedia('quality')">
+                        <div class="step-header">
+                            <span>1.2 <span data-key="qualityCheck">Visuele Controle</span></span>
+                            <i class="fa-solid fa-magnifying-glass step-icon"></i>
+                        </div>
+                        <div class="step-instruction" data-key="qualityCheckInst">
+                            Haal de hoes uit de doos en vouw deze deels uit. Controleer op gaten of scheuren. Ziet u schade of een productiefout? Gebruik deze hoes <b>niet</b> en pak een nieuwe.
+                        </div>
+                    </div>
+
+                    <div class="step-card" onclick="showMedia('temp')">
+                        <div class="step-header">
+                            <span>1.3 <span data-key="tempCheck">Temperatuur Controle</span></span>
+                            <i class="fa-solid fa-temperature-arrow-down step-icon"></i>
+                        </div>
+                        <div class="step-instruction">
+                            <span data-key="tempCheckInst">Het product moet volledig voorgekoeld zijn tot de kern. Meet dit na.</span>
+                            <span class="warning-text" data-key="tempWarning">⚠️ WAARSCHUWING: Warm product inpakken kan leiden tot condens en schimmel!</span>
+                        </div>
+                    </div>
+
+                    <!-- PHASE 2 (MHP Specific) -->
+                    <div class="phase-title"><i class="fa-solid fa-layer-group"></i> <span data-key="phase2">FASE 2: PALLET OPBOUW</span></div>
+
+                    <div class="step-card" onclick="showMedia('bottomsheet')">
+                        <div class="step-header">
+                            <span>2.1 <span data-key="mhpBodemvelTitle">Bodemvel</span></span>
+                            <i class="fa-regular fa-square step-icon"></i>
+                        </div>
+                        <div class="step-instruction" data-key="mhpBodemvelInst">
+                            Leg het PerfoTec bodemvel plat op de lege pallet ter bescherming. Zorg dat het vel gelijkmatig verdeeld is. (Voor MHP is een dubbel karton niet strikt vereist).
+                        </div>
+                    </div>
+
+                    <div class="step-card" onclick="showMedia('stacking')">
+                        <div class="step-header">
+                            <span>2.2 <span data-key="stacking">Stapelen & Datalogger</span></span>
+                            <i class="fa-solid fa-cubes step-icon"></i>
+                        </div>
+                        <div class="step-instruction" data-key="stackingInst">
+                            Stapel dozen recht. Plaats de datalogger <b>in een krat/doos bij het product</b> op 2/3 hoogte. Plak een sticker aan de buitenzijde waar de logger zit voor het uitlezen of terugvinden.
+                        </div>
+                    </div>
+
+                    <!-- PHASE 3 (MHP Specific) -->
+                    <div class="phase-title"><i class="fa-solid fa-shirt"></i> <span data-key="phase3">FASE 3: COVER AANBRENGEN</span></div>
+
+                    <div class="step-card" onclick="showMedia('apply')">
+                        <div class="step-header">
+                            <span>3.1 <span data-key="applyCover">Hoes Aanbrengen</span></span>
+                            <i class="fa-solid fa-people-carry-box step-icon"></i>
+                        </div>
+                        <div class="step-instruction" data-key="applyCoverInst">
+                            Werk met 2 personen. Pak de hoes vast en rek deze voorzichtig uit. Rol de hoes af naar beneden (zoals een opgerolde kous). Pas op voor scherpe hoeken van dozen.
+                        </div>
+                    </div>
+
+                    <div class="step-card" onclick="showMedia('seal')">
+                        <div class="step-header">
+                            <span>3.2 <span data-key="sealMhpTitle">Sluiting (MHP)</span></span>
+                            <i class="fa-solid fa-hand-holding step-icon"></i>
+                        </div>
+                        <div class="step-instruction" data-key="sealMhpInst">
+                            Gebruik géén tape. Vouw de onderkant van de hoes simpelweg naar binnen, strak onder de onderste laag dozen. Het gewicht van de dozen houdt de hoes gesloten.
+                        </div>
+                    </div>
+
+                    <!-- PHASE 4 (Same as MAP) -->
+                    <div class="phase-title"><i class="fa-solid fa-truck-fast"></i> <span data-key="phase4">FASE 4: TRANSPORT</span></div>
+
+                    <div class="step-card" onclick="showMedia('protection')">
+                        <div class="step-header">
+                            <span>4.1 <span data-key="protection">Transport Bescherming</span></span>
+                            <i class="fa-solid fa-shield-halved step-icon"></i>
+                        </div>
+                        <div class="step-instruction">
+                            <span data-key="protectionInst">
+                                <ol class="protection-list" style="margin: 5px 0 5px 15px; padding:0;">
+                                    <li>Breng eerst <b>1 laag GAASFOLIE</b> strak aan.</li>
+                                    <li>Plaats daarna de hoeklatten.</li>
+                                    <li>Bevestig tot slot de straps.</li>
+                                </ol>
+                            </span>
+                            <span class="warning-text" data-key="protectionWarning">⚠️ GEBRUIK NOOIT DICHTE REKWIKKELFOLIE! De lasergaatjes moeten kunnen ademen.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT: MEDIA VISUAL (STICKY SIDEBAR) -->
+        <div class="right-sidebar">
+            <!-- Full Static Image -->
+            <img src="https://cdn.prod.website-files.com/68b594c756c22085ddc6c1ea/6970dd7716f78c2340a3a108_PalletCoverImage2.jpg" class="pallet-overview-img" alt="PerfoTec Pallet Cover Overview">
+            
+            <!-- Video Placeholder -->
+            <div class="media-container">
+                <div class="media-placeholder" id="mediaDisplay" onclick="playVideo()" style="background-image: url('https://placehold.co/600x400/e9e9e9/007C27?text=Selecteer+een+Stap');">
+                    <div class="play-btn"><i class="fa-solid fa-play"></i></div>
+                </div>
+                <div class="media-caption" id="mediaCaption" data-key="mediaCaption">Klik op een stap voor instructie video (simulatie)</div>
+            </div>
+            
+            <!-- Quick Tips Box -->
+            <div class="tips-box">
+                <h4 data-key="tipsTitle" style="color:var(--pt-green); margin-bottom: 5px; font-size: 12px; margin-top:0;">PRO TIPS</h4>
+                <ul style="font-size: 11px; padding-left: 15px; margin: 0; color: #555;">
+                    <li data-key="tip1">Tape hecht niet op een natte of koude hoes. Maak eerst droog.</li>
+                    <li data-key="tip2">Datalogger vergeten? Maak een sneetje, plaats logger, tape het gat dubbel dicht.</li>
+                    <li data-key="tip3">Gebruik brede (50mm+) industriële tape.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- FINAL CHECKLIST -->
+    <div class="checklist-section">
+        <h3 data-key="checklistTitle">🛑 FINALE CHECKLIST (VÓÓR VERTREK)</h3>
+        <div class="checklist-grid">
+            <div class="check-item"><div class="check-box"></div> <span data-key="check1">Is het product tot in de kern voorgekoeld?</span></div>
+            <div class="check-item"><div class="check-box"></div> <span data-key="check2">Komt het hoes-type overeen met de pakbon?</span></div>
+            <div class="check-item"><div class="check-box"></div> <span data-key="check3">Is de datalogger in een krat (bij het product) geplaatst?</span></div>
+            <div class="check-item"><div class="check-box"></div> <span data-key="check4">Is er 1 laag GAASfolie gebruikt (géén dichte folie)?</span></div>
+            <div class="check-item"><div class="check-box"></div> <span data-key="check5">Zijn de hoeklatten en strapping stevig bevestigd?</span></div>
+            <div class="check-item"><div class="check-box"></div> <span data-key="check6">MAP flow: Ligt de tape gladgestreken? / MHP flow: Is de folie goed omgeslagen?</span></div>
+        </div>
+    </div>
+
+    <footer>
+        <div>PerfoTec B.V. | Klompenmakersweg 16, 3449 JB Woerden | The Netherlands</div>
+        <div>Support: +31 (0)297 25 55 70 | support@perfotec.com</div>
+    </footer>
+</div>
+
+<!-- Modal Structure -->
+<div id="videoModal" class="modal">
+    <div class="modal-content-wrapper">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <div id="modalVideoContent" class="modal-video-display">
+            <!-- Simulated Video Content -->
+            <div id="modalText">LOADING SIMULATION...</div>
+            <div class="progress-bar-bg">
+                <div id="modalProgressBar" class="progress-bar-fill"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Tab switching logic
+    function switchTab(tab) {
+        document.getElementById('tab-map').classList.remove('active');
+        document.getElementById('tab-mhp').classList.remove('active');
+        document.getElementById('btn-map').classList.remove('active');
+        document.getElementById('btn-mhp').classList.remove('active');
+
+        document.getElementById('tab-' + tab).classList.add('active');
+        document.getElementById('btn-' + tab).classList.add('active');
+
+        // Reset video placeholder
+        showMedia('');
+    }
+
+    // Content Data for 6 Languages
+    const content = {
+        nl: {
+            title: "PALLET COVER - INPAK PROTOCOL",
+            objectiveLabel: "DOEL:",
+            objectiveText: "Correcte installatie van de 40μm pallet cover voor maximale houdbaarheid.",
+            tempAlert: "PRE-COOLING IS CRUCIAAL",
+            tabMap: "MAP VERPAKKING (Hermetisch)",
+            tabMhp: "MHP VERPAKKING (Los)",
+            phase1: "FASE 1: VOORBEREIDING",
+            selectCover: "Juiste Hoes Selecteren",
+            selectCoverInst: "Kijk op het label van de doos. Vergelijk dit met uw pakbon. Gebruik alléén het type dat berekend is.<br><i style='color:var(--pt-alert);'>Een fout type kan leiden tot productbederf.</i>",
+            qualityCheck: "Visuele Controle",
+            qualityCheckInst: "Haal de hoes uit de doos en vouw deze deels uit. Controleer op gaten of scheuren. Ziet u schade of een productiefout? Gebruik deze hoes <b>niet</b> en pak een nieuwe.",
+            tempCheck: "Temperatuur Controle",
+            tempCheckInst: "Het product moet volledig voorgekoeld zijn tot de kern. Meet dit na.",
+            tempWarning: "⚠️ WAARSCHUWING: Warm product inpakken kan leiden tot condens en schimmel!",
+            phase2: "FASE 2: PALLET OPBOUW",
+            mapCardboardTitle: "Karton & Bodemvel",
+            mapCardboardInst: "Plaats een karton op de lege pallet. Leg het PerfoTec bodemvel plat hierop. <b>Plaats vervolgens nóg een karton op het bodemvel.</b> Dit voorkomt beschadiging van het vel en garandeert een hermetische MAP-sluiting.",
+            mhpBodemvelTitle: "Bodemvel",
+            mhpBodemvelInst: "Leg het PerfoTec bodemvel plat op de lege pallet ter bescherming. Zorg dat het vel gelijkmatig verdeeld is.",
+            stacking: "Stapelen & Datalogger",
+            stackingInst: "Stapel dozen recht. Plaats de datalogger <b>in een krat/doos direct bij het product</b> op 2/3 hoogte. Plak een sticker aan de buitenzijde waar de logger zit voor uitlezen/terugvinden.",
+            phase3: "FASE 3: COVER AANBRENGEN",
+            applyCover: "Hoes Aanbrengen",
+            applyCoverInst: "Werk met 2 personen. Pak de hoes vast en rek deze voorzichtig uit. Rol de hoes af naar beneden (zoals een opgerolde kous). Pas op voor scherpe hoeken van dozen.",
+            sealMapTitle: "Sluiting (MAP)",
+            sealMapInst: "Tape de hoes rondom vast aan het bodemvel (10cm overlap bij eindigen). <b>Wrijf de tape stevig aan met de hand</b> om rimpels (luchtlekken) te voorkomen.",
+            sealMhpTitle: "Sluiting (MHP)",
+            sealMhpInst: "Gebruik géén tape. Vouw de onderkant van de hoes simpelweg naar binnen, strak onder de onderste laag dozen. Het gewicht houdt de hoes gesloten.",
+            phase4: "FASE 4: TRANSPORT",
+            protection: "Transport Bescherming",
+            protectionInst: "<ol class='protection-list' style='margin: 5px 0 5px 15px; padding:0;'><li>Breng eerst <b>1 laag GAASFOLIE</b> strak aan.</li><li>Plaats daarna de hoeklatten.</li><li>Bevestig tot slot de straps.</li></ol>",
+            protectionWarning: "⚠️ GEBRUIK NOOIT DICHTE REKWIKKELFOLIE! De lasergaatjes moeten kunnen ademen.",
+            mediaCaption: "Klik op een stap voor instructie video (simulatie)",
+            tipsTitle: "PRO TIPS",
+            tip1: "Tape hecht niet op een natte of koude hoes. Maak eerst droog.",
+            tip2: "Datalogger vergeten? Maak een sneetje, plaats logger, tape het gat dubbel dicht.",
+            tip3: "Gebruik brede (50mm+) industriële tape.",
+            checklistTitle: "🛑 FINALE CHECKLIST (VÓÓR VERTREK)",
+            check1: "Is het product tot in de kern voorgekoeld?",
+            check2: "Komt het hoes-type overeen met de pakbon?",
+            check3: "Is de datalogger in een krat (bij product) geplaatst?",
+            check4: "Is er 1 laag GAASfolie gebruikt (géén dichte folie)?",
+            check5: "Zijn de hoeklatten en strapping stevig bevestigd?",
+            check6: "MAP flow: Ligt de tape gladgestreken? / MHP flow: Is de folie goed omgeslagen?"
+        },
+        en: {
+            title: "PALLET COVER - PACKING SOP",
+            objectiveLabel: "GOAL:",
+            objectiveText: "Correct installation of the 40μm pallet cover for maximum shelf life.",
+            tempAlert: "PRE-COOLING IS CRITICAL",
+            tabMap: "MAP PACKING (Hermetic)",
+            tabMhp: "MHP PACKING (Loose)",
+            phase1: "PHASE 1: PREPARATION",
+            selectCover: "Select Correct Cover",
+            selectCoverInst: "Check the box label. Match this with your order sheet. Only use the calculated type.<br><i style='color:var(--pt-alert);'>Wrong type can lead to product spoilage.</i>",
+            qualityCheck: "Visual Inspection",
+            qualityCheckInst: "Remove cover from box and partially unfold. Check for holes or tears. Do you see damage or a production fault? Do <b>not</b> use this cover; take a new one.",
+            tempCheck: "Temperature Check",
+            tempCheckInst: "Product must be pre-cooled to the core. Measure this.",
+            tempWarning: "⚠️ WARNING: Packing warm product can lead to condensation and mold!",
+            phase2: "PHASE 2: PALLET SETUP",
+            mapCardboardTitle: "Cardboard & Bottom Sheet",
+            mapCardboardInst: "Place a cardboard on the empty pallet. Put the PerfoTec bottom sheet flat on top. <b>Then place another cardboard ON TOP of the bottom sheet.</b> This prevents damage and guarantees a hermetic MAP seal.",
+            mhpBodemvelTitle: "Bottom Sheet",
+            mhpBodemvelInst: "Place the PerfoTec bottom sheet flat on the empty pallet for protection.",
+            stacking: "Stacking & Data Logger",
+            stackingInst: "Stack boxes straight. Place data logger <b>in a crate/box directly with the product</b> at 2/3 height. Place a sticker on the outside to mark the location.",
+            phase3: "PHASE 3: APPLY COVER",
+            applyCover: "Apply Cover",
+            applyCoverInst: "Work with 2 people. Hold the cover and stretch gently. Unroll downwards (like a rolled-up stocking). Beware of sharp box corners.",
+            sealMapTitle: "Sealing (MAP)",
+            sealMapInst: "Tape the cover to the bottom sheet all around (10cm overlap at the end). <b>Rub tape firmly by hand</b> to prevent wrinkles (air leaks).",
+            sealMhpTitle: "Sealing (MHP)",
+            sealMhpInst: "Do NOT use tape. Simply tuck the bottom of the cover inwards, tightly under the lowest layer of boxes. The weight holds it closed.",
+            phase4: "PHASE 4: TRANSPORT",
+            protection: "Transport Protection",
+            protectionInst: "<ol class='protection-list' style='margin: 5px 0 5px 15px; padding:0;'><li>First apply <b>1 layer of MESH FOIL</b> tightly.</li><li>Then place the corner boards.</li><li>Finally, attach the straps.</li></ol>",
+            protectionWarning: "⚠️ NEVER USE SOLID STRETCH WRAP! The laser holes must be able to breathe.",
+            mediaCaption: "Click a step for instruction video (simulation)",
+            tipsTitle: "PRO TIPS",
+            tip1: "Tape does not stick to wet/cold foil. Dry first.",
+            tip2: "Forgot logger? Cut small hole, place logger, double tape the hole shut.",
+            tip3: "Use wide (50mm+) industrial tape.",
+            checklistTitle: "🛑 FINAL CHECKLIST (BEFORE DEPARTURE)",
+            check1: "Is product pre-cooled to the core?",
+            check2: "Does cover type match the order sheet?",
+            check3: "Is data logger placed in a crate (with product)?",
+            check4: "Is 1 layer of MESH foil used (NO solid foil)?",
+            check5: "Are corner boards & strapping secure?",
+            check6: "MAP flow: Is tape rubbed smooth? / MHP flow: Is foil tucked in properly?"
+        },
+        es: {
+            title: "PALLET COVER - PROTOCOLO",
+            objectiveLabel: "OBJETIVO:",
+            objectiveText: "Instalación correcta de la funda de 40μm para máxima vida útil.",
+            tempAlert: "EL PRE-ENFRIAMIENTO ES CRÍTICO",
+            tabMap: "EMBALAJE MAP (Hermético)",
+            tabMhp: "EMBALAJE MHP (Suelto)",
+            phase1: "FASE 1: PREPARACIÓN",
+            selectCover: "Seleccionar Funda Correcta",
+            selectCoverInst: "Verifique la etiqueta. Compare con su orden. Use solo el tipo calculado.<br><i style='color:var(--pt-alert);'>El tipo incorrecto puede estropear el producto.</i>",
+            qualityCheck: "Inspección Visual",
+            qualityCheckInst: "Saque la funda y despliéguela parcialmente. ¿Ve agujeros o rasgaduras? <b>No</b> use esta funda; tome una nueva.",
+            tempCheck: "Control de Temperatura",
+            tempCheckInst: "El producto debe estar pre-enfriado hasta el núcleo. Mida esto.",
+            tempWarning: "⚠️ ADVERTENCIA: ¡Empacar producto caliente causa condensación y moho!",
+            phase2: "FASE 2: MONTAJE DEL PALET",
+            mapCardboardTitle: "Cartón y Lámina",
+            mapCardboardInst: "Coloque un cartón en el palet vacío. Ponga la lámina PerfoTec encima. <b>Luego coloque otro cartón SOBRE la lámina.</b> Esto evita daños y garantiza el sello MAP.",
+            mhpBodemvelTitle: "Lámina Inferior",
+            mhpBodemvelInst: "Coloque la lámina PerfoTec plana en el palet vacío como protección.",
+            stacking: "Apilado y Registrador",
+            stackingInst: "Apile cajas rectas. Coloque el registrador <b>en una caja directamente con el producto</b> a 2/3 de altura. Ponga una pegatina en el exterior para marcar la ubicación.",
+            phase3: "FASE 3: APLICAR FUNDA",
+            applyCover: "Aplicar Funda",
+            applyCoverInst: "Trabaje con 2 personas. Sostenga la funda y estire suavemente. Desenrolle hacia abajo (como una media). Cuidado con las esquinas afiladas.",
+            sealMapTitle: "Sellado (MAP)",
+            sealMapInst: "Encinte la funda a la lámina por todo el contorno (10cm de superposición). <b>Frote la cinta firmemente a mano</b> para evitar arrugas (fugas).",
+            sealMhpTitle: "Sellado (MHP)",
+            sealMhpInst: "NO use cinta. Simplemente meta la parte inferior de la funda hacia adentro, firmemente debajo de la capa más baja de cajas.",
+            phase4: "FASE 4: TRANSPORTE",
+            protection: "Protección de Transporte",
+            protectionInst: "<ol class='protection-list' style='margin: 5px 0 5px 15px; padding:0;'><li>Aplique <b>1 capa de MALLA</b> firmemente.</li><li>Luego coloque los esquineros.</li><li>Finalmente, fije los flejes.</li></ol>",
+            protectionWarning: "⚠️ ¡NUNCA USE FILM ESTIRABLE SÓLIDO! Los orificios láser deben respirar.",
+            mediaCaption: "Haga clic en un paso para ver el video (simulación)",
+            tipsTitle: "CONSEJOS PRO",
+            tip1: "La cinta no pega en funda mojada/fría. Seque primero.",
+            tip2: "¿Olvidó el logger? Haga un corte pequeño, colóquelo, encinte doble.",
+            tip3: "Use cinta industrial ancha (50mm+).",
+            checklistTitle: "🛑 LISTA DE VERIFICACIÓN FINAL",
+            check1: "¿Producto pre-enfriado al núcleo?",
+            check2: "¿El tipo de funda coincide con la orden?",
+            check3: "¿Registrador colocado en caja (con producto)?",
+            check4: "¿Se usó 1 capa de MALLA (NO film sólido)?",
+            check5: "¿Esquineros y flejes seguros?",
+            check6: "Flujo MAP: ¿Cinta lisa? / Flujo MHP: ¿Funda bien remetida?"
+        },
+        fr: {
+            title: "PALLET COVER - PROTOCOLE",
+            objectiveLabel: "OBJECTIF:",
+            objectiveText: "Installation correcte de la housse 40μm pour une conservation maximale.",
+            tempAlert: "LE PRÉ-REFROIDISSEMENT EST CRUCIAL",
+            tabMap: "EMBALLAGE MAP (Hermétique)",
+            tabMhp: "EMBALLAGE MHP (Lâche)",
+            phase1: "PHASE 1: PRÉPARATION",
+            selectCover: "Sélectionner la Bonne Housse",
+            selectCoverInst: "Vérifiez l'étiquette. Comparez avec la commande. Utilisez uniquement le type calculé.<br><i style='color:var(--pt-alert);'>Un mauvais type peut gâter le produit.</i>",
+            qualityCheck: "Inspection Visuelle",
+            qualityCheckInst: "Dépliez partiellement. Voyez-vous des trous ou déchirures? N'utilisez <b>pas</b> cette housse; prenez-en une nouvelle.",
+            tempCheck: "Contrôle Température",
+            tempCheckInst: "Le produit doit être pré-refroidi à cœur. Mesurez ceci.",
+            tempWarning: "⚠️ ATTENTION: Emballer un produit chaud cause condensation et moisissure!",
+            phase2: "PHASE 2: MONTAGE PALETTE",
+            mapCardboardTitle: "Carton & Feuille",
+            mapCardboardInst: "Placez un carton sur la palette vide. Mettez la feuille de fond dessus. <b>Puis placez un autre carton SUR la feuille de fond.</b> Cela prévient les dommages et garantit l'étanchéité MAP.",
+            mhpBodemvelTitle: "Feuille de Fond",
+            mhpBodemvelInst: "Placez la feuille de fond à plat sur la palette vide pour protection.",
+            stacking: "Empilage & Enregistreur",
+            stackingInst: "Empilez droit. Placez l'enregistreur <b>dans une caisse directement avec le produit</b>. Mettez un autocollant à l'extérieur pour marquer l'emplacement.",
+            phase3: "PHASE 3: PLACER LA HOUSSE",
+            applyCover: "Appliquer la Housse",
+            applyCoverInst: "Travaillez à 2 personnes. Étirez doucement. Déroulez vers le bas. Attention aux coins pointus.",
+            sealMapTitle: "Fermeture (MAP)",
+            sealMapInst: "Scotchez la housse à la feuille de fond (10cm de chevauchement). <b>Frottez fermement le scotch</b> pour éviter les plis (fuites).",
+            sealMhpTitle: "Fermeture (MHP)",
+            sealMhpInst: "PAS de scotch. Rentrez simplement le bas de la housse vers l'intérieur, sous la couche inférieure de boîtes. Le poids la maintient fermée.",
+            phase4: "PHASE 4: TRANSPORT",
+            protection: "Protection de Transport",
+            protectionInst: "<ol class='protection-list' style='margin: 5px 0 5px 15px; padding:0;'><li>Appliquez d'abord <b>1 couche de FILET</b>.</li><li>Placez les cornières.</li><li>Fixez les sangles.</li></ol>",
+            protectionWarning: "⚠️ NE JAMAIS UTILISER DE FILM ÉTIRABLE PLEIN! Les trous laser doivent respirer.",
+            mediaCaption: "Cliquez sur une étape pour la vidéo (simulación)",
+            tipsTitle: "CONSEILS PRO",
+            tip1: "Le scotch ne colle pas sur humide/froid. Séchez d'abord.",
+            tip2: "Oublié l'enregistreur? Faites une entaille, placez-le, scotchez double.",
+            tip3: "Utilisez du scotch industriel (50mm+).",
+            checklistTitle: "🛑 LISTE DE CONTRÔLE FINALE",
+            check1: "Produit pré-refroidi à cœur?",
+            check2: "Type de housse conforme à la commande?",
+            check3: "Enregistreur dans une caisse (avec produit)?",
+            check4: "1 couche de FILET utilisée (PAS plein)?",
+            check5: "Cornières et sangles sécurisées?",
+            check6: "MAP: Scotch bien frotté? / MHP: Housse bien rentrée?"
+        },
+        pt: {
+            title: "PALLET COVER - PROTOCOLO",
+            objectiveLabel: "OBJETIVO:",
+            objectiveText: "Instalação correta da cobertura de 40μm para vida útil máxima.",
+            tempAlert: "O PRÉ-RESFRIAMENTO É CRÍTICO",
+            tabMap: "EMBALAGEM MAP (Hermética)",
+            tabMhp: "EMBALAGEM MHP (Solta)",
+            phase1: "FASE 1: PREPARAÇÃO",
+            selectCover: "Selecionar Cobertura Correta",
+            selectCoverInst: "Verifique a etiqueta. Compare com o pedido. Use apenas o tipo calculado.<br><i style='color:var(--pt-alert);'>Tipo errado pode estragar o produto.</i>",
+            qualityCheck: "Inspeção Visual",
+            qualityCheckInst: "Desdobre parcialmente. Vê buracos ou rasgos? <b>Não</b> use esta cobertura.",
+            tempCheck: "Verificação de Temperatura",
+            tempCheckInst: "O produto deve estar pré-resfriado até o núcleo. Meça isso.",
+            tempWarning: "⚠️ AVISO: Embalar produto quente causa condensação e mofo!",
+            phase2: "FASE 2: MONTAGEM DO PALETE",
+            mapCardboardTitle: "Papelão & Folha Inferior",
+            mapCardboardInst: "Coloque um papelão no palete. Coloque a folha PerfoTec em cima. <b>Depois, coloque outro papelão SOBRE a folha inferior.</b> Isso evita danos e garante a vedação MAP.",
+            mhpBodemvelTitle: "Folha Inferior",
+            mhpBodemvelInst: "Coloque a folha de fundo plana no palete vazio para proteção.",
+            stacking: "Empilhamento & Registrador",
+            stackingInst: "Empilhe reto. Coloque o registrador <b>em uma caixa diretamente com o produto</b> a 2/3 de altura. Coloque um adesivo no exterior para marcar a posição.",
+            phase3: "FASE 3: APLICAR COBERTURA",
+            applyCover: "Aplicar Cobertura",
+            applyCoverInst: "Trabalhe com 2 pessoas. Estique suavemente. Desenrole para baixo. Cuidado com cantos afiados.",
+            sealMapTitle: "Selagem (MAP)",
+            sealMapInst: "Passe fita ao redor da folha inferior (10cm sobreposição). <b>Esfregue a fita firmemente à mão</b> para evitar rugas (vazamentos).",
+            sealMhpTitle: "Selagem (MHP)",
+            sealMhpInst: "NÃO use fita. Basta dobrar a parte inferior da cobertura para dentro, sob a camada inferior de caixas. O peso a mantém fechada.",
+            phase4: "FASE 4: TRANSPORTE",
+            protection: "Proteção de Transporte",
+            protectionInst: "<ol class='protection-list' style='margin: 5px 0 5px 15px; padding:0;'><li>Aplique <b>1 camada de REDE</b> firmemente.</li><li>Depois coloque as cantoneiras.</li><li>Finalmente, fixe as cintas.</li></ol>",
+            protectionWarning: "⚠️ NUNCA USE FILME STRETCH SÓLIDO! Os furos a laser devem respirar.",
+            mediaCaption: "Clique em uma etapa para vídeo (simulação)",
+            tipsTitle: "DICAS PRO",
+            tip1: "Fita não cola em úmido/frio. Seque primeiro.",
+            tip2: "Esqueceu o registrador? Faça corte, coloque, passe fita dupla.",
+            tip3: "Use fita industrial larga (50mm+).",
+            checklistTitle: "🛑 LISTA DE VERIFICAÇÃO FINAL",
+            check1: "Produto pré-resfriado até o núcleo?",
+            check2: "Tipo de cobertura corresponde ao pedido?",
+            check3: "Registrador colocado na caixa (com produto)?",
+            check4: "1 camada de REDE usada (NÃO filme sólido)?",
+            check5: "Cantoneiras e cintas seguras?",
+            check6: "Fluxo MAP: Fita alisada? / Fluxo MHP: Dobrado corretamente?"
+        },
+        ar: {
+            title: "غطاء البليت - بروتوكول التعبئة",
+            objectiveLabel: "الهدف:",
+            objectiveText: "التركيب الصحيح لغطاء البليت 40 ميكرون لأقصى فترة صلاحية.",
+            tempAlert: "التبريد المسبق أمر بالغ الأهمية",
+            tabMap: "تعبئة MAP (مُحكم)",
+            tabMhp: "تعبئة MHP (فضفاض)",
+            phase1: "المرحلة 1: التحضير",
+            selectCover: "اختر الغطاء الصحيح",
+            selectCoverInst: "تحقق من ملصق الصندوق. قارنه مع طلبك. استخدم فقط النوع المحسوب.<br><i style='color:var(--pt-alert);'>النوع الخاطئ قد يؤدي لتلف المنتج.</i>",
+            qualityCheck: "الفحص البصري",
+            qualityCheckInst: "أخرج الغطاء وافرده جزئيًا. هل ترى ثقوبًا أو تمزقات؟ <b>لا</b> تستخدم هذا الغطاء؛ خذ واحدًا جديدًا.",
+            tempCheck: "فحص درجة الحرارة",
+            tempCheckInst: "يجب تبريد المنتج مسبقًا حتى القلب. قم بقياس ذلك.",
+            tempWarning: "⚠️ تحذير: تعبئة المنتج الدافئ يسبب تكثيفًا وعفنًا فوريًا!",
+            phase2: "المرحلة 2: إعداد البليت",
+            mapCardboardTitle: "الكرتون والورقة السفلية",
+            mapCardboardInst: "ضع كرتونًا على البليت الفارغ. ضع ورقة PerfoTec السفلية فوقه. <b>ثم ضع كرتونًا آخر فوق الورقة السفلية.</b> هذا يمنع التلف ويضمن الإغلاق المحكم.",
+            mhpBodemvelTitle: "الورقة السفلية",
+            mhpBodemvelInst: "ضع ورقة PerfoTec السفلية مسطحة على البليت الفارغ للحماية.",
+            stacking: "التكديس ومسجل البيانات",
+            stackingInst: "كدس الصناديق بشكل مستقيم. ضع مسجل البيانات <b>في صندوق مع المنتج مباشرةً</b> عند 2/3 الارتفاع. ضع ملصقًا بالخارج لتمييز مكانه.",
+            phase3: "المرحلة 3: وضع الغطاء",
+            applyCover: "تطبيق الغطاء",
+            applyCoverInst: "اعمل مع شخصين. أمسك الغطاء ومده برفق. لفه لأسفل. احذر من زوايا الصناديق الحادة.",
+            sealMapTitle: "الإغلاق (MAP)",
+            sealMapInst: "ألصق الغطاء بالورقة السفلية بشريط (تداخل 10 سم). <b>افرك الشريط بقوة بيدك</b> لمنع التجاعيد (تسرب الهواء).",
+            sealMhpTitle: "الإغلاق (MHP)",
+            sealMhpInst: "لا تستخدم الشريط. ببساطة أدخل الجزء السفلي من الغطاء للداخل بقوة تحت الطبقة السفلية من الصناديق. الوزن يبقيه مغلقًا.",
+            phase4: "المرحلة 4: النقل",
+            protection: "حماية النقل",
+            protectionInst: "<ol class='protection-list' style='margin: 5px 15px 5px 0; padding:0;'><li>أولاً ضع <b>طبقة واحدة من الشبكة</b> بإحكام.</li><li>ثم ضع زوايا الحماية.</li><li>أخيرًا، ثبت الأشرطة.</li></ol>",
+            protectionWarning: "⚠️ لا تستخدم أبدًا فيلم التغليف الصلب! يجب أن تتنفس ثقوب الليزر.",
+            mediaCaption: "انقر فوق خطوة للفيديو (محاكاة)",
+            tipsTitle: "نصائح احترافية",
+            tip1: "الشريط لا يلتصق بالرطب/البارد. جفف أولاً.",
+            tip2: "نسيت المسجل؟ اصنع ثقبًا، ضعه، وأغلق بشريط مزدوج.",
+            tip3: "استخدم شريطًا صناعيًا عريضًا (50 مم+).",
+            checklistTitle: "🛑 القائمة النهائية (قبل المغادرة)",
+            check1: "هل تم تبريد المنتج للقلب؟",
+            check2: "هل يطابق نوع الغطاء الطلب؟",
+            check3: "هل المسجل في الصندوق (مع المنتج)؟",
+            check4: "هل تم استخدام طبقة واحدة من الشبكة؟",
+            check5: "هل الزوايا والأشرطة آمنة؟",
+            check6: "مسار MAP: الشريط مفرك جيدًا؟ / مسار MHP: الغطاء مطوي جيدًا؟"
+        }
+    };
+
+    let currentLang = 'en';
+    let currentStepText = "Selecteer een Stap";
+    let currentStepColor = "007C27";
+
+    const stepImages = {
+        'temp': ''
+    };
+
+    // Auto-detect language on load
+    window.onload = function() {
+        const userLang = navigator.language || navigator.userLanguage; 
+        const langCode = userLang.split('-')[0]; 
+        
+        if (content[langCode]) {
+            currentLang = langCode;
+        } else {
+            currentLang = 'en';
+        }
+
+        const select = document.getElementById('langSelect');
+        select.value = currentLang;
+        applyLanguage(currentLang);
+    };
+
+    function changeLanguage(lang) {
+        currentLang = lang;
+        applyLanguage(lang);
+    }
+
+    function applyLanguage(lang) {
+        if (lang === 'ar') {
+            document.documentElement.setAttribute('dir', 'rtl');
+        } else {
+            document.documentElement.setAttribute('dir', 'ltr');
+        }
+
+        const elements = document.querySelectorAll('[data-key]');
+        elements.forEach(el => {
+            const key = el.getAttribute('data-key');
+            if (content[lang][key]) {
+                el.innerHTML = content[lang][key]; 
+            }
+        });
+    }
+
+    // Interactive Media Simulator
+    function showMedia(step) {
+        document.querySelectorAll('.step-card').forEach(c => c.classList.remove('active'));
+        if(event && event.currentTarget) {
+            event.currentTarget.classList.add('active');
+        }
+
+        const display = document.getElementById('mediaDisplay');
+        const caption = document.getElementById('mediaCaption');
+        
+        if(!step) {
+            display.style.backgroundImage = `url('https://placehold.co/600x400/e9e9e9/007C27?text=Selecteer+een+Stap')`;
+            caption.innerText = "";
+            return;
+        }
+
+        let text = "";
+        let color = "007C27";
+
+        switch(step) {
+            case 'materials': text = "Check Label Type"; break;
+            case 'quality': text = "Visual Inspection"; break;
+            case 'temp': text = "Temperature Check"; color = "D32F2F"; break;
+            case 'bottomsheet': text = "Position Bottom Sheet"; break;
+            case 'stacking': text = "Logger Placement"; break;
+            case 'apply': text = "Unrolling Cover"; break;
+            case 'seal': text = "Taping Method"; color = "054E9A"; break;
+            case 'protection': text = "Netting & Straps"; break;
+        }
+
+        currentStepText = text;
+        currentStepColor = color;
+
+        if (stepImages[step] && stepImages[step] !== '') {
+             display.style.backgroundImage = `url('${stepImages[step]}')`;
+        } else {
+             display.style.backgroundImage = `url('https://placehold.co/600x400/e9e9e9/${color}?text=${encodeURIComponent(text)}')`;
+        }
+        
+        let loadingText = "Loading video: ";
+        if(currentLang === 'nl') loadingText = "Video wordt geladen: ";
+        else if(currentLang === 'es') loadingText = "Cargando video: ";
+        else if(currentLang === 'fr') loadingText = "Chargement vidéo: ";
+        else if(currentLang === 'pt') loadingText = "Carregando vídeo: ";
+        else if(currentLang === 'ar') loadingText = "جاري تحميل الفيديو: ";
+
+        caption.innerText = loadingText + text;
+    }
+
+    // MODAL / LIGHTBOX FUNCTIONS
+    function playVideo() {
+        const modal = document.getElementById('videoModal');
+        const modalContent = document.getElementById('modalVideoContent');
+        const modalText = document.getElementById('modalText');
+        const progressBar = document.getElementById('modalProgressBar');
+        
+        if(currentStepText === "Selecteer een Stap") return;
+
+        modal.style.display = "flex";
+        modalContent.style.backgroundImage = `url('https://placehold.co/800x450/222222/${currentStepColor}?text=${encodeURIComponent("PLAYING: " + currentStepText)}')`;
+        modalText.innerText = "SIMULATING VIDEO...";
+        progressBar.style.width = "0%";
+        
+        setTimeout(() => { progressBar.style.width = "100%"; }, 100);
+        
+        setTimeout(() => {
+            closeModal();
+        }, 3000);
+    }
+
+    function closeModal() {
+        document.getElementById('videoModal').style.display = "none";
+        document.getElementById('modalProgressBar').style.width = "0%";
+    }
+
+    window.onclick = function(event) {
+        const modal = document.getElementById('videoModal');
+        if (event.target == modal) {
+            closeModal();
+        }
+    }
+</script>
+
+</body>
+</html>
