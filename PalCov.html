@@ -476,41 +476,51 @@
 
         /* --- PRINT STYLES --- */
         @media print {
-            body { background: white; -webkit-print-color-adjust: exact; font-size: 11px; }
+            body { background: white; -webkit-print-color-adjust: exact; font-size: 10px; } /* Slightly reduced for better fit */
             .container { box-shadow: none; padding: 0; width: 100%; max-width: 100%; margin: 0; }
             .lang-wrapper { display: none; }
-            .main-content { display: block; }
-            .right-sidebar { display: none; } 
             
-            .intro-box { padding: 8px; margin-bottom: 10px; background: #eee !important; border-left: 5px solid var(--pt-blue) !important; }
+            /* Keep Grid Layout to put image on the right side */
+            .main-content { display: grid; grid-template-columns: 1fr 180px; gap: 15px; }
+            
+            .right-sidebar { display: flex; position: static; background: transparent; padding: 0; gap: 10px; }
+            .media-container, .tips-box { display: none; } /* Hide video and tips */
+            .pallet-overview-img { display: block; max-height: 150px; width: 100%; object-fit: contain; } /* Keep Image */
+            
+            .intro-box { padding: 6px 10px; margin-bottom: 8px; font-size: 11px; }
             [dir="rtl"] .intro-box { border-left: none !important; border-right: 5px solid var(--pt-blue) !important; }
             
             /* Hide tabs UI, only show active tab title */
+            .tabs-nav { margin-bottom: 5px; }
             .tabs-nav .tab-btn { display: none; }
             .tabs-nav .tab-btn.active { 
                 display: block; 
                 background: none; 
                 color: var(--pt-green); 
-                font-size: 18px; 
+                font-size: 16px; 
                 border: none; 
                 padding: 0; 
-                margin-bottom: 10px; 
+                margin-bottom: 5px; 
                 text-align: left; 
             }
             [dir="rtl"] .tabs-nav .tab-btn.active { text-align: right; }
 
-            .step-card { border: none; border-bottom: 1px dotted #ccc; padding: 4px 0; page-break-inside: avoid; }
+            .step-card { border: none; border-bottom: 1px dotted #ccc; padding: 3px 0; page-break-inside: avoid; }
             .step-card:hover { background: none; border-left: none; border-right: none;}
-            .phase-title { margin-top: 10px; font-size: 13px; color: var(--pt-green) !important; }
-            .checklist-section { background: #333 !important; color: white !important; padding: 10px; margin-top: 10px; page-break-inside: avoid; }
-            h1 { font-size: 20px; color: var(--pt-green) !important; }
+            .phase-title { margin-top: 8px; font-size: 12px; color: var(--pt-green) !important; }
+            .checklist-section { background: #333 !important; color: white !important; padding: 8px; margin-top: 10px; page-break-inside: avoid; }
+            .checklist-grid { gap: 4px; }
+            .check-item { font-size: 10px; }
+            
+            h1 { font-size: 18px; color: var(--pt-green) !important; }
+            .logo-img { height: 40px; }
             .steps-container { gap: 5px; }
             .step-header { font-size: 12px; margin-bottom: 1px;}
             .step-instruction { font-size: 11px; display: block !important; }
-            header { align-items: center; }
-            .header-info { padding-right: 0; align-items: flex-end; }
+            header { align-items: center; padding-bottom: 10px; margin-bottom: 10px; }
+            .header-info { padding-right: 0; align-items: flex-end; margin-top: 0; }
             [dir="rtl"] .header-info { align-items: flex-start; }
-            footer { display: flex; margin-top: 10px; }
+            footer { display: flex; margin-top: 10px; padding-top: 5px; font-size: 8px; }
         }
     </style>
 </head>
@@ -681,33 +691,22 @@
             <!-- TAB CONTENT: MHP -->
             <div id="tab-mhp" class="tab-content">
                 <div class="steps-container">
-                    <!-- PHASE 1 (Same as MAP) -->
+                    <!-- PHASE 1 (MHP Adjusted) -->
                     <div class="phase-title"><i class="fa-solid fa-clipboard-check"></i> <span data-key="phase1">FASE 1: VOORBEREIDING</span></div>
                     
-                    <div class="step-card" onclick="showMedia('materials')">
-                        <div class="step-header">
-                            <span>1.1 <span data-key="selectCover">Juiste Hoes Selecteren</span></span>
-                            <i class="fa-solid fa-box-open step-icon"></i>
-                        </div>
-                        <div class="step-instruction" data-key="selectCoverInst">
-                            Kijk op het label van de doos. Vergelijk dit met uw pakbon. Gebruik alléén het type dat berekend is.<br>
-                            <i style="color:var(--pt-alert);">Een fout type kan leiden tot productbederf.</i>
-                        </div>
-                    </div>
-
                     <div class="step-card" onclick="showMedia('quality')">
                         <div class="step-header">
-                            <span>1.2 <span data-key="qualityCheck">Visuele Controle</span></span>
+                            <span>1.1 <span data-key="qualityCheck">Visuele Controle</span></span>
                             <i class="fa-solid fa-magnifying-glass step-icon"></i>
                         </div>
-                        <div class="step-instruction" data-key="qualityCheckInst">
-                            Haal de hoes uit de doos en vouw deze deels uit. Controleer op gaten of scheuren. Ziet u schade of een productiefout? Gebruik deze hoes <b>niet</b> en pak een nieuwe.
+                        <div class="step-instruction" data-key="qualityCheckMhpInst">
+                            Vouw de hoes deels uit en controleer op beschadigingen. Alleen bij grote afwijkingen of aanzienlijke productiefouten dient de hoes vervangen te worden.
                         </div>
                     </div>
 
                     <div class="step-card" onclick="showMedia('temp')">
                         <div class="step-header">
-                            <span>1.3 <span data-key="tempCheck">Temperatuur Controle</span></span>
+                            <span>1.2 <span data-key="tempCheck">Temperatuur Controle</span></span>
                             <i class="fa-solid fa-temperature-arrow-down step-icon"></i>
                         </div>
                         <div class="step-instruction">
@@ -801,10 +800,10 @@
 
         <!-- RIGHT: MEDIA VISUAL (STICKY SIDEBAR) -->
         <div class="right-sidebar">
-            <!-- Full Static Image -->
+            <!-- Full Static Image (Will remain in print layout) -->
             <img src="https://cdn.prod.website-files.com/68b594c756c22085ddc6c1ea/6970dd7716f78c2340a3a108_PalletCoverImage2.jpg" class="pallet-overview-img" alt="PerfoTec Pallet Cover Overview">
             
-            <!-- Video Placeholder -->
+            <!-- Video Placeholder (Hidden in print layout) -->
             <div class="media-container">
                 <div class="media-placeholder" id="mediaDisplay" onclick="playVideo()" style="background-image: url('https://placehold.co/600x400/e9e9e9/007C27?text=Selecteer+een+Stap');">
                     <div class="play-btn"><i class="fa-solid fa-play"></i></div>
@@ -812,7 +811,7 @@
                 <div class="media-caption" id="mediaCaption" data-key="mediaCaption">Klik op een stap voor instructie video (simulatie)</div>
             </div>
             
-            <!-- Quick Tips Box -->
+            <!-- Quick Tips Box (Hidden in print layout) -->
             <div class="tips-box">
                 <h4 data-key="tipsTitle" style="color:var(--pt-green); margin-bottom: 5px; font-size: 12px; margin-top:0;">PRO TIPS</h4>
                 <ul style="font-size: 11px; padding-left: 15px; margin: 0; color: #555;">
@@ -886,6 +885,7 @@
             selectCoverInst: "Kijk op het label van de doos. Vergelijk dit met uw pakbon. Gebruik alléén het type dat berekend is.<br><i style='color:var(--pt-alert);'>Een fout type kan leiden tot productbederf.</i>",
             qualityCheck: "Visuele Controle",
             qualityCheckInst: "Haal de hoes uit de doos en vouw deze deels uit. Controleer op gaten of scheuren. Ziet u schade of een productiefout? Gebruik deze hoes <b>niet</b> en pak een nieuwe.",
+            qualityCheckMhpInst: "Vouw de hoes deels uit en controleer op beschadigingen. Alleen bij grote afwijkingen of aanzienlijke productiefouten dient de hoes vervangen te worden.",
             tempCheck: "Temperatuur Controle",
             tempCheckInst: "Het product moet volledig voorgekoeld zijn tot de kern. Meet dit na.",
             tempWarning: "⚠️ WAARSCHUWING: Warm product inpakken kan leiden tot condens en schimmel!",
@@ -938,6 +938,7 @@
             selectCoverInst: "Check the box label. Match this with your order sheet. Only use the calculated type.<br><i style='color:var(--pt-alert);'>Wrong type can lead to product spoilage.</i>",
             qualityCheck: "Visual Inspection",
             qualityCheckInst: "Remove cover from box and partially unfold. Check for holes or tears. Do you see damage or a production fault? Do <b>not</b> use this cover; take a new one.",
+            qualityCheckMhpInst: "Partially unfold the cover and check for damage. Only in the case of major deviations or significant production defects should the cover be replaced.",
             tempCheck: "Temperature Check",
             tempCheckInst: "Product must be pre-cooled to the core. Measure this.",
             tempWarning: "⚠️ WARNING: Packing warm product can lead to condensation and mold!",
@@ -990,6 +991,7 @@
             selectCoverInst: "Verifique la etiqueta. Compare con su orden. Use solo el tipo calculado.<br><i style='color:var(--pt-alert);'>El tipo incorrecto puede estropear el producto.</i>",
             qualityCheck: "Inspección Visual",
             qualityCheckInst: "Saque la funda y despliéguela parcialmente. ¿Ve agujeros o rasgaduras? <b>No</b> use esta funda; tome una nueva.",
+            qualityCheckMhpInst: "Despliegue parcialmente la funda y compruebe si hay daños. Solo en caso de desviaciones importantes o defectos de producción significativos se debe reemplazar la funda.",
             tempCheck: "Control de Temperatura",
             tempCheckInst: "El producto debe estar pre-enfriado hasta el núcleo. Mida esto.",
             tempWarning: "⚠️ ADVERTENCIA: ¡Empacar producto caliente causa condensación y moho!",
@@ -1042,6 +1044,7 @@
             selectCoverInst: "Vérifiez l'étiquette. Comparez avec la commande. Utilisez uniquement le type calculé.<br><i style='color:var(--pt-alert);'>Un mauvais type peut gâter le produit.</i>",
             qualityCheck: "Inspection Visuelle",
             qualityCheckInst: "Dépliez partiellement. Voyez-vous des trous ou déchirures? N'utilisez <b>pas</b> cette housse; prenez-en une nouvelle.",
+            qualityCheckMhpInst: "Dépliez partiellement la housse et vérifiez s'il y a des dommages. La housse ne doit être remplacée qu'en cas de déviations majeures ou de défauts de production significatifs.",
             tempCheck: "Contrôle Température",
             tempCheckInst: "Le produit doit être pré-refroidi à cœur. Mesurez ceci.",
             tempWarning: "⚠️ ATTENTION: Emballer un produit chaud cause condensation et moisissure!",
@@ -1094,6 +1097,7 @@
             selectCoverInst: "Verifique a etiqueta. Compare com o pedido. Use apenas o tipo calculado.<br><i style='color:var(--pt-alert);'>Tipo errado pode estragar o produto.</i>",
             qualityCheck: "Inspeção Visual",
             qualityCheckInst: "Desdobre parcialmente. Vê buracos ou rasgos? <b>Não</b> use esta cobertura.",
+            qualityCheckMhpInst: "Desdobre parcialmente a cobertura e verifique se há danos. A cobertura só deve ser substituída em caso de grandes desvios ou defeitos de produção significativos.",
             tempCheck: "Verificação de Temperatura",
             tempCheckInst: "O produto deve estar pré-resfriado até o núcleo. Meça isso.",
             tempWarning: "⚠️ AVISO: Embalar produto quente causa condensação e mofo!",
@@ -1146,6 +1150,7 @@
             selectCoverInst: "تحقق من ملصق الصندوق. قارنه مع طلبك. استخدم فقط النوع المحسوب.<br><i style='color:var(--pt-alert);'>النوع الخاطئ قد يؤدي لتلف المنتج.</i>",
             qualityCheck: "الفحص البصري",
             qualityCheckInst: "أخرج الغطاء وافرده جزئيًا. هل ترى ثقوبًا أو تمزقات؟ <b>لا</b> تستخدم هذا الغطاء؛ خذ واحدًا جديدًا.",
+            qualityCheckMhpInst: "افرد الغطاء جزئيًا وتحقق من وجود أضرار. يجب استبدال الغطاء فقط في حالة وجود انحرافات كبيرة أو عيوب إنتاج كبيرة.",
             tempCheck: "فحص درجة الحرارة",
             tempCheckInst: "يجب تبريد المنتج مسبقًا حتى القلب. قم بقياس ذلك.",
             tempWarning: "⚠️ تحذير: تعبئة المنتج الدافئ يسبب تكثيفًا وعفنًا فوريًا!",
