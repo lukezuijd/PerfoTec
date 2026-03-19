@@ -476,16 +476,15 @@
 
         /* --- PRINT STYLES --- */
         @media print {
-            body { background: white; -webkit-print-color-adjust: exact; font-size: 10px; } /* Slightly reduced for better fit */
+            body { background: white; -webkit-print-color-adjust: exact; font-size: 10px; } 
             .container { box-shadow: none; padding: 0; width: 100%; max-width: 100%; margin: 0; }
             .lang-wrapper { display: none; }
             
-            /* Keep Grid Layout to put image on the right side */
             .main-content { display: grid; grid-template-columns: 1fr 180px; gap: 15px; }
             
             .right-sidebar { display: flex; position: static; background: transparent; padding: 0; gap: 10px; }
-            .media-container, .tips-box { display: none; } /* Hide video and tips */
-            .pallet-overview-img { display: block; max-height: 150px; width: 100%; object-fit: contain; } /* Keep Image */
+            .media-container { display: none; } /* Hide video */
+            .pallet-overview-img { display: block; max-height: 150px; width: 100%; object-fit: contain; }
             
             .intro-box { padding: 6px 10px; margin-bottom: 8px; font-size: 11px; }
             [dir="rtl"] .intro-box { border-left: none !important; border-right: 5px solid var(--pt-blue) !important; }
@@ -521,6 +520,10 @@
             .header-info { padding-right: 0; align-items: flex-end; margin-top: 0; }
             [dir="rtl"] .header-info { align-items: flex-start; }
             footer { display: flex; margin-top: 10px; padding-top: 5px; font-size: 8px; }
+            
+            /* Print handling for tips/checklists */
+            .tips-box, .checklist-section { display: none !important; } /* hide all first */
+            .tips-box.active-block, .checklist-section.active-block { display: block !important; } /* show only active ones */
         }
     </style>
 </head>
@@ -662,7 +665,7 @@
                         </div>
                         <div class="step-instruction">
                             <span data-key="protMeshInst">Breng <b>1 laag GAASFOLIE</b> aan. Breng deze strak genoeg aan, maar niet zó strak dat de hoes beschadigt.</span>
-                            <span class="warning-text" data-key="protectionWarning">⚠️ GEBRUIK NOOIT DICHTE REKWIKKELFOLIE! De lasergaatjes moeten kunnen ademen.</span>
+                            <span class="warning-text" data-key="protectionWarning">⚠️ GEBRUIK NOOIT DICHTE REKWIKKELFOLIE! De folie en de lasergaatjes moeten kunnen ademen.</span>
                         </div>
                     </div>
 
@@ -771,7 +774,7 @@
                         </div>
                         <div class="step-instruction">
                             <span data-key="protMeshInstMhp">Voor extra stabiliteit tijdens transport raden we aan <b>1 laag GAASFOLIE</b> te gebruiken. Breng deze stevig aan, maar voorkom dat de PerfoTec hoes beschadigt.</span>
-                            <span class="warning-text" data-key="protectionWarning">⚠️ GEBRUIK NOOIT DICHTE REKWIKKELFOLIE! De lasergaatjes moeten kunnen ademen.</span>
+                            <span class="warning-text" data-key="protectionWarning">⚠️ GEBRUIK NOOIT DICHTE REKWIKKELFOLIE! De folie en de lasergaatjes moeten kunnen ademen.</span>
                         </div>
                     </div>
 
@@ -811,28 +814,50 @@
                 <div class="media-caption" id="mediaCaption" data-key="mediaCaption">Klik op een stap voor instructie video (simulatie)</div>
             </div>
             
-            <!-- Quick Tips Box (Hidden in print layout) -->
-            <div class="tips-box">
+            <!-- Quick Tips Box MAP -->
+            <div id="tips-map" class="tips-box active-block">
                 <h4 data-key="tipsTitle" style="color:var(--pt-green); margin-bottom: 5px; font-size: 12px; margin-top:0;">PRO TIPS</h4>
                 <ul style="font-size: 11px; padding-left: 15px; margin: 0; color: #555;">
-                    <li data-key="tip1">Tape hecht niet op een natte of koude hoes. Maak eerst droog.</li>
-                    <li data-key="tip2">Datalogger vergeten? Maak een sneetje, plaats logger, tape het gat dubbel dicht.</li>
-                    <li data-key="tip3">Gebruik brede (50mm+) industriële tape.</li>
+                    <li data-key="mapTip1">Tape hecht niet op een natte of koude hoes. Maak eerst droog.</li>
+                    <li data-key="mapTip2">Datalogger vergeten? Maak een sneetje, plaats logger, tape het gat dubbel dicht.</li>
+                    <li data-key="mapTip3">Gebruik brede (50mm+) industriële tape.</li>
+                </ul>
+            </div>
+
+            <!-- Quick Tips Box MHP -->
+            <div id="tips-mhp" class="tips-box" style="display:none;">
+                <h4 data-key="tipsTitle" style="color:var(--pt-green); margin-bottom: 5px; font-size: 12px; margin-top:0;">PRO TIPS</h4>
+                <ul style="font-size: 11px; padding-left: 15px; margin: 0; color: #555;">
+                    <li data-key="mhpTip1">Zorg dat de hoes vrij hangt en nergens klem zit voor optimale ventilatie.</li>
+                    <li data-key="mhpTip2">Vouw overtollige folie aan de onderkant netjes weg om schade door pompwagens of heftrucks te voorkomen.</li>
+                    <li data-key="mhpTip3">Vergeet de datalogger niet; bij MHP kunt u de hoes makkelijk even optillen om deze alsnog te plaatsen.</li>
                 </ul>
             </div>
         </div>
     </div>
 
-    <!-- FINAL CHECKLIST -->
-    <div class="checklist-section">
+    <!-- FINAL CHECKLIST MAP -->
+    <div id="checklist-map" class="checklist-section active-block">
         <h3 data-key="checklistTitle">🛑 FINALE CHECKLIST (VÓÓR VERTREK)</h3>
         <div class="checklist-grid">
-            <div class="check-item"><div class="check-box"></div> <span data-key="check1">Is het product tot in de kern voorgekoeld?</span></div>
-            <div class="check-item"><div class="check-box"></div> <span data-key="check2">Komt het hoes-type overeen met de pakbon?</span></div>
-            <div class="check-item"><div class="check-box"></div> <span data-key="check3">Is de datalogger in een krat (bij het product) geplaatst?</span></div>
-            <div class="check-item"><div class="check-box"></div> <span data-key="check4">Is er 1 laag GAASfolie gebruikt (géén dichte folie)?</span></div>
-            <div class="check-item"><div class="check-box"></div> <span data-key="check5">Zijn de hoeklatten en strapping stevig bevestigd?</span></div>
-            <div class="check-item"><div class="check-box"></div> <span data-key="check6">MAP: Ligt de tape gladgestreken? / MHP: Sleept de folie niet over de grond?</span></div>
+            <div class="check-item"><div class="check-box"></div> <span data-key="mapCheck1">Is het product tot in de kern voorgekoeld?</span></div>
+            <div class="check-item"><div class="check-box"></div> <span data-key="mapCheck2">Komt het hoes-type overeen met de pakbon?</span></div>
+            <div class="check-item"><div class="check-box"></div> <span data-key="mapCheck3">Is de karton-bodemvel-karton sandwich correct toegepast?</span></div>
+            <div class="check-item"><div class="check-box"></div> <span data-key="mapCheck4">Is de datalogger in een krat (bij het product) geplaatst?</span></div>
+            <div class="check-item"><div class="check-box"></div> <span data-key="mapCheck5">Ligt de tape strak en gladgestreken (geen luchtlekken)?</span></div>
+            <div class="check-item"><div class="check-box"></div> <span data-key="mapCheck6">Is er 1 laag GAASfolie gebruikt en zijn latten/straps stevig?</span></div>
+        </div>
+    </div>
+
+    <!-- FINAL CHECKLIST MHP -->
+    <div id="checklist-mhp" class="checklist-section" style="display:none;">
+        <h3 data-key="checklistTitle">🛑 FINALE CHECKLIST (VÓÓR VERTREK)</h3>
+        <div class="checklist-grid">
+            <div class="check-item"><div class="check-box"></div> <span data-key="mhpCheck1">Is het product tot in de kern voorgekoeld?</span></div>
+            <div class="check-item"><div class="check-box"></div> <span data-key="mhpCheck2">Is de datalogger in een krat (bij het product) geplaatst?</span></div>
+            <div class="check-item"><div class="check-box"></div> <span data-key="mhpCheck3">Is overtollige folie weggewerkt zodat het niet over de grond sleept?</span></div>
+            <div class="check-item"><div class="check-box"></div> <span data-key="mhpCheck4">Zit de hoes niet hermetisch dichtgetapet (fixatie-tape is toegestaan)?</span></div>
+            <div class="check-item"><div class="check-box"></div> <span data-key="mhpCheck5">(Aanbevolen) Is er 1 laag GAASfolie gebruikt en zijn latten/straps stevig?</span></div>
         </div>
     </div>
 
@@ -859,6 +884,7 @@
 <script>
     // Tab switching logic
     function switchTab(tab) {
+        // UI Tabs
         document.getElementById('tab-map').classList.remove('active');
         document.getElementById('tab-mhp').classList.remove('active');
         document.getElementById('btn-map').classList.remove('active');
@@ -866,6 +892,18 @@
 
         document.getElementById('tab-' + tab).classList.add('active');
         document.getElementById('btn-' + tab).classList.add('active');
+
+        // Tips Blocks
+        document.getElementById('tips-map').style.display = (tab === 'map') ? 'block' : 'none';
+        document.getElementById('tips-map').classList.toggle('active-block', tab === 'map');
+        document.getElementById('tips-mhp').style.display = (tab === 'mhp') ? 'block' : 'none';
+        document.getElementById('tips-mhp').classList.toggle('active-block', tab === 'mhp');
+
+        // Checklist Blocks
+        document.getElementById('checklist-map').style.display = (tab === 'map') ? 'block' : 'none';
+        document.getElementById('checklist-map').classList.toggle('active-block', tab === 'map');
+        document.getElementById('checklist-mhp').style.display = (tab === 'mhp') ? 'block' : 'none';
+        document.getElementById('checklist-mhp').classList.toggle('active-block', tab === 'mhp');
 
         // Reset video placeholder
         showMedia('');
@@ -912,19 +950,32 @@
             protCornersInst: "Plaats de hoeklatten op de hoeken van de pallet.",
             protStrapsTitle: "Straps Bevestigen",
             protStrapsInst: "Bevestig tot slot de straps (spanbanden) om het geheel vast te zetten.",
-            protectionWarning: "⚠️ GEBRUIK NOOIT DICHTE REKWIKKELFOLIE! De lasergaatjes moeten kunnen ademen.",
+            protectionWarning: "⚠️ GEBRUIK NOOIT DICHTE REKWIKKELFOLIE! De folie en de lasergaatjes moeten kunnen ademen.",
             mediaCaption: "Klik op een stap voor instructie video (simulatie)",
             tipsTitle: "PRO TIPS",
-            tip1: "Tape hecht niet op een natte of koude hoes. Maak eerst droog.",
-            tip2: "Datalogger vergeten? Maak een sneetje, plaats logger, tape het gat dubbel dicht.",
-            tip3: "Gebruik brede (50mm+) industriële tape.",
-            checklistTitle: "🛑 FINALE CHECKLIST (VÓÓR VERTREK)",
-            check1: "Is het product tot in de kern voorgekoeld?",
-            check2: "Komt het hoes-type overeen met de pakbon?",
-            check3: "Is de datalogger in een krat (bij product) geplaatst?",
-            check4: "Is er 1 laag GAASfolie gebruikt (géén dichte folie)?",
-            check5: "Zijn de hoeklatten en strapping stevig bevestigd?",
-            check6: "MAP: Ligt de tape gladgestreken? / MHP: Sleept de folie niet over de grond?"
+            
+            // MAP Tips & Checklist
+            mapTip1: "Tape hecht niet op een natte of koude hoes. Maak eerst droog.",
+            mapTip2: "Datalogger vergeten? Maak een sneetje, plaats logger, tape het gat dubbel dicht.",
+            mapTip3: "Gebruik brede (50mm+) industriële tape.",
+            mapCheck1: "Is het product tot in de kern voorgekoeld?",
+            mapCheck2: "Komt het hoes-type overeen met de pakbon?",
+            mapCheck3: "Is de karton-bodemvel-karton sandwich correct toegepast?",
+            mapCheck4: "Is de datalogger in een krat (bij het product) geplaatst?",
+            mapCheck5: "Ligt de tape strak en gladgestreken (geen luchtlekken)?",
+            mapCheck6: "Is er 1 laag GAASfolie gebruikt en zijn latten/straps stevig?",
+
+            // MHP Tips & Checklist
+            mhpTip1: "Zorg dat de hoes vrij hangt en nergens klem zit voor optimale ventilatie.",
+            mhpTip2: "Vouw overtollige folie aan de onderkant netjes weg om schade door pompwagens of heftrucks te voorkomen.",
+            mhpTip3: "Vergeet de datalogger niet; bij MHP kunt u de hoes makkelijk even optillen om deze alsnog te plaatsen.",
+            mhpCheck1: "Is het product tot in de kern voorgekoeld?",
+            mhpCheck2: "Is de datalogger in een krat (bij het product) geplaatst?",
+            mhpCheck3: "Is overtollige folie weggewerkt zodat het niet over de grond sleept?",
+            mhpCheck4: "Zit de hoes niet hermetisch dichtgetapet (fixatie-tape is toegestaan)?",
+            mhpCheck5: "(Aanbevolen) Is er 1 laag GAASfolie gebruikt en zijn latten/straps stevig?",
+            
+            checklistTitle: "🛑 FINALE CHECKLIST (VÓÓR VERTREK)"
         },
         en: {
             title: "PALLET COVER - PACKING SOP",
@@ -965,19 +1016,32 @@
             protCornersInst: "Place corner boards on the corners of the pallet.",
             protStrapsTitle: "Attach Straps",
             protStrapsInst: "Finally, attach the straps to secure the load.",
-            protectionWarning: "⚠️ NEVER USE SOLID STRETCH WRAP! The laser holes must be able to breathe.",
+            protectionWarning: "⚠️ NEVER USE SOLID STRETCH WRAP! The foil and laser holes must be able to breathe.",
             mediaCaption: "Click a step for instruction video (simulation)",
             tipsTitle: "PRO TIPS",
-            tip1: "Tape does not stick to wet/cold foil. Dry first.",
-            tip2: "Forgot logger? Cut small hole, place logger, double tape the hole shut.",
-            tip3: "Use wide (50mm+) industrial tape.",
-            checklistTitle: "🛑 FINAL CHECKLIST (BEFORE DEPARTURE)",
-            check1: "Is product pre-cooled to the core?",
-            check2: "Does cover type match the order sheet?",
-            check3: "Is data logger placed in a crate (with product)?",
-            check4: "Is 1 layer of MESH foil used (NO solid foil)?",
-            check5: "Are corner boards & strapping secure?",
-            check6: "MAP: Is tape rubbed smooth? / MHP: Cover not dragging on floor?"
+            
+            // MAP Tips & Checklist
+            mapTip1: "Tape does not stick to wet/cold foil. Dry first.",
+            mapTip2: "Forgot logger? Cut small hole, place logger, double tape the hole shut.",
+            mapTip3: "Use wide (50mm+) industrial tape.",
+            mapCheck1: "Is product pre-cooled to the core?",
+            mapCheck2: "Does cover type match the order sheet?",
+            mapCheck3: "Is the cardboard-bottomsheet-cardboard sandwich applied?",
+            mapCheck4: "Is data logger placed in a crate (with product)?",
+            mapCheck5: "Is tape rubbed smooth and airtight (no wrinkles)?",
+            mapCheck6: "Is 1 layer of MESH foil used and are straps/corners secure?",
+
+            // MHP Tips & Checklist
+            mhpTip1: "Ensure the cover hangs freely for optimal ventilation.",
+            mhpTip2: "Neatly tuck away excess foil at the bottom to prevent damage from pallet jacks or forklifts.",
+            mhpTip3: "Forgot logger? With MHP, you can easily lift the cover to place it.",
+            mhpCheck1: "Is product pre-cooled to the core?",
+            mhpCheck2: "Is data logger placed in a crate (with product)?",
+            mhpCheck3: "Is excess foil tucked away so it doesn't drag on the floor?",
+            mhpCheck4: "Is the cover NOT hermetically sealed (fixation tape is allowed)?",
+            mhpCheck5: "(Recommended) Is 1 layer of MESH foil used and are straps secure?",
+
+            checklistTitle: "🛑 FINAL CHECKLIST (BEFORE DEPARTURE)"
         },
         es: {
             title: "PALLET COVER - PROTOCOLO",
@@ -1018,19 +1082,32 @@
             protCornersInst: "Coloque los esquineros en las esquinas del palet.",
             protStrapsTitle: "Fijar Flejes",
             protStrapsInst: "Finalmente, fije los flejes para asegurar la carga.",
-            protectionWarning: "⚠️ ¡NUNCA USE FILM ESTIRABLE SÓLIDO! Los orificios láser deben respirar.",
+            protectionWarning: "⚠️ ¡NUNCA USE FILM ESTIRABLE SÓLIDO! El plástico y los orificios láser deben respirar.",
             mediaCaption: "Haga clic en un paso para ver el video (simulación)",
             tipsTitle: "CONSEJOS PRO",
-            tip1: "La cinta no pega en funda mojada/fría. Seque primero.",
-            tip2: "¿Olvidó el logger? Haga un corte pequeño, colóquelo, encinte doble.",
-            tip3: "Use cinta industrial ancha (50mm+).",
-            checklistTitle: "🛑 LISTA DE VERIFICACIÓN FINAL",
-            check1: "¿Producto pre-enfriado al núcleo?",
-            check2: "¿El tipo de funda coincide con la orden?",
-            check3: "¿Registrador colocado en caja (con producto)?",
-            check4: "¿Se usó 1 capa de MALLA (NO film sólido)?",
-            check5: "¿Esquineros y flejes seguros?",
-            check6: "MAP: ¿Cinta lisa? / MHP: ¿Funda no arrastra por el suelo?"
+            
+            // MAP Tips & Checklist
+            mapTip1: "La cinta no pega en funda mojada/fría. Seque primero.",
+            mapTip2: "¿Olvidó el logger? Haga un corte pequeño, colóquelo, encinte doble.",
+            mapTip3: "Use cinta industrial ancha (50mm+).",
+            mapCheck1: "¿Producto pre-enfriado al núcleo?",
+            mapCheck2: "¿El tipo de funda coincide con la orden?",
+            mapCheck3: "¿Sándwich de cartón-lámina-cartón correcto?",
+            mapCheck4: "¿Registrador colocado en caja (con producto)?",
+            mapCheck5: "¿La cinta está lisa y sin fugas de aire?",
+            mapCheck6: "¿Se usó 1 capa de MALLA y los flejes están seguros?",
+
+            // MHP Tips & Checklist
+            mhpTip1: "Asegúrese de que la funda cuelgue libremente para ventilación.",
+            mhpTip2: "Meta ordenadamente el exceso de plástico en la parte inferior para evitar daños por transpaletas.",
+            mhpTip3: "¿Olvidó el logger? Con MHP puede levantar la funda fácilmente.",
+            mhpCheck1: "¿Producto pre-enfriado al núcleo?",
+            mhpCheck2: "¿Registrador colocado en caja (con producto)?",
+            mhpCheck3: "¿Se ha recogido el exceso de plástico para que no arrastre?",
+            mhpCheck4: "¿La funda NO está sellada herméticamente (se permite cinta de fijación)?",
+            mhpCheck5: "(Recomendado) ¿Se usó 1 capa de MALLA y los flejes están seguros?",
+
+            checklistTitle: "🛑 LISTA DE VERIFICACIÓN FINAL"
         },
         fr: {
             title: "PALLET COVER - PROTOCOLE",
@@ -1071,19 +1148,32 @@
             protCornersInst: "Placez les cornières sur les coins de la palette.",
             protStrapsTitle: "Fixer les Sangles",
             protStrapsInst: "Enfin, fixez les sangles pour sécuriser l'ensemble.",
-            protectionWarning: "⚠️ NE JAMAIS UTILISER DE FILM ÉTIRABLE PLEIN! Les trous laser doivent respirer.",
+            protectionWarning: "⚠️ NE JAMAIS UTILISER DE FILM ÉTIRABLE PLEIN! Le film et les trous laser doivent respirer.",
             mediaCaption: "Cliquez sur une étape pour la vidéo (simulación)",
             tipsTitle: "CONSEILS PRO",
-            tip1: "Le scotch ne colle pas sur humide/froid. Séchez d'abord.",
-            tip2: "Oublié l'enregistreur? Faites une entaille, placez-le, scotchez double.",
-            tip3: "Utilisez du scotch industriel (50mm+).",
-            checklistTitle: "🛑 LISTE DE CONTRÔLE FINALE",
-            check1: "Produit pré-refroidi à cœur?",
-            check2: "Type de housse conforme à la commande?",
-            check3: "Enregistreur dans une caisse (avec produit)?",
-            check4: "1 couche de FILET utilisée (PAS plein)?",
-            check5: "Cornières et sangles sécurisées?",
-            check6: "MAP: Scotch bien frotté? / MHP: Housse ne traîne pas au sol?"
+            
+            // MAP Tips & Checklist
+            mapTip1: "Le scotch ne colle pas sur humide/froid. Séchez d'abord.",
+            mapTip2: "Oublié l'enregistreur? Faites une entaille, placez-le, scotchez double.",
+            mapTip3: "Utilisez du scotch industriel large (50mm+).",
+            mapCheck1: "Le produit est-il pré-refroidi à cœur?",
+            mapCheck2: "Type de housse conforme à la commande?",
+            mapCheck3: "Le sandwich carton-feuille-carton est-il appliqué?",
+            mapCheck4: "Enregistreur dans une caisse (avec le produit)?",
+            mapCheck5: "Le scotch est-il bien frotté et étanche?",
+            mapCheck6: "1 couche de FILET utilisée et sangles sécurisées?",
+
+            // MHP Tips & Checklist
+            mhpTip1: "Laissez la housse pendre librement pour une bonne ventilation.",
+            mhpTip2: "Rangez soigneusement l'excès de film en bas pour éviter les dommages par les transpalettes.",
+            mhpTip3: "Oublié l'enregistreur? Soulevez simplement la housse pour le placer.",
+            mhpCheck1: "Le produit est-il pré-refroidi à cœur?",
+            mhpCheck2: "Enregistreur dans une caisse (avec le produit)?",
+            mhpCheck3: "L'excès de film est-il rangé pour ne pas traîner au sol?",
+            mhpCheck4: "La housse n'est-elle PAS hermétiquement fermée (scotch de fixation permis)?",
+            mhpCheck5: "(Optionnel) 1 couche de FILET utilisée et sangles sécurisées?",
+
+            checklistTitle: "🛑 LISTE DE CONTRÔLE FINALE"
         },
         pt: {
             title: "PALLET COVER - PROTOCOLO",
@@ -1124,19 +1214,32 @@
             protCornersInst: "Coloque as cantoneiras nos cantos do palete.",
             protStrapsTitle: "Fixar Cintas",
             protStrapsInst: "Finalmente, fixe as cintas para prender a carga.",
-            protectionWarning: "⚠️ NUNCA USE FILME STRETCH SÓLIDO! Os furos a laser devem respirar.",
+            protectionWarning: "⚠️ NUNCA USE FILME STRETCH SÓLIDO! O plástico e os furos a laser devem respirar.",
             mediaCaption: "Clique em uma etapa para vídeo (simulação)",
             tipsTitle: "DICAS PRO",
-            tip1: "Fita não cola em úmido/frio. Seque primeiro.",
-            tip2: "Esqueceu o registrador? Faça corte, coloque, passe fita dupla.",
-            tip3: "Use fita industrial larga (50mm+).",
-            checklistTitle: "🛑 LISTA DE VERIFICAÇÃO FINAL",
-            check1: "Produto pré-resfriado até o núcleo?",
-            check2: "Tipo de cobertura corresponde ao pedido?",
-            check3: "Registrador colocado na caixa (com produto)?",
-            check4: "1 camada de REDE usada (NÃO filme sólido)?",
-            check5: "Cantoneiras e cintas seguras?",
-            check6: "MAP: Fita alisada? / MHP: Cobertura não arrasta no chão?"
+            
+            // MAP Tips & Checklist
+            mapTip1: "A fita não cola em folha úmida/fria. Seque primeiro.",
+            mapTip2: "Esqueceu o registrador? Faça um corte, coloque, passe fita dupla.",
+            mapTip3: "Use fita industrial larga (50mm+).",
+            mapCheck1: "O produto está pré-resfriado até o núcleo?",
+            mapCheck2: "O tipo de cobertura corresponde ao pedido?",
+            mapCheck3: "O sanduíche papelão-folha-papelão está correto?",
+            mapCheck4: "O registrador está na caixa (com o produto)?",
+            mapCheck5: "A fita está bem alisada (sem vazamentos de ar)?",
+            mapCheck6: "1 camada de REDE aplicada e cintas seguras?",
+
+            // MHP Tips & Checklist
+            mhpTip1: "Deixe a cobertura solta para otimizar a ventilação.",
+            mhpTip2: "Prenda bem o excesso de plástico na parte inferior para evitar danos por paleteiras.",
+            mhpTip3: "Esqueceu o registrador? Basta levantar a cobertura solta.",
+            mhpCheck1: "O produto está pré-resfriado até o núcleo?",
+            mhpCheck2: "O registrador está na caixa (com o produto)?",
+            mhpCheck3: "O excesso de plástico está guardado para não arrastar no chão?",
+            mhpCheck4: "A cobertura NÃO está selada hermeticamente (fita de fixação é permitida)?",
+            mhpCheck5: "(Recomendado) 1 camada de REDE aplicada e cintas seguras?",
+
+            checklistTitle: "🛑 LISTA DE VERIFICAÇÃO FINAL"
         },
         ar: {
             title: "غطاء البليت - بروتوكول التعبئة",
@@ -1177,19 +1280,32 @@
             protCornersInst: "ضع زوايا الحماية على زوايا البليت.",
             protStrapsTitle: "تثبيت الأشرطة",
             protStrapsInst: "أخيرًا، قم بتثبيت الأشرطة لتأمين الحمولة.",
-            protectionWarning: "⚠️ لا تستخدم أبدًا فيلم التغليف الصلب! يجب أن تتنفس ثقوب الليزر.",
+            protectionWarning: "⚠️ لا تستخدم أبدًا فيلم التغليف الصلب! يجب أن يتنفس الغلاف وثقوب الليزر.",
             mediaCaption: "انقر فوق خطوة للفيديو (محاكاة)",
             tipsTitle: "نصائح احترافية",
-            tip1: "الشريط لا يلتصق بالرطب/البارد. جفف أولاً.",
-            tip2: "نسيت المسجل؟ اصنع ثقبًا، ضعه، وأغلق بشريط مزدوج.",
-            tip3: "استخدم شريطًا صناعيًا عريضًا (50 مم+).",
-            checklistTitle: "🛑 القائمة النهائية (قبل المغادرة)",
-            check1: "هل تم تبريد المنتج للقلب؟",
-            check2: "هل يطابق نوع الغطاء الطلب؟",
-            check3: "هل المسجل في الصندوق (مع المنتج)؟",
-            check4: "هل تم استخدام طبقة واحدة من الشبكة؟",
-            check5: "هل الزوايا والأشرطة آمنة؟",
-            check6: "مسار MAP: الشريط مفرك جيدًا؟ / مسار MHP: الغطاء لا يلامس الأرض؟"
+            
+            // MAP Tips & Checklist
+            mapTip1: "الشريط لا يلتصق بالرطب/البارد. جفف أولاً.",
+            mapTip2: "نسيت المسجل؟ اصنع ثقبًا، ضعه، وأغلق بشريط مزدوج.",
+            mapTip3: "استخدم شريطًا صناعيًا عريضًا (50 مم+).",
+            mapCheck1: "هل تم تبريد المنتج للقلب؟",
+            mapCheck2: "هل يطابق نوع الغطاء الطلب؟",
+            mapCheck3: "هل تم تطبيق ترتيب كرتون-ورقة-كرتون؟",
+            mapCheck4: "هل المسجل في الصندوق (مع المنتج)؟",
+            mapCheck5: "هل الشريط مفرك جيدًا (بدون تسرب هواء)؟",
+            mapCheck6: "هل تم استخدام طبقة شبكة واحدة والأشرطة آمنة؟",
+
+            // MHP Tips & Checklist
+            mhpTip1: "تأكد من تدلي الغطاء بحرية لضمان التهوية.",
+            mhpTip2: "قم بطي الغلاف الزائد في الأسفل بعناية لمنع التلف من الرافعات الشوكية.",
+            mhpTip3: "نسيت المسجل؟ يمكنك بسهولة رفع الغطاء لوضعه.",
+            mhpCheck1: "هل تم تبريد المنتج للقلب؟",
+            mhpCheck2: "هل المسجل في الصندوق (مع المنتج)؟",
+            mhpCheck3: "هل تم طي الغلاف الزائد حتى لا يلامس الأرض؟",
+            mhpCheck4: "هل الغطاء غير محكم الإغلاق (يُسمح بشريط التثبيت)؟",
+            mhpCheck5: "(موصى به) هل تم استخدام طبقة شبكة واحدة والأشرطة آمنة؟",
+
+            checklistTitle: "🛑 القائمة النهائية (قبل المغادرة)"
         }
     };
 
@@ -1274,9 +1390,9 @@
         currentStepColor = color;
 
         if (stepImages[step] && stepImages[step] !== '') {
-             display.style.backgroundImage = `url('${stepImages[step]}')`;
+            display.style.backgroundImage = `url('${stepImages[step]}')`;
         } else {
-             display.style.backgroundImage = `url('https://placehold.co/600x400/e9e9e9/${color}?text=${encodeURIComponent(text)}')`;
+            display.style.backgroundImage = `url('https://placehold.co/600x400/e9e9e9/${color}?text=${encodeURIComponent(text)}')`;
         }
         
         let loadingText = "Loading video: ";
