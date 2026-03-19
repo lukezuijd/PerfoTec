@@ -473,7 +473,6 @@
         [dir="rtl"] .media-caption { text-align: center; }
         [dir="rtl"] .tips-box { text-align: right; border-left: none; border-right: 3px solid var(--pt-green); }
         [dir="rtl"] .tips-box ul { padding-left: 0; padding-right: 15px; }
-        [dir="rtl"] .protection-list { margin: 5px 15px 5px 0 !important; }
 
         /* --- PRINT STYLES --- */
         @media print {
@@ -616,7 +615,7 @@
                             <i class="fa-solid fa-cubes step-icon"></i>
                         </div>
                         <div class="step-instruction" data-key="stackingInst">
-                            Stapel dozen recht. Plaats de datalogger <b>in een krat/doos bij het product</b> op 2/3 hoogte. Plak een sticker aan de buitenzijde waar de logger zit voor het uitlezen of terugvinden.
+                            Stapel dozen recht. Plaats de datalogger <b>in een krat/doos direct bij het product</b> op 2/3 hoogte. Plak een sticker aan de buitenzijde waar de logger zit voor uitlezen/terugvinden.
                         </div>
                     </div>
 
@@ -648,18 +647,32 @@
 
                     <div class="step-card" onclick="showMedia('protection')">
                         <div class="step-header">
-                            <span>4.1 <span data-key="protection">Transport Bescherming</span></span>
-                            <i class="fa-solid fa-shield-halved step-icon"></i>
+                            <span>4.1 <span data-key="protMeshTitle">Gaasfolie Aanbrengen</span></span>
+                            <i class="fa-solid fa-expand step-icon"></i>
                         </div>
                         <div class="step-instruction">
-                            <span data-key="protectionInst">
-                                <ol class="protection-list" style="margin: 5px 0 5px 15px; padding:0;">
-                                    <li>Breng eerst <b>1 laag GAASFOLIE</b> strak aan.</li>
-                                    <li>Plaats daarna de hoeklatten.</li>
-                                    <li>Bevestig tot slot de straps.</li>
-                                </ol>
-                            </span>
+                            <span data-key="protMeshInst">Breng <b>1 laag GAASFOLIE</b> aan. Breng deze strak genoeg aan, maar niet zó strak dat de hoes beschadigt.</span>
                             <span class="warning-text" data-key="protectionWarning">⚠️ GEBRUIK NOOIT DICHTE REKWIKKELFOLIE! De lasergaatjes moeten kunnen ademen.</span>
+                        </div>
+                    </div>
+
+                    <div class="step-card" onclick="showMedia('corners')">
+                        <div class="step-header">
+                            <span>4.2 <span data-key="protCornersTitle">Hoeklatten Plaatsen</span></span>
+                            <i class="fa-solid fa-ruler-combined step-icon"></i>
+                        </div>
+                        <div class="step-instruction" data-key="protCornersInst">
+                            Plaats de hoeklatten op de hoeken van de pallet.
+                        </div>
+                    </div>
+
+                    <div class="step-card" onclick="showMedia('straps')">
+                        <div class="step-header">
+                            <span>4.3 <span data-key="protStrapsTitle">Straps Bevestigen</span></span>
+                            <i class="fa-solid fa-shield-halved step-icon"></i>
+                        </div>
+                        <div class="step-instruction" data-key="protStrapsInst">
+                            Bevestig tot slot de straps (spanbanden) om het geheel vast te zetten.
                         </div>
                     </div>
                 </div>
@@ -745,7 +758,7 @@
                             <i class="fa-solid fa-hand-holding step-icon"></i>
                         </div>
                         <div class="step-instruction" data-key="sealMhpInst">
-                            Gebruik géén tape. Vouw de onderkant van de hoes simpelweg naar binnen, strak onder de onderste laag dozen. Het gewicht van de dozen houdt de hoes gesloten.
+                            Gebruik géén tape. De hoes hoeft niet afgesloten te worden en mag er los overheen blijven hangen. Let er wel op dat de hoes niet over de grond sleept.
                         </div>
                     </div>
 
@@ -754,18 +767,32 @@
 
                     <div class="step-card" onclick="showMedia('protection')">
                         <div class="step-header">
-                            <span>4.1 <span data-key="protection">Transport Bescherming</span></span>
-                            <i class="fa-solid fa-shield-halved step-icon"></i>
+                            <span>4.1 <span data-key="protMeshTitle">Gaasfolie Aanbrengen</span></span>
+                            <i class="fa-solid fa-expand step-icon"></i>
                         </div>
                         <div class="step-instruction">
-                            <span data-key="protectionInst">
-                                <ol class="protection-list" style="margin: 5px 0 5px 15px; padding:0;">
-                                    <li>Breng eerst <b>1 laag GAASFOLIE</b> strak aan.</li>
-                                    <li>Plaats daarna de hoeklatten.</li>
-                                    <li>Bevestig tot slot de straps.</li>
-                                </ol>
-                            </span>
+                            <span data-key="protMeshInst">Breng <b>1 laag GAASFOLIE</b> aan. Breng deze strak genoeg aan, maar niet zó strak dat de hoes beschadigt.</span>
                             <span class="warning-text" data-key="protectionWarning">⚠️ GEBRUIK NOOIT DICHTE REKWIKKELFOLIE! De lasergaatjes moeten kunnen ademen.</span>
+                        </div>
+                    </div>
+
+                    <div class="step-card" onclick="showMedia('corners')">
+                        <div class="step-header">
+                            <span>4.2 <span data-key="protCornersTitle">Hoeklatten Plaatsen</span></span>
+                            <i class="fa-solid fa-ruler-combined step-icon"></i>
+                        </div>
+                        <div class="step-instruction" data-key="protCornersInst">
+                            Plaats de hoeklatten op de hoeken van de pallet.
+                        </div>
+                    </div>
+
+                    <div class="step-card" onclick="showMedia('straps')">
+                        <div class="step-header">
+                            <span>4.3 <span data-key="protStrapsTitle">Straps Bevestigen</span></span>
+                            <i class="fa-solid fa-shield-halved step-icon"></i>
+                        </div>
+                        <div class="step-instruction" data-key="protStrapsInst">
+                            Bevestig tot slot de straps (spanbanden) om het geheel vast te zetten.
                         </div>
                     </div>
                 </div>
@@ -806,7 +833,7 @@
             <div class="check-item"><div class="check-box"></div> <span data-key="check3">Is de datalogger in een krat (bij het product) geplaatst?</span></div>
             <div class="check-item"><div class="check-box"></div> <span data-key="check4">Is er 1 laag GAASfolie gebruikt (géén dichte folie)?</span></div>
             <div class="check-item"><div class="check-box"></div> <span data-key="check5">Zijn de hoeklatten en strapping stevig bevestigd?</span></div>
-            <div class="check-item"><div class="check-box"></div> <span data-key="check6">MAP flow: Ligt de tape gladgestreken? / MHP flow: Is de folie goed omgeslagen?</span></div>
+            <div class="check-item"><div class="check-box"></div> <span data-key="check6">MAP: Ligt de tape gladgestreken? / MHP: Sleept de folie niet over de grond?</span></div>
         </div>
     </div>
 
@@ -875,10 +902,14 @@
             sealMapTitle: "Sluiting (MAP)",
             sealMapInst: "Tape de hoes rondom vast aan het bodemvel (10cm overlap bij eindigen). <b>Wrijf de tape stevig aan met de hand</b> om rimpels (luchtlekken) te voorkomen.",
             sealMhpTitle: "Sluiting (MHP)",
-            sealMhpInst: "Gebruik géén tape. Vouw de onderkant van de hoes simpelweg naar binnen, strak onder de onderste laag dozen. Het gewicht houdt de hoes gesloten.",
+            sealMhpInst: "Gebruik géén tape. De hoes hoeft niet afgesloten te worden en mag er los overheen blijven hangen. Let er wel op dat de hoes niet over de grond sleept.",
             phase4: "FASE 4: TRANSPORT",
-            protection: "Transport Bescherming",
-            protectionInst: "<ol class='protection-list' style='margin: 5px 0 5px 15px; padding:0;'><li>Breng eerst <b>1 laag GAASFOLIE</b> strak aan.</li><li>Plaats daarna de hoeklatten.</li><li>Bevestig tot slot de straps.</li></ol>",
+            protMeshTitle: "Gaasfolie Aanbrengen",
+            protMeshInst: "Breng <b>1 laag GAASFOLIE</b> aan. Breng deze strak genoeg aan, maar niet zó strak dat de hoes beschadigt.",
+            protCornersTitle: "Hoeklatten Plaatsen",
+            protCornersInst: "Plaats de hoeklatten op de hoeken van de pallet.",
+            protStrapsTitle: "Straps Bevestigen",
+            protStrapsInst: "Bevestig tot slot de straps (spanbanden) om het geheel vast te zetten.",
             protectionWarning: "⚠️ GEBRUIK NOOIT DICHTE REKWIKKELFOLIE! De lasergaatjes moeten kunnen ademen.",
             mediaCaption: "Klik op een stap voor instructie video (simulatie)",
             tipsTitle: "PRO TIPS",
@@ -891,7 +922,7 @@
             check3: "Is de datalogger in een krat (bij product) geplaatst?",
             check4: "Is er 1 laag GAASfolie gebruikt (géén dichte folie)?",
             check5: "Zijn de hoeklatten en strapping stevig bevestigd?",
-            check6: "MAP flow: Ligt de tape gladgestreken? / MHP flow: Is de folie goed omgeslagen?"
+            check6: "MAP: Ligt de tape gladgestreken? / MHP: Sleept de folie niet over de grond?"
         },
         en: {
             title: "PALLET COVER - PACKING SOP",
@@ -921,10 +952,14 @@
             sealMapTitle: "Sealing (MAP)",
             sealMapInst: "Tape the cover to the bottom sheet all around (10cm overlap at the end). <b>Rub tape firmly by hand</b> to prevent wrinkles (air leaks).",
             sealMhpTitle: "Sealing (MHP)",
-            sealMhpInst: "Do NOT use tape. Simply tuck the bottom of the cover inwards, tightly under the lowest layer of boxes. The weight holds it closed.",
+            sealMhpInst: "Do NOT use tape. The cover does not need to be sealed and can just hang loose over it. Just make sure the cover does not drag on the floor.",
             phase4: "PHASE 4: TRANSPORT",
-            protection: "Transport Protection",
-            protectionInst: "<ol class='protection-list' style='margin: 5px 0 5px 15px; padding:0;'><li>First apply <b>1 layer of MESH FOIL</b> tightly.</li><li>Then place the corner boards.</li><li>Finally, attach the straps.</li></ol>",
+            protMeshTitle: "Apply Mesh Foil",
+            protMeshInst: "Apply <b>1 layer of MESH FOIL</b>. Apply tight enough, but not so tight that it damages the cover.",
+            protCornersTitle: "Place Corner Boards",
+            protCornersInst: "Place corner boards on the corners of the pallet.",
+            protStrapsTitle: "Attach Straps",
+            protStrapsInst: "Finally, attach the straps to secure the load.",
             protectionWarning: "⚠️ NEVER USE SOLID STRETCH WRAP! The laser holes must be able to breathe.",
             mediaCaption: "Click a step for instruction video (simulation)",
             tipsTitle: "PRO TIPS",
@@ -937,7 +972,7 @@
             check3: "Is data logger placed in a crate (with product)?",
             check4: "Is 1 layer of MESH foil used (NO solid foil)?",
             check5: "Are corner boards & strapping secure?",
-            check6: "MAP flow: Is tape rubbed smooth? / MHP flow: Is foil tucked in properly?"
+            check6: "MAP: Is tape rubbed smooth? / MHP: Cover not dragging on floor?"
         },
         es: {
             title: "PALLET COVER - PROTOCOLO",
@@ -967,10 +1002,14 @@
             sealMapTitle: "Sellado (MAP)",
             sealMapInst: "Encinte la funda a la lámina por todo el contorno (10cm de superposición). <b>Frote la cinta firmemente a mano</b> para evitar arrugas (fugas).",
             sealMhpTitle: "Sellado (MHP)",
-            sealMhpInst: "NO use cinta. Simplemente meta la parte inferior de la funda hacia adentro, firmemente debajo de la capa más baja de cajas.",
+            sealMhpInst: "NO use cinta. La funda no necesita ser sellada y puede colgar suelta. Solo asegúrese de que la funda no arrastre por el suelo.",
             phase4: "FASE 4: TRANSPORTE",
-            protection: "Protección de Transporte",
-            protectionInst: "<ol class='protection-list' style='margin: 5px 0 5px 15px; padding:0;'><li>Aplique <b>1 capa de MALLA</b> firmemente.</li><li>Luego coloque los esquineros.</li><li>Finalmente, fije los flejes.</li></ol>",
+            protMeshTitle: "Aplicar Malla",
+            protMeshInst: "Aplique <b>1 capa de MALLA</b>. Aplíquela lo suficientemente ajustada, pero no tanto como para dañar la funda.",
+            protCornersTitle: "Colocar Esquineros",
+            protCornersInst: "Coloque los esquineros en las esquinas del palet.",
+            protStrapsTitle: "Fijar Flejes",
+            protStrapsInst: "Finalmente, fije los flejes para asegurar la carga.",
             protectionWarning: "⚠️ ¡NUNCA USE FILM ESTIRABLE SÓLIDO! Los orificios láser deben respirar.",
             mediaCaption: "Haga clic en un paso para ver el video (simulación)",
             tipsTitle: "CONSEJOS PRO",
@@ -983,7 +1022,7 @@
             check3: "¿Registrador colocado en caja (con producto)?",
             check4: "¿Se usó 1 capa de MALLA (NO film sólido)?",
             check5: "¿Esquineros y flejes seguros?",
-            check6: "Flujo MAP: ¿Cinta lisa? / Flujo MHP: ¿Funda bien remetida?"
+            check6: "MAP: ¿Cinta lisa? / MHP: ¿Funda no arrastra por el suelo?"
         },
         fr: {
             title: "PALLET COVER - PROTOCOLE",
@@ -1013,10 +1052,14 @@
             sealMapTitle: "Fermeture (MAP)",
             sealMapInst: "Scotchez la housse à la feuille de fond (10cm de chevauchement). <b>Frottez fermement le scotch</b> pour éviter les plis (fuites).",
             sealMhpTitle: "Fermeture (MHP)",
-            sealMhpInst: "PAS de scotch. Rentrez simplement le bas de la housse vers l'intérieur, sous la couche inférieure de boîtes. Le poids la maintient fermée.",
+            sealMhpInst: "N'utilisez PAS de scotch. La housse n'a pas besoin d'être fermée et peut pendre librement. Assurez-vous simplement qu'elle ne traîne pas au sol.",
             phase4: "PHASE 4: TRANSPORT",
-            protection: "Protection de Transport",
-            protectionInst: "<ol class='protection-list' style='margin: 5px 0 5px 15px; padding:0;'><li>Appliquez d'abord <b>1 couche de FILET</b>.</li><li>Placez les cornières.</li><li>Fixez les sangles.</li></ol>",
+            protMeshTitle: "Appliquer le Filet",
+            protMeshInst: "Appliquez <b>1 couche de FILET</b>. Assez serré, mais pas trop pour ne pas endommager la housse.",
+            protCornersTitle: "Placer les Cornières",
+            protCornersInst: "Placez les cornières sur les coins de la palette.",
+            protStrapsTitle: "Fixer les Sangles",
+            protStrapsInst: "Enfin, fixez les sangles pour sécuriser l'ensemble.",
             protectionWarning: "⚠️ NE JAMAIS UTILISER DE FILM ÉTIRABLE PLEIN! Les trous laser doivent respirer.",
             mediaCaption: "Cliquez sur une étape pour la vidéo (simulación)",
             tipsTitle: "CONSEILS PRO",
@@ -1029,7 +1072,7 @@
             check3: "Enregistreur dans une caisse (avec produit)?",
             check4: "1 couche de FILET utilisée (PAS plein)?",
             check5: "Cornières et sangles sécurisées?",
-            check6: "MAP: Scotch bien frotté? / MHP: Housse bien rentrée?"
+            check6: "MAP: Scotch bien frotté? / MHP: Housse ne traîne pas au sol?"
         },
         pt: {
             title: "PALLET COVER - PROTOCOLO",
@@ -1059,10 +1102,14 @@
             sealMapTitle: "Selagem (MAP)",
             sealMapInst: "Passe fita ao redor da folha inferior (10cm sobreposição). <b>Esfregue a fita firmemente à mão</b> para evitar rugas (vazamentos).",
             sealMhpTitle: "Selagem (MHP)",
-            sealMhpInst: "NÃO use fita. Basta dobrar a parte inferior da cobertura para dentro, sob a camada inferior de caixas. O peso a mantém fechada.",
+            sealMhpInst: "NÃO use fita. A cobertura não precisa ser selada e pode ficar solta por cima. Apenas certifique-se de que não arraste no chão.",
             phase4: "FASE 4: TRANSPORTE",
-            protection: "Proteção de Transporte",
-            protectionInst: "<ol class='protection-list' style='margin: 5px 0 5px 15px; padding:0;'><li>Aplique <b>1 camada de REDE</b> firmemente.</li><li>Depois coloque as cantoneiras.</li><li>Finalmente, fixe as cintas.</li></ol>",
+            protMeshTitle: "Aplicar Rede",
+            protMeshInst: "Aplique <b>1 camada de REDE</b>. Suficientemente esticada, mas não ao ponto de danificar a cobertura.",
+            protCornersTitle: "Colocar Cantoneiras",
+            protCornersInst: "Coloque as cantoneiras nos cantos do palete.",
+            protStrapsTitle: "Fixar Cintas",
+            protStrapsInst: "Finalmente, fixe as cintas para prender a carga.",
             protectionWarning: "⚠️ NUNCA USE FILME STRETCH SÓLIDO! Os furos a laser devem respirar.",
             mediaCaption: "Clique em uma etapa para vídeo (simulação)",
             tipsTitle: "DICAS PRO",
@@ -1075,7 +1122,7 @@
             check3: "Registrador colocado na caixa (com produto)?",
             check4: "1 camada de REDE usada (NÃO filme sólido)?",
             check5: "Cantoneiras e cintas seguras?",
-            check6: "Fluxo MAP: Fita alisada? / Fluxo MHP: Dobrado corretamente?"
+            check6: "MAP: Fita alisada? / MHP: Cobertura não arrasta no chão?"
         },
         ar: {
             title: "غطاء البليت - بروتوكول التعبئة",
@@ -1105,10 +1152,14 @@
             sealMapTitle: "الإغلاق (MAP)",
             sealMapInst: "ألصق الغطاء بالورقة السفلية بشريط (تداخل 10 سم). <b>افرك الشريط بقوة بيدك</b> لمنع التجاعيد (تسرب الهواء).",
             sealMhpTitle: "الإغلاق (MHP)",
-            sealMhpInst: "لا تستخدم الشريط. ببساطة أدخل الجزء السفلي من الغطاء للداخل بقوة تحت الطبقة السفلية من الصناديق. الوزن يبقيه مغلقًا.",
+            sealMhpInst: "لا تستخدم الشريط. لا يحتاج الغطاء إلى الإغلاق ويمكن أن يتدلى بحرية. فقط تأكد من أن الغطاء لا يلامس الأرض.",
             phase4: "المرحلة 4: النقل",
-            protection: "حماية النقل",
-            protectionInst: "<ol class='protection-list' style='margin: 5px 15px 5px 0; padding:0;'><li>أولاً ضع <b>طبقة واحدة من الشبكة</b> بإحكام.</li><li>ثم ضع زوايا الحماية.</li><li>أخيرًا، ثبت الأشرطة.</li></ol>",
+            protMeshTitle: "تطبيق الشبكة",
+            protMeshInst: "ضع <b>طبقة واحدة من الشبكة</b>. اجعلها مشدودة بشكل كافٍ، ولكن ليس لدرجة إتلاف الغطاء.",
+            protCornersTitle: "وضع زوايا الحماية",
+            protCornersInst: "ضع زوايا الحماية على زوايا البليت.",
+            protStrapsTitle: "تثبيت الأشرطة",
+            protStrapsInst: "أخيرًا، قم بتثبيت الأشرطة لتأمين الحمولة.",
             protectionWarning: "⚠️ لا تستخدم أبدًا فيلم التغليف الصلب! يجب أن تتنفس ثقوب الليزر.",
             mediaCaption: "انقر فوق خطوة للفيديو (محاكاة)",
             tipsTitle: "نصائح احترافية",
@@ -1121,7 +1172,7 @@
             check3: "هل المسجل في الصندوق (مع المنتج)؟",
             check4: "هل تم استخدام طبقة واحدة من الشبكة؟",
             check5: "هل الزوايا والأشرطة آمنة؟",
-            check6: "مسار MAP: الشريط مفرك جيدًا؟ / مسار MHP: الغطاء مطوي جيدًا؟"
+            check6: "مسار MAP: الشريط مفرك جيدًا؟ / مسار MHP: الغطاء لا يلامس الأرض؟"
         }
     };
 
@@ -1197,7 +1248,9 @@
             case 'stacking': text = "Logger Placement"; break;
             case 'apply': text = "Unrolling Cover"; break;
             case 'seal': text = "Taping Method"; color = "054E9A"; break;
-            case 'protection': text = "Netting & Straps"; break;
+            case 'protection': text = "Applying Netting"; break;
+            case 'corners': text = "Placing Corners"; break;
+            case 'straps': text = "Applying Straps"; break;
         }
 
         currentStepText = text;
