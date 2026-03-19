@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PerfoTec - Portaal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        header {
+            background-color: #ffffff;
+            width: 100%;
+            padding: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        header img {
+            max-height: 60px;
+        }
+        .container {
+            max-width: 800px;
+            width: 90%;
+            margin: 50px auto;
+            text-align: center;
+        }
+        h1 {
+            color: #005b9f; /* PerfoTec Blauw */
+            margin-bottom: 10px;
+        }
+        p {
+            margin-bottom: 40px;
+            color: #666;
+        }
+        .menu-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+        .menu-btn {
+            background-color: #005b9f;
+            color: white;
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 1.2em;
+            font-weight: bold;
+            width: 100%;
+            max-width: 350px;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .menu-btn:hover {
+            background-color: #00437a;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="https://cdn.prod.website-files.com/68b594c756c22085ddc6c1ea/68b59ba2f027bfeecd25261b_PerfoTec%20logo.png" alt="PerfoTec Logo">
+</header>
+
+<div class="container">
+    <h1>PerfoTec Portaal</h1>
+    <p>Welkom. Kies een categorie om verder te gaan.</p>
+    
+    <div class="menu-grid">
+        <a href="inpakken.html" class="menu-btn">📦 Inpakken</a>
+        
+        <a href="#" class="menu-btn" style="background-color: #ccc; cursor: not-allowed;">⚙️ Kwaliteitscontrole (Binnenkort)</a>
+    </div>
+</div>
+
+</body>
+</html>
