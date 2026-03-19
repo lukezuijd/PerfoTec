@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactieve PerfoTec Cursus - Uitgebreide Theorie & Praktijk</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* 1. THE SETUP & RESET */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #f0fdf4;
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Main window never scrolls */
+            font-family: 'Inter', sans-serif;
+            color: #1e293b;
+        }
+
+        p {
+            margin-bottom: 2vh;
+            line-height: 1.6;
+            font-size: clamp(15px, 1.2vw, 18px);
+        }
+
+        strong {
+            color: #007C27;
+            font-weight: 600;
+        }
+
+        /* 1.1 SLIDE CONTAINER - CSS GRID ZONES (HEADER / CONTENT / FOOTER) */
+        #course-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            background-color: #ffffff;
+        }
+
+        .slide-container {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            
+            /* CSS GRID OPZET VOOR ABSOLUTE SCHEIDING VAN ZONES */
+            display: grid;
+            grid-template-rows: 12vh 1fr 12vh; /* Header 12%, Content Rest, Footer 12% */
+            grid-template-columns: 100%;
+            padding: 0 5vw;
+            
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease-in-out, visibility 0.5s, transform 0.5s ease;
+            background-color: #ffffff;
+            z-index: 1;
+            transform: translateY(20px);
+        }
+
+        .slide-container.active {
+            opacity: 1;
+            visibility: visible;
+            z-index: 2;
+            transform: translateY(0);
+        }
+
+        /* Background Blobs */
+        .bg-blob {
+            position: absolute;
+            top: -10vw; right: -10vw;
+            width: 45vw; height: 45vw;
+            min-width: 400px; min-height: 400px;
+            background: radial-gradient(circle, rgba(0,124,39,0.04) 0%, rgba(255,255,255,0) 70%);
+            border-radius: 50%;
+            z-index: 0;
+        }
+        .bg-blob-bottom {
+            position: absolute;
+            bottom: -10vw; left: -10vw;
+            width: 40vw; height: 40vw;
+            min-width: 350px; min-height: 350px;
+            background: radial-gradient(circle, rgba(5,78,154,0.04) 0%, rgba(255,255,255,0) 70%);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        /* 2. TYPOGRAPHY */
+        h1, h2, h3, h4 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        h1, h2 { color: #007C27; }
+        h3 { color: #054E9A; }
+
+        h1 {
+            font-size: clamp(36px, 4vw, 65px);
+            line-height: 1.2;
+            margin-bottom: 3vh;
+        }
+
+        .slide-title {
+            font-size: clamp(26px, 3vw, 42px);
+            margin-bottom: 3vh;
+            text-align: left;
+            width: 100%;
+            max-width: 1400px;
+            padding-left: 1vw;
+            border-left: 6px solid #007C27;
+        }
+
+        h3 {
+            font-size: clamp(20px, 1.8vw, 26px);
+            margin-bottom: 2vh;
+        }
+
+        ul {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(15px, 1.2vw, 18px);
+            line-height: 1.6;
+            margin-bottom: 2vh;
+        }
+
+        .subtitle {
+            font-size: clamp(18px, 1.6vw, 26px);
+            font-weight: 500;
+            color: #475569;
+            margin-bottom: 4vh;
+        }
+
+        /* 3. LAYOUT ZONES (Header, Content, Footer) */
+        
+        /* HEADER ZONE */
+        .brand-logo {
+            grid-row: 1; /* Forceer in bovenste vak */
+            align-self: center;
+            justify-self: flex-start;
+            height: clamp(30px, 4vh, 50px);
+            z-index: 10;
+            position: relative; /* Geen absolute overlay meer */
+        }
+
+        /* CONTENT ZONE (Dit is het afgeschermde middenstuk) */
+        .content-area, .title-layout, .highlight-box {
+            grid-row: 2; /* Forceer in het middelste vak */
+            align-self: center; /* Centreer verticaal binnen 1fr */
+            justify-self: center; /* Centreer horizontaal */
+            width: 100%;
+            max-width: 1300px;
+            max-height: 100%; /* Zorgt dat het nooit in de footer of header groeit */
+            overflow-y: auto; /* Voegt interne scrollbar toe op extreem kleine schermen */
+            padding: 1vh 1vw; /* Kleine ademruimte */
+            scrollbar-width: thin; /* Firefox */
+            scrollbar-color: #cbd5e1 transparent; /* Firefox */
+            z-index: 2;
+        }
+
+        /* Styling van de interne scrollbar (Chrome/Edge/Safari) */
+        .content-area::-webkit-scrollbar, .title-layout::-webkit-scrollbar, .highlight-box::-webkit-scrollbar {
+            width: 6px;
+        }
+        .content-area::-webkit-scrollbar-track, .title-layout::-webkit-scrollbar-track, .highlight-box::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .content-area::-webkit-scrollbar-thumb, .title-layout::-webkit-scrollbar-thumb, .highlight-box::-webkit-scrollbar-thumb {
+            background-color: #cbd5e1;
+            border-radius: 10px;
+        }
+
+        .title-layout {
+            text-align: center;
+            max-width: 1100px;
+        }
+
+        .two-column {
+            display: flex;
+            gap: 4vw;
+            width: 100%;
+            align-items: center;
+        }
+        .two-column > div {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .two-column ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .two-column li {
+            margin-bottom: 2vh;
+            position: relative;
+            padding-left: 30px;
+        }
+        .two-column li::before {
+            content: '\f058'; 
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: #007C27;
+            position: absolute;
+            left: 0;
+            top: 2px;
+            font-size: 20px;
+        }
+
+        /* Aspect ratio prevents vertical overflow on images */
+        .image-wrapper {
+            border-radius: 12px;
+            width: 100%;
+            height: clamp(200px, 35vh, 400px); /* Beperk hoogte zodat tekst eronder past */
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            background-color: #f8fafc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .image-wrapper.contain img {
+            object-fit: contain;
+            padding: 20px;
+        }
+
+        .tiled-content {
+            display: flex;
+            gap: 2vw;
+            width: 100%;
+            align-items: stretch;
+        }
+        .tile {
+            background-color: #f8fafc;
+            border-radius: 16px;
+            border-top: 6px solid #007C27;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            padding: 3vh 2vw;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .tile:hover {
+            transform: translateY(-5px);
+        }
+        .tile.accent-blue {
+            border-top-color: #054E9A;
+        }
+        .tile .icon {
+            color: #007C27;
+            font-size: clamp(35px, 3.5vw, 50px);
+            margin-bottom: 2vh;
+        }
+        .tile.accent-blue .icon {
+            color: #054E9A;
+        }
+        
+        /* Table Layout */
+        .table-layout {
+            width: 100%;
+            background-color: #ffffff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+        }
+        .table-layout table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        .table-layout th, .table-layout td {
+            border-bottom: 1px solid #e2e8f0;
+            padding: 1.5vh 1.5vw;
+            text-align: left;
+            font-size: clamp(14px, 1.1vw, 17px);
+        }
+        .table-layout th {
+            background-color: #f1f5f9;
+            color: #054E9A;
+            font-size: clamp(16px, 1.3vw, 19px);
+            font-family: 'Poppins', sans-serif;
+            width: 25%;
+        }
+        .table-layout tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+
+        /* Image overrides for tiled layout */
+        .image-tile {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background-color: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+            padding: 2vw;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+        .image-tile .image-wrapper {
+            height: clamp(120px, 20vh, 200px);
+            margin-bottom: 2vh;
+            box-shadow: none;
+            border-radius: 8px;
+        }
+
+        /* Speciale Highlight Slide */
+        .highlight-slide {
+            background: linear-gradient(135deg, #007C27 0%, #054E9A 100%);
+            color: white;
+            text-align: center;
+        }
+        .highlight-slide h1, .highlight-slide p {
+            color: white !important;
+        }
+        .highlight-slide strong {
+            color: #fef08a !important;
+        }
+        .highlight-box {
+            background: rgba(255,255,255,0.1);
+            padding: 5vh 4vw;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            width: 100%;
+            max-width: 1100px;
+        }
+
+        /* --- FOOTER ZONE (Navigatie) --- */
+        .nav-controls {
+            position: absolute;
+            bottom: 3vh; /* Zweeft mooi in de gereserveerde 12vh zone */
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background-color: #ffffff;
+            padding: 10px 25px;
+            border-radius: 50px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            z-index: 1000;
+            border: 1px solid #e2e8f0;
+        }
+
+        .nav-btn {
+            background-color: #007C27;
+            color: #ffffff;
+            border: none;
+            padding: 1vh 1.5vw;
+            border-radius: 30px;
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(14px, 1vw, 16px);
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            background-color: #054E9A;
+            transform: translateY(-2px);
+        }
+
+        .nav-btn:disabled {
+            background-color: #cbd5e1;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .nav-counter {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            color: #1e293b;
+            font-size: clamp(14px, 1vw, 16px);
+            min-width: 60px;
+            text-align: center;
+        }
+
+        /* Mobile / Narrow Screen Responsive */
+        @media (max-width: 900px) {
+            .slide-container {
+                grid-template-rows: 10vh 1fr 15vh; /* Footer iets groter op mobiel voor dikke vingers */
+            }
+            .brand-logo {
+                justify-self: center; /* Logo gecentreerd op mobiel */
+            }
+            .two-column {
+                flex-direction: column;
+                gap: 4vh;
+            }
+            .tiled-content {
+                flex-direction: column;
+                gap: 3vh;
+            }
+            .slide-title {
+                text-align: center;
+                border-left: none;
+                border-bottom: 4px solid #007C27;
+                padding-left: 0;
+                padding-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="course-container">
+        
+        <!-- Pagina 1: Titel -->
+        <div class="slide-container active">
+            <div class="bg-blob"></div>
+            <div class="bg-blob-bottom"></div>
+            <img src="https://cdn.prod.website-files.com/68b594c756c22085ddc6c1ea/69a072937a1dc9ca517ac375_perfotec%20logo%202026.png" alt="PerfoTec Logo" class="brand-logo">
+            
+            <div class="title-layout">
+                <h1>Theorie & Praktijk: De Versketen Transformeren</h1>
+                <p class="subtitle">Een diepgaande cursus over post-harvest fysiologie, verpakkingstechnologie en het datagestuurde PerfoTec 5-Stappenplan.</p>
+            </div>
+        </div>
+
+        <!-- Pagina 2: Het Probleem -->
+        <div class="slide-container">
+            <div class="bg-blob"></div>
+            <img src="https://cdn.prod.website-files.com/68b594c756c22085ddc6c1ea/69a072937a1dc9ca517ac375_perfotec%20logo%202026.png" alt="PerfoTec Logo" class="brand-logo">
+            <div class="content-area">
+                <h2 class="slide-title">De Uitdaging: Het verse product leeft nog</h2>
+                <div class="two-column">
+                    <div>
+                        <p>De mondiale Fresh Produce sector wordt geconfronteerd met ongekende voedselverspilling. De kern van dit probleem? Verse gewassen zijn na de oogst niet 'dood'. Het zijn levende organismen die fysiologische processen onverminderd voortzetten.</p>
+                        <p>Om deze onvermijdelijke kwaliteitsafbraak te vertragen en de commerciële houdbaarheid (shelf life) te maximaliseren, is een fundamenteel begrip van de post-harvest fysiologie een absolute vereiste.</p>
+                    </div>
+                    <div>
+                        <div class="image-wrapper contain">
+                            <img src="https://placehold.co/800x600/f8fafc/007C27?text=[Image+of+Vers+Geoogst+Product]" alt="Vers geoogst product">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagina 3: NEW Theorie: Product Respiratie -->
+        <div class="slide-container">
+            <div class="bg-blob-bottom"></div>
+            <img src="https://cdn.prod.website-files.com/68b594c756c22085ddc6c1ea/69a072937a1dc9ca517ac375_perfotec%20logo%202026.png" alt="PerfoTec Logo" class="brand-logo">
+            <div class="content-area">
+                <h2 class="slide-title">Theorie: Product Respiratie (Ademhaling)</h2>
+                <div class="two-column">
+                    <div>
+                        <div class="image-wrapper contain">
+                            <img src="https://placehold.co/800x600/f8fafc/054E9A?text=[Image+of+Cel+Ademhaling]" alt="Cel ademhaling schema">
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Temperatuur fungeert als het gaspedaal</h3>
+                        <p>Om na de oogst in leven te blijven, valt de cel terug op opgeslagen energiereserves (zoals glucose). Tijdens dit aerobe ademhalingsproces verbruikt het product zuurstof (O2) en produceert het koolstofdioxide (CO2), water en thermische warmte.</p>
+                        <ul>
+                            <li><strong>Respiratiesnelheid:</strong> Dit is de meest accurate indicator van metabole activiteit. Een hoge ademhaling correleert direct met snelle weefselafbraak.</li>
+                            <li><strong>De rol van temperatuur:</strong> Warmte versnelt de ademhaling exponentieel. Strikte temperatuurcontrole in de keten is daarom cruciaal, maar biedt op zichzelf onvoldoende bescherming.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagina 4: NEW Theorie: Turgor & Transpiratie -->
+        <div class="slide-container">
+            <div class="bg-blob"></div>
+            <img src="https://cdn.prod.website-files.com/68b594c756c22085ddc6c1ea/69a072937a1dc9ca517ac375_perfotec%20logo%202026.png" alt="PerfoTec Logo" class="brand-logo">
+            <div class="content-area">
+                <h2 class="slide-title">Theorie: Transpiratie en Verlies van Turgor</h2>
+                <div class="two-column">
+                    <div>
+                        <h3>Verlies van celspanning en commerciële waarde</h3>
+                        <p>Naast de ademhaling speelt transpiratie een destructieve rol. Dit is het verlies van waterdamp, simpelweg gedreven door het verschil in dampspanning tussen het interne weefsel en de omringende lucht.</p>
+                        <p>Dit vochtverlies leidt tot een acuut verlies van <strong>Turgor</strong> (de interne celspanning). De plantencellen lopen figuurlijk leeg, wat zich in de praktijk vertaalt naar:</p>
+                        <ul>
+                            <li>Verlies van 'bite' en knapperige textuur.</li>
+                            <li>Zichtbaar verwelken en verschrompelen van het weefsel.</li>
+                            <li>Direct en significant <strong>gewichtsverlies</strong>, wat een onmiddellijke daling van uw operationele rendement betekent.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="image-wrapper contain">
+                            <img src="https://placehold.co/800x600/f8fafc/007C27?text=[Image+of+Verlies+van+Turgor]" alt="Verlies van celspanning">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagina 5: NEW De dreiging van Micro-organismen -->
+        <div class="slide-container">
+            <div class="bg-blob-bottom"></div>
+            <img src="https://cdn.prod.website-files.com/68b594c756c22085ddc6c1ea/69a072937a1dc9ca517ac375_perfotec%20logo%202026.png" alt="PerfoTec Logo" class="brand-logo">
+            <div class="content-area">
+                <h2 class="slide-title">De Dreiging van Micro-organismen</h2>
+                <div class="tiled-content">
+                    <div class="tile">
+                        <div class="icon"><i class="fa-solid fa-temperature-arrow-down"></i></div>
+                        <h3>Temperatuurfluctuatie</h3>
+                        <p>In de logistieke keten zijn temperatuurschommelingen onvermijdelijk. Wanneer warm product in een koude omgeving wordt geplaatst, daalt de temperatuur van de folie tot onder het dauwpunt van de interne atmosfeer.</p>
+                    </div>
+                    <div class="tile accent-blue">
+                        <div class="icon"><i class="fa-solid fa-droplet"></i></div>
+                        <h3>Vrij Water (Condens)</h3>
+                        <p>Dit fenomeen resulteert onherroepelijk in de vorming van condensatie (vrij water) aan de binnenzijde van de verpakking. Deze vochtophoping is de primaire katalysator voor bederf.</p>
+                    </div>
+                    <div class="tile">
+                        <div class="icon"><i class="fa-solid fa-virus"></i></div>
+                        <h3>Infecties & Rot</h3>
+                        <p>Dit vochtige microklimaat biedt de ideale wateractiviteit voor pathologische aandoeningen. Het stimuleert de razendsnelle groei van bacteriën, schimmels (zoals Botrytis) en agressieve weefselrot.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagina 6: NEW Wat is MAP? -->
+        <div class="slide-container">
+            <div class="bg-blob"></div>
+            <img src="https://cdn.prod.website-files.com/68b594c756c22085ddc6c1ea/69a072937a1dc9ca517ac375_perfotec%20logo%202026.png" alt="PerfoTec Logo" class="brand-logo">
+            <div class="content-area">
+                <h2 class="slide-title">Conserveringsstrategie: Wat is MAP?</h2>
+                <div class="two-column">
+                    <div>
+                        <div class="image-wrapper contain">
+                            <img src="https://placehold.co/800x600/f8fafc/054E9A?text=[Image+of+MAP+Gasbalans]" alt="Modified Atmosphere Packaging balans">
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Modified Atmosphere Packaging (De Gasbalans)</h3>
+                        <p>MAP manipuleert de gasvormige omgeving rondom het product om biologische afbraak te vertragen. Een gecontroleerde reductie van zuurstof (O2) en stijging van CO2 remt de ademhaling aanzienlijk.</p>
+                        <p><strong>De delicate balans is cruciaal:</strong></p>
+                        <ul>
+                            <li>Een té laag zuurstofniveau (<1%) dwingt cellen tot <em>anaerobe fermentatie</em>, resulterend in weefselafbraak en vieze geuren.</li>
+                            <li>Een té hoog CO2-niveau veroorzaakt <em>MAP-stress</em> (celnecrose en verzuring).</li>
+                            <li>Stikstof (N2) wordt gebruikt als inert vulgas om te voorkomen dat de verpakking vacuüm trekt.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagina 7: NEW Wat is MHP? -->
+        <div class="slide-container">
+            <div class="bg-blob-bottom"></div>
+            <img src="https://cdn.prod.website-files.com/68b594c756c22085ddc6c1ea/69a072937a1dc9ca517ac375_perfotec%20logo%202026.png" alt="PerfoTec Logo" class="brand-logo">
+            <div class="content-area">
+                <h2 class="slide-title">Conserveringsstrategie: Wat is MHP?</h2>
+                <div class="two-column">
+                    <div>
+                        <h3>Modified Humidity Packaging (Vochtbeheersing)</h3>
+                        <p>Terwijl MAP zich primair richt op gassen, focust MHP zich uitsluitend op de beheersing van de Relatieve Luchtvochtigheid (RH) in de verpakkingsmicro-omgeving.</p>
+                        <p>MHP-technologieën maken gebruik van foliestructuren met een exact gereguleerde vochtdoorlaatbaarheid (<em>Moisture Vapor Transmission Rate - MVTR</em>). Het doel is de perfecte vochtbalans: transpiratievocht laten ontsnappen om <strong>dodelijke condensatie te elimineren</strong>, zonder dat het product uitdroogt en structuur verliest.</p>
+                    </div>
+                    <div>
+                        <div class="image-wrapper contain">
+                            <img src="https://placehold.co/800x600/f8fafc/007C27?text=[Image+of+MHP+Vochtbeheersing]" alt="Modified Humidity Packaging dynamiek">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagina 8: NEW Huidig: Zonder perforaties -->
+        <div class="slide-container">
+            <div class="bg-blob"></div>
+            <img src="https://cdn.prod.website-files.com/68b594c756c22085ddc6c1ea/69a072937a1dc9ca517ac375_perfotec%20logo%202026.png" alt="PerfoTec Logo" class="brand-logo">
+            <div class="content-area">
+                <h2 class="slide-title">Huidige Standaard: Zonder perforaties</h2>
+                <div class="two-column">
+                    <div>
+                        <div class="image-wrapper contain">
+                            <img src="https://placehold.co/800x600/cbd5e1/475569?text=[Image+of+Dichte+BOPP+Folie]" alt="Gesloten verpakking met condens">
+                        </div>
+                    </div>
+                    <div>
+                        <h3>De BOPP Paradox: Anaerobe Verstikking</h3>
+                        <p>De industrie maakt massaal gebruik van conventionele BOPP-folies vanwege de sterke machinale verwerkbaarheid. Deze folies zijn echter ontworpen voor <em>inerte</em> producten, niet voor ademende organismen.</p>
+                        <p>Een hermetisch gesloten folie blokkeert de gas- en vochtuitwisseling volledig. Zuurstof raakt in een razend tempo op, CO2 bouwt zich agressief op en vocht condenseert tegen de wanden. Het product stikt in zijn eigen gassen en rot weg in zijn eigen transpiratievocht. De commerciële houdbaarheid is hierdoor drastisch gelimiteerd.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagina 9: NEW Huidig: Macro perforaties -->
+        <div class="slide-container">
+            <div class="bg-blob-bottom"></div>
+            <img src="https://cdn.prod.website-files.com/68b594c756c22085ddc6c1ea/69a072937a1dc9ca517ac375_perfotec%20logo%202026.png" alt="PerfoTec Logo" class="brand-logo">
+            <div class="content-area">
+                <h2 class="slide-title">Huidige Standaard: Macro perforaties</h2>
+                <div class="two-column">
+                    <div>
+                        <h3>Het verlies van atmosferische bescherming</h3>
+                        <p>Om de fatale verstikking van dichte folies te omzeilen, wendt de industrie zich tot <strong>statische macro-perforaties</strong> (het mechanisch stansen van relatief grote gaten in het plastic).</p>
+                        <p>Dit is fysiologisch incorrect en creëert een nieuwe paradox: de verpakking fungeert nu enkel nog als een fysiek transportzakje. Het product ademt vrij met de omgevingslucht, waardoor er onmogelijk een beschermend MAP-klimaat kan worden opgebouwd. Tevens ontsnapt het vocht in een veel te hoog tempo, wat leidt tot acuut verlies van turgor en onacceptabel gewichtsverlies.</p>
+                    </div>
+                    <div>
+                        <div class="image-wrapper contain">
+                            <img src="https://placehold.co/800x600/cbd5e1/475569?text=[Image+of+Folie+met+Grote+Gaten]" alt="Macro perforaties in folie">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagina 10: Intro Methode PerfoTec -->
+        <div class="slide-container">
+            <div class="bg-blob"></div>
+            <img src="https://cdn.prod.website-files.com/68b594c756c22085ddc6c1ea/69a072937a1dc9ca517ac375_perfotec%20logo%202026.png" alt="PerfoTec Logo" class="brand-logo">
+            <div class="title-layout">
+                <i class="fa-solid fa-list-check" style="font-size: clamp(40px, 5vw, 60px); color: #007C27; margin-bottom: 3vh;"></i>
+                <h1>De Datagestuurde Oplossing</h1>
+                <p class="subtitle" style="max-width: 900px; margin: 0 auto;">Om de tekortkomingen van standaard verpakkingen te doorbreken en het product perfect vers te houden, is adaptieve kalibratie noodzakelijk. Hiervoor ontwikkelde PerfoTec een sluitend 5-stappen ecosysteem.</p>
+            </div>
+        </div>
+
+        <!-- Pagina 11: STAP 1 FRM -->
+        <div class="slide-container">
+            <div class="bg-blob-bottom"></div>
+            <img src="https://cdn.prod.website-files.com/68b594c756c22085ddc6c1ea/69a072937a1dc9ca517ac375_perfotec%20logo%202026.png" alt="PerfoTec Logo" class="brand-logo">
+            <div class="content-area">
+                <h2 class="slide-title">Stap 1: Fast Respiration Meter - Fysiologische Diagnostiek</h2>
+                <div class="two-column">
+                    <div>
+                        <div class="image-wrapper contain">
+                            <img src="https://placehold.co/800x600/f8fafc/054E9A?text=[Image+of+Fast+Respiration+Meter]" alt="Wetenschappelijke analyse apparatuur FRM">
+                        </div>
+                    </div>
+                    <div>
+                        <p><strong>Meten is weten, voorkomt fouten vooraf.</strong> Omdat ademhaling extreem variabel is (afhankelijk van genetica, weersinvloeden en temperatuur), is het gebruik van theoretische literatuurtabellen fundamenteel onnauwkeurig.</p>
+                        <p>Onze <em>Fast Respiration Meter (FRM)</em> meet direct en uiterst nauwkeurig de exacte snelheid van zuurstofconsumptie (O2) en koolstofdioxide-emissie (CO2) van het verse product. Hierdoor elimineert u giswerk en voorkomt u anaerobe verstikking nog voordat de verpakkingsmachine draait.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagina 12: STAP 2 HUB -->
+        <div class="slide-container">
+            <div class="bg-blob"></div>
+            <img src="https://cdn.prod.website-files.com/68b594c756c22085ddc6c1ea/69a072937a1dc9ca517ac375_perfotec%20logo%202026.png" alt="PerfoTec Logo" class="brand-logo">
+            <div class="content-area">
+                <h2 class="slide-title">Stap 2: PerfoTec Hub - Slimme AMAP software</h2>
+                <div class="two-column">
+                    <div>
+                        <p><strong>Hub rekent en stuurt M2M automatisch, geen menselijke rekenfouten.</strong> Biologische data heeft op zichzelf geen fysieke invloed op het verpakkingsproces. Onze slimme AMAP software vertaalt dit wiskundig.</p>
+                        <p>De Hub combineert de ademhalingsdata razendsnel met productgewicht en de logistieke temperatuurprofielen. Het algoritme berekent de exacte zuurstofdoorlaatbaarheid (OTR). Deze data wordt 100% volautomatisch (Machine-to-Machine) doorgestuurd naar de laser op uw productievloer. Puur, foutloos maatwerk.</p>
+                    </div>
+                    <div>
+                        <div class="image-wrapper contain">
+                            <img src="https://placehold.co/800x600/f8fafc/007C27?text=[Image+of+Hub+Software+Dashboard]" alt="Data dashboard en cloud software">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagina 13: STAP 3 LASER -->
+        <div class="slide-container">
+            <div class="bg-blob-bottom"></div>
+            <img src="https://cdn.prod.website-files.com/68b594c756c22085ddc6c1ea/69a072937a1dc9ca517ac375_perfotec%20logo%202026.png" alt="PerfoTec Logo" class="brand-logo">
+            <div class="content-area">
+                <h2 class="slide-title">Stap 3: Laser Perforatie - Micro / Nano precisie</h2>
+                <div class="two-column">
+                    <div>
+                        <div class="image-wrapper contain">
+                            <img src="https://placehold.co/800x600/f8fafc/054E9A?text=[Image+of+Laser+Perforatie]" alt="Industriële laser op een verpakkingslijn">
+                        </div>
+                    </div>
+                    <div>
+                        <p><strong>Camera 250x per sec. past foliedikte-fluctuaties aan, 100% zekere OTR.</strong> De perfect berekende OTR wordt uitgevoerd door onze laser, die onzichtbare microscopische gaatjes (50-200µm) schiet in de folie, zonder het materiaal te scheuren.</p>
+                        <p>Verpakkingsfolie fluctueert microscopisch in dikte, wat invloed heeft op het perforatieformaat. Ons gepatenteerde closed-loop camerasysteem inspecteert elke perforatie realtime. De laser stelt zich in milliseconden automatisch bij om variaties te compenseren. Dit garandeert bij elk geproduceerd zakje een 100% accurate atmosfeer.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagina 14: STAP 4 O2 CONTROL -->
+        <div class="slide-container">
+            <div class="bg-blob"></div>
+            <img src="https://cdn.prod.website-files.com/68b594c756c22085ddc6c1ea/69a072937a1dc9ca517ac375_perfotec%20logo%202026.png" alt="PerfoTec Logo" class="brand-logo">
+            <div class="content-area">
+                <h2 class="slide-title">Stap 4: O2 Control - Optimale start atmosfeer</h2>
+                <div class="two-column">
+                    <div>
+                        <p><strong>O2 Control voorkomt 'product-in-seal' turbulentie en dus: verpakkingen die fout geseald/gesloten worden.</strong> Specifieke, kwetsbare bewerkte producten hebben in de verpakkingsseconde direct een beschermende gasspoeling nodig om snelle verkleuring te dempen.</p>
+                        <p>Verouderde flushingsystemen blazen gassen met zoveel kracht naar binnen dat er hoge turbulentie ontstaat. Lichte productdelen waaien opwaarts in de sealkaken, resulterend in afgekeurde, lekkende seals. De <em>PerfoTec O2 Control</em> bouwt een perfecte start-atmosfeer op zonder windstromen. Uw lijn draait efficiënter met absoluut schone, luchtdichte seals.</p>
+                    </div>
+                    <div>
+                        <div class="image-wrapper contain">
+                            <img src="https://placehold.co/800x600/f8fafc/007C27?text=[Image+of+Schone+Verpakking+Seal]" alt="Vers product in schone retail verpakking">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagina 15: STAP 5 FOLIE -->
+        <div class="slide-container">
+            <div class="bg-blob-bottom"></div>
+            <img src="https://cdn.prod.website-files.com/68b594c756c22085ddc6c1ea/69a072937a1dc9ca517ac375_perfotec%20logo%202026.png" alt="PerfoTec Logo" class="brand-logo">
+            <div class="content-area">
+                <h2 class="slide-title">Stap 5: Folie - Materiaal dat aansluit bij MAP + MHP technologie</h2>
+                <div class="tiled-content">
+                    <div class="tile">
+                        <div class="icon"><i class="fa-solid fa-droplet-slash"></i></div>
+                        <h3>MVTR voorkomt condens</h3>
+                        <p>Onze specifieke materialen voor de retail hebben een superieure vochtdoorlaatbaarheid (MVTR). Dit laat het verse product veilig ademen en elimineert de vorming van extreme condensdruppels en weefselverzuring direct in het consumentenzakje.</p>
+                    </div>
+                    <div class="tile accent-blue">
+                        <div class="icon"><i class="fa-solid fa-ship"></i></div>
+                        <h3>Bio-liners voor zeevracht</h3>
+                        <p>Voor logistiek bulktransport bieden wij ademende, composteerbare binnenzakken (Liners). Deze creëren een stabiel ecosysteem en maken langdurig zeetransport mogelijk, wat de enorme investeringen in zware CA (Controlled Atmosphere) containers vervangt.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagina 16: Waarom een MUST-HAVE -->
+        <div class="slide-container">
+            <div class="bg-blob"></div>
+            <img src="https://cdn.prod.website-files.com/68b594c756c22085ddc6c1ea/69a072937a1dc9ca517ac375_perfotec%20logo%202026.png" alt="PerfoTec Logo" class="brand-logo">
+            <div class="title-layout">
+                <i class="fa-solid fa-link" style="font-size: clamp(40px, 5vw, 60px); color: #007C27; margin-bottom: 3vh;"></i>
+                <h1>Waarom dit systeem een "Must-Have" is</h1>
+                <p style="font-size: clamp(18px, 1.8vw, 24px); max-width: 1000px; margin: 0 auto; color:#334155; line-height: 1.6;">
+                    Bedrijven kunnen in deze hoog-competitieve markt niet op <strong>"één paard wedden"</strong>. Het uitsluitend inzetten van 'ander plastic', óf het blind stansen van gaten zonder empirische fysiologische meting, leidt structureel tot onvoorspelbare foutmarges.
+                    <br><br>
+                    De revolutionaire slagkracht zit in de <strong>keten-synergie</strong>. PerfoTec is de énige partner die onfeilbare meting automatisch koppelt aan thermodynamische software en laser-uitvoering, ondersteund door folie die fysiologisch aansluit op MHP en MAP. Juist deze <em>totaaltechnologie</em> garandeert uw rendement en neutraliseert de twee grootste gevaren in uw supply chain: <strong>anaerobe verstikking en massaal vochtverlies.</strong>
+                </p>
+            </div>
+        </div>
+
+        <!-- Pagina 17: ROI Tabel -->
+        <div class="slide-container">
+            <div class="bg-blob-bottom"></div>
+            <img src="https://cdn.prod.website-files.com/68b594c756c22085ddc6c1ea/69a072937a1dc9ca517ac375_perfotec%20logo%202026.png" alt="PerfoTec Logo" class="brand-logo">
+            <div class="content-area">
+                <h2 class="slide-title">Aantoonbare Toegevoegde Waarde per Markt</h2>
+                <div class="table-layout">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Voor wie?</th>
+                                <th>Kwantificeerbaar Rendement en Concurrentievoordeel</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Kwekers & Telers</strong></td>
+                                <td>Directe reductie van vochtverlies (gewicht = rendement). Het product blijft wekenlang vers. Hierdoor kunt u de oogst strategisch opslaan en wachten met de afzet totdat de marktprijzen stijgen.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Logistiek & Export</strong></td>
+                                <td>Faciliteert de transitie van extreem dure, vervuilende luchtvracht naar geconditioneerde zeevracht, zónder de zware investeringen in peperdure, mechanische CA containers.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Verwerkers & Verpakkers</strong></td>
+                                <td>Maximalisatie van OEE efficiëntie op de productielijn. Drastische reductie van verpakkingen die fout geseald of gesloten worden door product in de sealkaken.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Converters<br>(Folie Producenten)</strong></td>
+                                <td>Bied uw eindklanten high-end, traceerbaar vooraf micro-geperforeerde folie aan. Verhoog uw marges en positioneer uzelf als technologische partner in plaats van slechts een leverancier.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Retail & Consument</strong></td>
+                                <td>Aantoonbare halvering van dure, verlieslatende in-store derving. De consument ontvangt een hoogwaardig, vers product zonder extreme condensdruppels.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagina 18: IJzersterke Afsluiting -->
+        <div class="slide-container highlight-slide">
+            <img src="https://cdn.prod.website-files.com/68b594c756c22085ddc6c1ea/69a072937a1dc9ca517ac375_perfotec%20logo%202026.png" alt="PerfoTec Logo" class="brand-logo" style="filter: brightness(0) invert(1);">
+            <div class="highlight-box">
+                <h1>Samen transformeren wij de versketen.</h1>
+                <p style="margin-bottom: 4vh;">Elke dag verdwijnt er massaal veel hoogwaardig product in de afvalstroom door ouderwetse, passieve verpakkingen. Dit veroorzaakt onnodige milieubelasting en tast uw marges en reputatie keihard aan.</p>
+                <p style="margin-bottom: 4vh; line-height: 1.5;">
+                    <strong>De keuze in de moderne supply chain is dwingend en pijnlijk helder:</strong><br>
+                    Accepteert u structurele derving als een vaststaand feit?<br>
+                    Óf kiest u de standaard die u weken extra houdbaarheid oplevert?
+                </p>
+                <p>Laat het verse product ademen. Maximaliseer uw rendement.<br><strong>Integreer vandaag nog de PerfoTec totaaltechnologie.</strong></p>
+            </div>
+        </div>
+
+        <!-- Pagina 19: Contact -->
+        <div class="slide-container">
+            <div class="bg-blob"></div>
+            <img src="https://cdn.prod.website-files.com/68b594c756c22085ddc6c1ea/69a072937a1dc9ca517ac375_perfotec%20logo%202026.png" alt="PerfoTec Logo" class="brand-logo">
+            <div class="content-area" style="text-align: center;">
+                <h1 style="font-size: clamp(45px, 6vw, 75px); margin-bottom: 2vh;">Ontdek uw potentieel</h1>
+                <p style="font-size: clamp(18px, 2vw, 26px); color: #475569; margin-bottom: 6vh;">Neem contact op en we berekenen direct de ROI voor uw specifieke productlijn.</p>
+                
+                <div style="background: #f8fafc; padding: 4vh 4vw; border-radius: 16px; border: 1px solid #e2e8f0; display: inline-block;">
+                    <h3 style="color: #007C27; margin-bottom: 2vh; font-size: clamp(20px, 2.5vw, 30px);">www.perfotec.com</h3>
+                    <h3 style="color: #054E9A; font-size: clamp(20px, 2.5vw, 30px);">contact@perfotec.com</h3>
+                </div>
+                
+                <p style="margin-top: 6vh; font-weight: 600; color: #94a3b8; letter-spacing: 2px;">BEST FOR FRESHNESS</p>
+            </div>
+        </div>
+
+        <!-- Navigatie Knoppen (blijven verankerd in Footer-zone op het scherm) -->
+        <div class="nav-controls">
+            <button class="nav-btn" id="prevBtn" onclick="prevSlide()" disabled>
+                <i class="fa-solid fa-chevron-left"></i> Vorige
+            </button>
+            <div class="nav-counter" id="slideCounter">1 / 19</div>
+            <button class="nav-btn" id="nextBtn" onclick="nextSlide()">
+                Volgende <i class="fa-solid fa-chevron-right"></i>
+            </button>
+        </div>
+
+    </div>
+
+    <script>
+        let currentSlideIndex = 0;
+        const slides = document.querySelectorAll('.slide-container');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const slideCounter = document.getElementById('slideCounter');
+
+        function updateUI() {
+            slides.forEach((slide, index) => {
+                if(index === currentSlideIndex) {
+                    slide.classList.add('active');
+                    // Zoek intern de content-area op en reset daarvan de scroll
+                    const contentArea = slide.querySelector('.content-area, .title-layout, .highlight-box');
+                    if (contentArea) contentArea.scrollTop = 0;
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+
+            slideCounter.textContent = `${currentSlideIndex + 1} / ${slides.length}`;
+            prevBtn.disabled = currentSlideIndex === 0;
+            nextBtn.disabled = currentSlideIndex === slides.length - 1;
+        }
+
+        function nextSlide() {
+            if (currentSlideIndex < slides.length - 1) {
+                currentSlideIndex++;
+                updateUI();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlideIndex > 0) {
+                currentSlideIndex--;
+                updateUI();
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        updateUI();
+    </script>
+</body>
+</html>
