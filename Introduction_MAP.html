@@ -11,21 +11,21 @@
     <style>
         /* 1. THE SETUP & RESET */
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background-color: #f0fdf4; width: 100vw; height: 100vh; overflow: hidden; font-family: 'Inter', sans-serif; color: #1e293b; }
+        html, body { width: 100vw; height: 100vh; background-color: #f0fdf4; overflow: hidden; font-family: 'Inter', sans-serif; color: #1e293b; }
         
-        /* UNIFORME LETTERGROOTTE VOOR STANDAARD INHOUDELIJKE TEKSTEN */
-        p, li, .case-study-box-content p { 
-            font-size: clamp(14px, 1.8vh, 18px); 
-            line-height: 1.6; 
+        /* UNIFORME LETTERGROOTTE & SCHALING VOOR DE HOOGTE */
+        p, li, td, th, .case-study-box-content p { 
+            font-size: clamp(11px, 1.5vh, 16px) !important; 
+            line-height: 1.4 !important; 
         }
         
-        p { margin-bottom: 1.5vh; }
+        p { margin-bottom: 1vh; }
         strong { color: #007C27; font-weight: 600; }
 
         /* RTL (Right-to-Left) ONDERSTEUNING */
         [dir="rtl"] { text-align: right; }
         [dir="rtl"] .slide-title { border-left: none; border-right: 6px solid #007C27; padding-left: 0; padding-right: 1vw; text-align: right; }
-        [dir="rtl"] .two-column li { padding-left: 0; padding-right: 30px; }
+        [dir="rtl"] .two-column li { padding-left: 0; padding-right: 25px; }
         [dir="rtl"] .two-column li::before { left: auto; right: 0; }
         [dir="rtl"] .case-study-box { border-left: none; border-right: 6px solid #007C27; }
         [dir="rtl"] .case-study-box i { margin-right: 0; margin-left: 20px; }
@@ -34,20 +34,27 @@
         [dir="rtl"] .custom-lang-selector { right: auto; left: 4vw; flex-direction: row-reverse; }
         [dir="rtl"] .custom-lang-selector select { padding-right: 0; padding-left: 5px; }
 
-        /* 1.1 HOOFD CONTAINER - GLOBALE LAYOUT */
-        #course-container { position: relative; width: 100vw; height: 100vh; background-color: #ffffff; overflow: hidden; }
+        /* 1.1 HOOFD CONTAINER - STRAKKE FLEXBOX LAYOUT */
+        #course-container { 
+            display: flex; 
+            flex-direction: column; 
+            width: 100vw; 
+            height: 100vh; 
+            background-color: #ffffff; 
+            overflow: hidden; 
+        }
 
         /* Background Blobs (Globaal) */
-        .bg-blob { position: absolute; top: -10vw; right: -10vw; width: 45vw; height: 45vw; min-width: 400px; min-height: 400px; background: radial-gradient(circle, rgba(0,124,39,0.04) 0%, rgba(255,255,255,0) 70%); border-radius: 50%; z-index: 0; pointer-events: none; }
-        .bg-blob-bottom { position: absolute; bottom: -10vw; left: -10vw; width: 40vw; height: 40vw; min-width: 350px; min-height: 350px; background: radial-gradient(circle, rgba(5,78,154,0.04) 0%, rgba(255,255,255,0) 70%); border-radius: 50%; z-index: 0; pointer-events: none; }
+        .bg-blob { position: fixed; top: -10vw; right: -10vw; width: 45vw; height: 45vw; min-width: 400px; min-height: 400px; background: radial-gradient(circle, rgba(0,124,39,0.04) 0%, rgba(255,255,255,0) 70%); border-radius: 50%; z-index: 0; pointer-events: none; }
+        .bg-blob-bottom { position: fixed; bottom: -10vw; left: -10vw; width: 40vw; height: 40vw; min-width: 350px; min-height: 350px; background: radial-gradient(circle, rgba(5,78,154,0.04) 0%, rgba(255,255,255,0) 70%); border-radius: 50%; z-index: 0; pointer-events: none; }
 
-        /* VASTE HEADER ZONE (LOGO & TAAL) */
+        /* VASTE HEADER ZONE */
         .header-zone {
-            position: absolute; top: 0; left: 0; right: 0; height: 12vh;
+            flex: 0 0 10vh; /* Vast op 10% van schermhoogte */
             padding: 0 5vw; display: flex; justify-content: space-between; align-items: center; z-index: 1000;
         }
         
-        .brand-logo { height: clamp(25px, 5vh, 50px); z-index: 10; margin: 0; }
+        .brand-logo { height: clamp(20px, 4vh, 40px); z-index: 10; margin: 0; }
         
         .custom-lang-selector { 
             display: flex; align-items: center; gap: 8px; background: #ffffff; 
@@ -56,109 +63,113 @@
         }
         .custom-lang-selector select { 
             border: none; background: transparent; font-family: 'Inter', sans-serif; 
-            font-size: clamp(14px, 1.8vh, 18px); font-weight: 600; color: #054E9A; 
+            font-size: clamp(12px, 1.6vh, 16px); font-weight: 600; color: #054E9A; 
             cursor: pointer; outline: none; -webkit-appearance: none; -moz-appearance: none; appearance: none; padding-right: 5px; 
         }
 
-        /* VASTE FOOTER ZONE (KNOPPEN) */
-        .footer-zone { 
-            position: absolute; bottom: 0; left: 0; right: 0; height: 12vh; 
-            display: flex; justify-content: center; align-items: center; z-index: 1000; 
-        }
-
-        .nav-controls { display: flex; align-items: center; gap: 20px; background-color: #ffffff; padding: 1vh 2vw; border-radius: 50px; box-shadow: 0 5px 25px rgba(0,0,0,0.15); border: 1px solid #e2e8f0; }
-        .nav-btn { background-color: #007C27; color: #ffffff; border: none; padding: 1vh 1.5vw; border-radius: 30px; font-family: 'Poppins', sans-serif; font-size: clamp(14px, 1.8vh, 18px); font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: all 0.2s ease; }
-        .nav-btn:hover:not(:disabled) { background-color: #054E9A; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(5,78,154,0.3); }
-        .nav-btn:disabled { background-color: #cbd5e1; cursor: not-allowed; opacity: 0.7; }
-        .nav-counter { font-family: 'Inter', sans-serif; font-weight: 600; color: #1e293b; font-size: clamp(14px, 1.8vh, 18px); min-width: 60px; text-align: center; }
-
-        /* GECENTREERDE SLIDES WRAPPER (HIERTUSSEN GEBEURT ALLES) */
+        /* GECENTREERDE SLIDES WRAPPER */
         #slides-wrapper {
-            position: absolute; top: 12vh; bottom: 12vh; left: 0; right: 0;
+            flex: 1 1 auto; /* Pakt exact de overgebleven ruimte */
+            position: relative;
             display: flex; justify-content: center; align-items: center;
-            overflow: hidden; 
+            overflow: hidden; /* Forceert het verbergen van uitstekende delen */
             z-index: 2;
         }
 
         .slide-container { 
             position: absolute; top: 0; left: 0; right: 0; bottom: 0; 
             display: flex; flex-direction: column; justify-content: center; align-items: center; 
-            padding: 0 5vw; opacity: 0; visibility: hidden; 
+            padding: 1vh 5vw; opacity: 0; visibility: hidden; 
             transition: opacity 0.5s ease-in-out, visibility 0.5s, transform 0.5s ease; 
             z-index: 1; transform: translateY(20px); 
         }
         .slide-container.active { opacity: 1; visibility: visible; z-index: 2; transform: translateY(0); }
-        .content-area { width: 100%; max-width: 1300px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        .content-area { 
+            width: 100%; max-width: 1300px; max-height: 100%; /* Mag nooit buiten kader komen */
+            display: flex; flex-direction: column; justify-content: center; align-items: center; 
+        }
 
-        /* 2. TYPOGRAPHY TITELS (Blijven relatief groot) */
+        /* VASTE FOOTER ZONE (KNOPPEN) */
+        .footer-zone { 
+            flex: 0 0 10vh; /* Vast op 10% van schermhoogte */
+            display: flex; justify-content: center; align-items: center; z-index: 1000; 
+        }
+
+        .nav-controls { display: flex; align-items: center; gap: 2vw; background-color: #ffffff; padding: 1vh 2vw; border-radius: 50px; box-shadow: 0 5px 25px rgba(0,0,0,0.15); border: 1px solid #e2e8f0; }
+        .nav-btn { background-color: #007C27; color: #ffffff; border: none; padding: 1vh 1.5vw; border-radius: 30px; font-family: 'Poppins', sans-serif; font-size: clamp(12px, 1.6vh, 16px); font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: all 0.2s ease; }
+        .nav-btn:hover:not(:disabled) { background-color: #054E9A; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(5,78,154,0.3); }
+        .nav-btn:disabled { background-color: #cbd5e1; cursor: not-allowed; opacity: 0.7; }
+        .nav-counter { font-family: 'Inter', sans-serif; font-weight: 600; color: #1e293b; font-size: clamp(12px, 1.6vh, 16px); min-width: 60px; text-align: center; }
+
+        /* 2. TYPOGRAPHY TITELS */
         h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; font-weight: 700; margin: 0; }
         h1, h2 { color: #007C27; }
-        h3 { color: #054E9A; margin-top: 1vh; margin-bottom: 1.5vh; font-size: clamp(18px, 2.4vh, 26px); }
-        h1 { font-size: clamp(28px, 5vh, 60px); line-height: 1.2; margin-bottom: 2vh; }
-        .slide-title { font-size: clamp(24px, 3.5vh, 42px); margin-bottom: 2vh; text-align: left; width: 100%; padding-left: 1vw; border-left: 6px solid #007C27; }
-        ul { font-family: 'Inter', sans-serif; list-style: none; padding-left: 0; margin-bottom: 1.5vh; }
-        li { position: relative; padding-left: 25px; margin-bottom: 1vh; }
-        li::before { content: '\f058'; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: #007C27; position: absolute; left: 0; top: 2px; }
-        .subtitle { font-size: clamp(16px, 2.2vh, 26px); font-weight: 500; color: #475569; margin-bottom: 3vh; }
+        h3 { color: #054E9A; margin-top: 0.5vh; margin-bottom: 1vh; font-size: clamp(16px, 2vh, 22px); }
+        h1 { font-size: clamp(24px, 4.5vh, 50px); line-height: 1.2; margin-bottom: 1.5vh; }
+        .slide-title { font-size: clamp(20px, 3vh, 38px); margin-bottom: 1.5vh; text-align: left; width: 100%; padding-left: 1vw; border-left: 6px solid #007C27; }
+        ul { font-family: 'Inter', sans-serif; list-style: none; padding-left: 0; margin-bottom: 1vh; }
+        li { position: relative; padding-left: 20px; margin-bottom: 0.8vh; }
+        li::before { content: '\f058'; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: #007C27; position: absolute; left: 0; top: 2px; font-size: clamp(12px, 1.6vh, 16px); }
+        .subtitle { font-size: clamp(14px, 1.8vh, 22px); font-weight: 500; color: #475569; margin-bottom: 2vh; }
 
         /* 3. LAYOUT ZONES */
         .title-layout { text-align: center; max-width: 1100px; margin: auto; }
-        .two-column { display: flex; gap: 3vw; width: 100%; align-items: flex-start; }
+        .two-column { display: flex; gap: 3vw; width: 100%; align-items: center; }
         .two-column > div { flex: 1; display: flex; flex-direction: column; }
 
-        .image-wrapper { border-radius: 12px; width: 100%; height: auto; max-height: 35vh; overflow: hidden; background-color: transparent; display: flex; align-items: center; justify-content: center; } 
+        .image-wrapper { border-radius: 12px; width: 100%; height: auto; max-height: 28vh; overflow: hidden; background-color: transparent; display: flex; align-items: center; justify-content: center; } 
         .image-wrapper img { width: 100%; height: 100%; object-fit: cover; border-radius: 12px;}
-        .image-wrapper.contain img { object-fit: contain; padding: 1vh; max-height: 35vh; }
+        .image-wrapper.contain img { object-fit: contain; padding: 1vh; max-height: 28vh; }
 
         .tiled-content { display: flex; gap: 1.5vw; width: 100%; align-items: stretch; }
-        .tile { background-color: #f8fafc; border-radius: 16px; border-top: 6px solid #007C27; box-shadow: 0 4px 15px rgba(0,0,0,0.05); display: flex; flex-direction: column; flex: 1; padding: 2vh 1.5vw; transition: transform 0.3s ease; }
+        .tile { background-color: #f8fafc; border-radius: 16px; border-top: 6px solid #007C27; box-shadow: 0 4px 15px rgba(0,0,0,0.05); display: flex; flex-direction: column; flex: 1; padding: 1.5vh 1.5vw; transition: transform 0.3s ease; }
         .tile:hover { transform: translateY(-5px); }
         .tile.accent-blue { border-top-color: #054E9A; }
-        .tile .icon { color: #007C27; font-size: clamp(24px, 3.5vh, 45px); margin-bottom: 1vh; text-align: center; }
+        .tile .icon { color: #007C27; font-size: clamp(20px, 3vh, 40px); margin-bottom: 1vh; text-align: center; }
         .tile.accent-blue .icon { color: #054E9A; }
 
-        .case-study-box { background-color: #e6f4ea; border-left: 6px solid #007C27; padding: 1.5vh 2vw; border-radius: 8px; margin-top: 2vh; display: flex; align-items: flex-start; gap: 20px; width: 100%; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-        .case-study-box i { color: #007C27; font-size: clamp(20px, 2.5vh, 28px); margin-top: 4px; }
+        .case-study-box { background-color: #e6f4ea; border-left: 6px solid #007C27; padding: 1vh 2vw; border-radius: 8px; margin-top: 1.5vh; display: flex; align-items: center; gap: 20px; width: 100%; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .case-study-box i { color: #007C27; font-size: clamp(18px, 2vh, 26px); margin-top: 2px; }
         .case-study-box-content p { margin: 0; }
-        .case-study-box-content strong { display: block; margin-bottom: 0.5vh; color: #007C27; font-size: clamp(16px, 2vh, 20px); font-family: 'Poppins', sans-serif; }
+        .case-study-box-content strong { display: block; margin-bottom: 0.5vh; color: #007C27; font-size: clamp(14px, 1.8vh, 18px); font-family: 'Poppins', sans-serif; }
         
         /* STANDAARD TABEL STYLING */
-        .table-layout { width: 100%; background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 25px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; margin-top: 2vh; }
+        .table-layout { width: 100%; background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 25px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; margin-top: 1.5vh; }
         .table-layout table { border-collapse: collapse; width: 100%; }
-        .table-layout th, .table-layout td { border-bottom: 1px solid #e2e8f0; padding: 1.2vh 1.2vw; text-align: left; font-size: clamp(13px, 1.6vh, 17px); line-height: 1.4; }
-        .table-layout th { background-color: #f1f5f9; color: #054E9A; font-size: clamp(16px, 2vh, 20px); font-family: 'Poppins', sans-serif; width: 25%; }
+        .table-layout th, .table-layout td { border-bottom: 1px solid #e2e8f0; padding: 1vh 1vw; text-align: left; }
+        .table-layout th { background-color: #f1f5f9; color: #054E9A; font-family: 'Poppins', sans-serif; width: 25%; }
         .table-layout tr:nth-child(even) { background-color: #f8fafc; }
 
-        /* COMPACTE STYLING SPECIFIEK VOOR SLIDE 6 (Om scrollen te voorkomen bij de grote tabel) */
+        /* COMPACTE STYLING SPECIFIEK VOOR SLIDE 6 */
         .compact-table-container { margin-top: 0.5vh !important; }
         .compact-table th, .compact-table td {
-            padding: 0.5vh 0.8vw !important;
-            font-size: clamp(11px, 1.35vh, 14px) !important;
+            padding: 0.4vh 0.6vw !important;
+            font-size: clamp(10px, 1.25vh, 13px) !important;
             line-height: 1.2 !important;
         }
-        .compact-table th { font-size: clamp(12px, 1.45vh, 15px) !important; padding: 0.6vh 0.8vw !important; }
+        .compact-table th { font-size: clamp(11px, 1.35vh, 14px) !important; padding: 0.5vh 0.6vw !important; }
         
         .insights-box {
             background-color: #e6f4ea; border-left: 4px solid #007C27; border-radius: 8px;
-            padding: 1vh 1.5vw; margin-top: 1vh; width: 100%; box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            padding: 0.8vh 1.5vw; margin-top: 1vh; width: 100%; box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
         .insights-box ul { margin-bottom: 0; }
         .insights-box li {
             margin-bottom: 0.2vh;
-            font-size: clamp(11px, 1.35vh, 14px) !important;
-            line-height: 1.3 !important;
-            padding-left: 20px;
+            font-size: clamp(10px, 1.25vh, 13px) !important;
+            line-height: 1.2 !important;
+            padding-left: 15px;
         }
-        .insights-box li::before { top: 1px; font-size: 13px; }
-        .insights-box strong { font-size: clamp(12px, 1.45vh, 15px) !important; color: #007C27; font-weight: 600; display: block; margin-bottom: 0.5vh;}
+        .insights-box li::before { top: 1px; font-size: 11px; }
+        .insights-box strong { font-size: clamp(11px, 1.35vh, 14px) !important; color: #007C27; font-weight: 600; display: block; margin-bottom: 0.5vh;}
 
-        .highlight-box { background: rgba(255,255,255,0.9); padding: 5vh 4vw; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); border: 1px solid rgba(0,124,39,0.2); width: 100%; max-width: 1100px; margin: auto; text-align: center; }
+        .highlight-box { background: rgba(255,255,255,0.9); padding: 4vh 4vw; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); border: 1px solid rgba(0,124,39,0.2); width: 100%; max-width: 1100px; margin: auto; text-align: center; }
 
         @media (max-width: 900px) {
             .header-zone { padding: 0 3vw; }
-            .two-column { flex-direction: column; gap: 3vh; }
+            .two-column { flex-direction: column; gap: 2vh; }
             .tiled-content { flex-direction: column; gap: 2vh; }
-            .slide-title { text-align: center; border-left: none; border-bottom: 4px solid #007C27; padding-left: 0; padding-bottom: 10px; }
+            .slide-title { text-align: center; border-left: none; border-bottom: 4px solid #007C27; padding-left: 0; padding-bottom: 5px; }
             .case-study-box { flex-direction: column; align-items: center; text-align: center; }
         }
     </style>
@@ -190,10 +201,10 @@
             <!-- S1: Titel -->
             <div class="slide-container active">
                 <div class="content-area">
-                    <div class="title-layout">
-                        <h1 data-key="s1_h1">Masterclass: De Versketen Transformeren</h1>
-                        <p class="subtitle" data-key="s1_sub">Een complete analyse van post-harvest fysiologie, geavanceerde folietechnieken, producttesten en de datagestuurde PerfoTec methode.</p>
-                        <div style="display: inline-block; background-color: #054E9A; color: white; padding: 1vh 1.5vw; border-radius: 30px; font-weight: 600; font-family: 'Poppins', sans-serif; margin-top: 1vh;" data-key="s1_badge">
+                    <div class="title-layout" data-key="s1_title_layout">
+                        <h1>Masterclass: De Versketen Transformeren</h1>
+                        <p class="subtitle">Een complete analyse van post-harvest fysiologie, geavanceerde folietechnieken, producttesten en de datagestuurde PerfoTec methode.</p>
+                        <div style="display: inline-block; background-color: #054E9A; color: white; padding: 1vh 1.5vw; border-radius: 30px; font-weight: 600; font-family: 'Poppins', sans-serif; margin-top: 1vh;">
                             Inclusief Praktijkcase: Versneden Iceberg Lettuce
                         </div>
                     </div>
@@ -289,11 +300,11 @@
                 </div>
             </div>
 
-            <!-- S6: Bewaarcondities Tabel (COMPACT MET 10 CATEGORIEËN) -->
+            <!-- S6: Bewaarcondities Tabel -->
             <div class="slide-container">
                 <div class="content-area">
                     <h2 class="slide-title" data-key="s6_title">Theorie: Optimale Bewaarcondities per Gewas</h2>
-                    <p style="margin-bottom: 1vh;" data-key="s6_intro">Omdat de fysiologie zo verschilt, heeft elk gewas een eigen Equilibrium Modified Atmosphere (EMA) doelstelling. Een kleine afwijking kan al effect hebben op de kwaliteit.</p>
+                    <p style="margin-bottom: 0.5vh;" data-key="s6_intro">Omdat de fysiologie zo verschilt, heeft elk gewas een eigen Equilibrium Modified Atmosphere (EMA) doelstelling. Een kleine afwijking kan al effect hebben op de kwaliteit.</p>
                     
                     <div class="table-layout compact-table-container">
                         <table class="compact-table" data-key="s6_table">
@@ -396,7 +407,7 @@
             <div class="slide-container">
                 <div class="content-area">
                     <h2 class="slide-title" data-key="s10_title">De Dreiging van Micro-organismen</h2>
-                    <p style="text-align: center; max-width: 900px; margin: 0 auto 3vh auto;" data-key="s10_intro">Temperatuurschommelingen tijdens transport en opslag zijn in de praktijk onvermijdelijk. Dit veroorzaakt een gevaarlijke kettingreactie in de verpakking.</p>
+                    <p style="text-align: center; max-width: 900px; margin: 0 auto 2vh auto;" data-key="s10_intro">Temperatuurschommelingen tijdens transport en opslag zijn in de praktijk onvermijdelijk. Dit veroorzaakt een gevaarlijke kettingreactie in de verpakking.</p>
                     <div class="tiled-content">
                         <div class="tile" data-key="s10_t1">
                             <div class="icon"><i class="fa-solid fa-temperature-arrow-down"></i></div>
@@ -782,95 +793,14 @@
 
     <script>
         // --- TRANSLATION ENGINE & DATA ---
-        var content = {
+        const content = {
             nl: {
-                "nav_prev": "<i class='fa-solid fa-chevron-left'></i> Vorige",
-                "nav_next": "Volgende <i class='fa-solid fa-chevron-right'></i>",
-                "s1_h1": "Masterclass: De Versketen Transformeren",
-                "s1_sub": "Een complete analyse van post-harvest fysiologie, geavanceerde folietechnieken, producttesten en de datagestuurde PerfoTec methode.",
-                "s1_badge": "Inclusief Praktijkcase: Versneden Iceberg Lettuce",
-                "s2_title": "De Uitdaging: Het verse product leeft nog",
-                "s2_text": "<p>De mondiale Fresh Produce sector wordt geconfronteerd met ongekende uitdagingen rondom logistieke inefficiënties en kwaliteitsbehoud. <strong>Wereldwijd wordt een aanzienlijk deel van het geproduceerde voedsel verspild.</strong> Dit is niet alleen ecologisch belastend, maar ook een economische strop.</p><p>De absolute kern van deze technologische uitdaging? <strong>Verse gewassen zijn na de oogst niet 'dood' of inert.</strong> Het zijn levende organismen die hun fysiologische processen onverminderd voortzetten nadat zij van de plant zijn gescheiden.</p>",
-                "s2_case": "<strong>Praktijkcase Iceberg Lettuce: Het levende bewijs</strong><p>Zodra een verse krop Iceberg Lettuce wordt versneden in de fabriek, stopt het niet met leven. Het product reageert op de zuurstof in de buitenlucht. Zonder de juiste verpakking oxideert het kwetsbare snijvlak, en kleurt de sla onsmakelijk roze en bruin.</p>",
-                "s3_title": "Theorie: Product Respiratie (Ademhaling)",
-                "s3_text": "<h3>Wat ademt het product eigenlijk in?</h3><p>Om na de oogst in leven te blijven, ademt het gewas omgevingslucht in. <strong>De lucht om ons heen bestaat voor ~78% uit stikstof (N2), ~21% zuurstof (O2) en 0,04% CO2.</strong></p><p>Tijdens dit aerobe proces verbruikt het product deze zuurstof en verbrandt het zijn eigen energiereserves. Hierbij stoot het CO2, waterdamp en warmte uit.</p><ul><li><strong>Respiratiesnelheid (RR):</strong> De belangrijkste graadmeter voor verval. Een snelle ademhaling (hoog zuurstofverbruik) betekent een kortere houdbaarheid.</li></ul>",
-                "s4_title": "Theorie: Factoren die Ademhaling Bepalen",
-                "s4_intro": "Ademhaling is geen statisch gegeven. Binnen uw fabriek en logistieke keten wordt de ademhalingssnelheid gestuurd door 3 primaire triggers:",
-                "s4_t1": "<div class='icon'><i class='fa-solid fa-thermometer-half'></i></div><h3>Temperatuur</h3><p>Warmte is het gaspedaal. Kou vertraagt de ademhaling. Echter, een té koude opslag maakt het zeer moeilijk om een product atmosferisch te optimaliseren, omdat de cel 'stilvalt'.</p>",
-                "s4_t2": "<div class='icon'><i class='fa-solid fa-cut'></i></div><h3>Bewerking</h3><p>Hoe fijner of kleiner u het product snijdt in de fabriek, hoe meer wond-oppervlak er ontstaat. De cellen herstellen zich, wat de ademhalingssnelheid verhoogt.</p>",
-                "s4_t3": "<div class='icon'><i class='fa-solid fa-truck-fast'></i></div><h3>Handling</h3><p>Hard wassen, vallen op transportbanden of zware trillingen veroorzaken fysieke stress voor het plantenweefsel. Ook dit jaagt de ademhaling omhoog.</p>",
-                "s5_title": "Theorie: Ieder product is fysiologisch uniek",
-                "s5_intro": "Er bestaat geen 'one-size-fits-all' folie. Ieder gewas heeft zijn eigen specifieke fysiologie en vereist unieke, optimale bewaarcondities. Het negeren van deze specifieke eigenschappen leidt onherroepelijk tot kwaliteitsverlies.",
-                "s5_t1": "<div class='icon'><i class='fa-solid fa-apple-whole'></i></div><h3>Zachtfruit (bijv. Aardbei)</h3><p>Heeft een relatief hoge ademhaling. Tolereert en profiteert juist van aanzienlijk hogere CO2-niveaus (soms tot 20%) in de verpakking om schimmelgroei (Botrytis) te onderdrukken zonder weefselschade op te lopen.</p>",
-                "s5_t2": "<div class='icon'><i class='fa-solid fa-leaf'></i></div><h3>Bladgroenten (bijv. Iceberg Lettuce)</h3><p>Gemiddelde ademhaling, maar <strong>gevoelig</strong> voor de gasbalans. Te weinig O2 leidt tot fermentatie (zure geur). Te veel CO2 leidt tot MAP-stress (roze/bruine verkleuring op de snijvlakken).</p>",
-                "s5_t3": "<div class='icon'><i class='fa-solid fa-seedling'></i></div><h3>Koolgewassen (bijv. Broccoli)</h3><p>Bezitten een zeer hoge ademhaling. Dit vereist een verpakking met een aanzienlijke zuurstofdoorlaatbaarheid om snelle anaerobe verstikking en penetrante zwavelgeuren te voorkomen.</p>",
-                "s6_title": "Theorie: Optimale Bewaarcondities per Gewas",
-                "s6_intro": "Omdat de fysiologie zo verschilt, heeft elk gewas een eigen Equilibrium Modified Atmosphere (EMA) doelstelling. Een kleine afwijking kan al effect hebben op de kwaliteit.",
-                "s6_table": "<thead><tr><th>Categorie (Voorbeelden)</th><th>Kenmerk / Respiratie</th><th>O₂</th><th>CO₂</th><th>Perforatie</th><th>Kritiek Aandachtspunt</th></tr></thead><tbody><tr><td><strong>1. Brassica's</strong> (Broccoli, Bloemkool)</td><td>Middel-hoog, CO₂-gevoelig</td><td>2-5%</td><td>5-10%</td><td>Middel</td><td>Zwavelgeur bij te hoge CO₂</td></tr><tr><td><strong>2. Bladgroenten</strong> (Spinazie, Iceberg Lettuce)</td><td>Zeer hoog, snel kwaliteitsverlies</td><td>2-5%</td><td>5-10%</td><td>Rel. hoog</td><td>Vochtbalans + ROS-burst na openen</td></tr><tr><td><strong>3. Verse kruiden</strong> (Basilicum, Koriander)</td><td>Extreem gevoelig (lage O₂ / condens)</td><td>5-10%</td><td>0-5%</td><td>Hoog</td><td>Snel kwaliteitsverlies bij te lage O₂</td></tr><tr><td><strong>4. Gesneden fruit</strong> (Mango, Meloen)</td><td>Hoge suikers, fermentatiegevoelig</td><td>3-8%</td><td>5-15%</td><td>Middel</td><td>Fermentatie bij te lage O₂</td></tr><tr><td><strong>5. Wortel- & knolgewassen</strong> (Wortel, Zoete aardappel)</td><td>Lage respiratie, stabiel</td><td>5-10%</td><td>0-5%</td><td>Laag</td><td>Uitdroging</td></tr><tr><td><strong>6. Allium groenten</strong> (Ui, Prei)</td><td>Middel, microbiologisch gevoelig</td><td>3-8%</td><td>5-10%</td><td>Middel</td><td>Vocht en geurontwikkeling</td></tr><tr><td><strong>7. Peulgewassen</strong> (Sperziebonen)</td><td>Middel respiratie, redelijk stabiel</td><td>2-5%</td><td>3-8%</td><td>Middel</td><td>Verkleuring bij verkeerde atmosfeer</td></tr><tr><td><strong>8. Stengelgroenten</strong> (Asperge)</td><td>Middel-hoog, textuurgevoelig</td><td>2-5%</td><td>5-10%</td><td>Middel</td><td>Lignificatie / kwaliteitsverlies</td></tr><tr><td><strong>9. Kiemgroenten</strong> (Taugé)</td><td>Zeer hoog, hoog microbiologisch risico</td><td>5-10%</td><td>0-5%</td><td>Hoog</td><td>Voedselveiligheid + snelle achteruitgang</td></tr><tr><td><strong>10. Gemengd</strong> (Salade mix)</td><td>Variabel gedrag</td><td>3-7%</td><td>3-10%</td><td>Middel</td><td>Afstemmen op meest kritische component</td></tr></tbody>",
-                "s6_insights": "<strong>Belangrijke algemene MAP-inzichten:</strong><ul style='margin-top: 0.5vh;'><li>Producten passen zich aan aan lage O₂ &rarr; té laag leidt tot fermentatie/schade.</li><li>Na openen is er risico op een ROS-burst, wat leidt tot versnelde veroudering.</li><li>Ethyleengevoeligheid neemt toe na bewaring in MAP.</li><li>Vochtbalans is cruciaal (de juiste afstemming tussen condens en uitdroging).</li><li>Bij gemengde producten (melanges): stuur altijd op de <strong>zwakste schakel</strong>.</li></ul>",
-                "s7_title": "Theorie: De Complexiteit van Productmixen",
-                "s7_text": "<p>Consumenten vragen steeds vaker om gemengde salades en roerbakmixen. Het verpakken hiervan is fysiologisch complex, omdat u meerdere levende organismen – met allemaal een ándere ademhaling – in één gesloten zak plaatst.</p><p>Gelukkig kunnen we de ademhalingsbehoefte van de totale mix wiskundig berekenen op basis van de individuele ingrediënten. Als product 1 snel stikt, en product 2 snel rot, vereist de totale mix een compleet nieuw verpakkings-evenwicht.</p>",
-                "s7_case": "<strong>Rekenvoorbeeld Melangesla</strong><p>Stel, uw mix bestaat voor 50% uit Iceberg Lettuce (RR: 12 ml/kg), 20% Rucola (RR: 16 ml/kg) en 30% Spinazie (RR: 17 ml/kg). We kunnen de totale zuurstofbehoefte mathematisch berekenen. Hierna bepalen we exact de folie-permeabiliteit die voorkomt dat de agressief ademende rucola alle zuurstof verbruikt en de overige ingrediënten laat stikken.</p>",
-                "s8_title": "Fresh-Cut Fruit: Een Categorie Apart",
-                "s8_text": "<p>Het bewerken en verpakken van fruit is wezenlijk anders en moeilijker dan groenten. Bij fruit beoordeelt de consument visuele bruinkleuring, geur (odour), sapverlies, textuur en zelfs bitterheid direct bij het openen van de bak.</p><ul><li><strong>Toevoegingen (Dips):</strong> Alleen gas en folie is voor fruit vaak niet genoeg. Vaak worden ingrediënten zoals Calcium of Ascorbinezuur aan het waswater toegevoegd.</li><li><strong>Anaerobe Tolerantie:</strong> Bepaalde fruitsoorten presteren, afhankelijk van de was-dip, soms het beste in een verpakking met nagenoeg 100% Stikstof (N2) spoeling.</li></ul>",
-                "s9_title": "Theorie: Transpiratie en Verlies van Turgor",
-                "s9_text": "<h3>Verlies van celspanning en commerciële waarde</h3><p>Naast ademhaling 'zweet' het verse product. Dit vochtverlies (transpiratie) leidt tot een verlies van <strong>Turgor</strong> (de interne celspanning). De plantencellen verliezen spanning. In de praktijk resulteert dit in:</p><ul><li>Verlies van 'bite' en knapperige textuur.</li><li>Zichtbaar verwelken en verschrompelen.</li><li>Direct <strong>gewichtsverlies</strong>, wat effect heeft op uw opbrengst.</li></ul>",
-                "s10_title": "De Dreiging van Micro-organismen",
-                "s10_intro": "Temperatuurschommelingen tijdens transport en opslag zijn in de praktijk onvermijdelijk. Dit veroorzaakt een gevaarlijke kettingreactie in de verpakking.",
-                "s10_t1": "<div class='icon'><i class='fa-solid fa-temperature-arrow-down'></i></div><h3>Temperatuurfluctuatie</h3><p>Wanneer koud product warm wordt (of andersom), daalt de temperatuur van de folie al snel tot ónder het dauwpunt van de verpakkingsatmosfeer.</p>",
-                "s10_t2": "<div class='icon'><i class='fa-solid fa-droplet'></i></div><h3>Vrij Water (Condens)</h3><p>Dit resulteert onherroepelijk in de vorming van condensatie (vrij water) aan de binnenzijde. Deze vochtophoping is een belangrijke katalysator voor bederf.</p>",
-                "s10_t3": "<div class='icon'><i class='fa-solid fa-virus'></i></div><h3>Infecties & Rot</h3><p>Dit biedt de ideale wateractiviteit. Het stimuleert de groei van bacteriën en schimmels en leidt tot weefselrot in de zak.</p>",
-                "s11_title": "Conserveringsstrategie: Wat is MAP?",
-                "s11_text": "<h3>Modified Atmosphere Packaging (De Gasbalans)</h3><p>Om fysiologische afbraak te vertragen, manipuleert MAP de gassen rondom het product. Een gecontroleerde reductie van zuurstof (O2) en een stijging van CO2 remt de ademhaling aanzienlijk. <strong>Echter, de balans is delicaat:</strong></p><ul><li>Té laag O2 dwingt cellen tot <em>anaerobe fermentatie</em>, wat resulteert in ongewenste, zure en bedorven geuren.</li><li>Té hoog CO2 veroorzaakt <em>MAP-stress</em>, leidend tot weefselnecrose en verbruining.</li></ul>",
-                "s12_title": "Conserveringsstrategie: Wat is MHP?",
-                "s12_text": "<h3>Modified Humidity Packaging (Vochtbeheersing)</h3><p>MHP focust zich op de Relatieve Luchtvochtigheid in de verpakking. Het maakt gebruik van folies met een gereguleerde vochtdoorlaatbaarheid (<em>Moisture Vapor Transmission Rate - MVTR</em>).</p><p><strong>Het doel is de perfecte vochtbalans:</strong> Overtollig zweet (transpiratievocht) moet naar buiten ademen om <strong>condensatie tegen te gaan</strong>, zónder dat het product intern te snel uitdroogt en zijn cellen (turgor) verliest.</p>",
-                "s13_title": "Huidige Standaard: Eigenschappen van Folies",
-                "s13_intro": "De verpakkingsindustrie gebruikt voornamelijk twee soorten mono-folies (naast laminaten). Beiden missen standaard vaak de specifieke fysiologische balans.",
-                "s13_t1": "<div class='icon'><i class='fa-solid fa-scroll'></i></div><h3>OPP (Oriented Polypropylene)</h3><p>De retail-standaard. Zeer helder transparant. De scheurweerstand is echter relatief laag en de OTR (gasdoorlaatbaarheid) ligt rond de 1400-2150 ml/m2. Een sterk ademend product kan hierin moeite hebben.</p>",
-                "s13_t2": "<div class='icon'><i class='fa-solid fa-layer-group'></i></div><h3>PE (Polyethyleen)</h3><p>Dit is een veel troebelere ('milky') folie met hogere scheurweerstand. De gasdoorlaatbaarheid is met >3500 ml/m2 hoger, maar soms onvoldoende voor agressief ademende AGF-producten.</p>",
-                "s14_title": "Huidige Standaard: Zonder perforaties",
-                "s14_text": "<h3>De BOPP Paradox: Anaerobe Verstikking</h3><p>De industrie gebruikt veel conventionele, dichte OPP-folies. Dit blokkeert de gasuitwisseling in aanzienlijke mate.</p><p>De zuurstof raakt op, en CO2 bouwt zich op. <strong>Gevolg:</strong> Het luchtdicht verpakte product fermenteert, loopt CO2-schade op en rot sneller weg in zijn eigen condens.</p>",
-                "s15_title": "Huidige Standaard: Macro perforaties",
-                "s15_text": "<h3>Het verlies van atmosferische bescherming</h3><p>Om de beperkingen van dichte folies te omzeilen, stansen verpakkers vaak <strong>statische macro-perforaties</strong> (grote gaten).</p><p>De verpakking is dan enkel nog een plastic tasje. Het product ademt de omgevingslucht. Er ontstaat geen beschermende MAP-atmosfeer, snijvlakken oxideren sneller, en vocht (gewicht) ontsnapt ongeremd.</p>",
-                "s16_title": "<i class='fa-solid fa-list-check' style='font-size: clamp(40px, 5vh, 60px); color: #007C27; margin-bottom: 2vh;'></i><h1>De Datagestuurde Oplossing</h1><p class='subtitle' style='max-width: 900px; margin: 0 auto; line-height: 1.6;'>Om de tekortkomingen van deze standaard verpakkingen te doorbreken en het product vers te houden, kiezen we voor <strong>adaptieve, datagestuurde kalibratie</strong>. Hiervoor ontwikkelde PerfoTec een geïntegreerd ecosysteem.</p>",
-                "s17_title": "Stap 1: Fast Respiration Meter - Diagnostiek",
-                "s17_text": "<p><strong>Ademen is de eigenschap van de natuur.</strong> Om dit te sturen, moeten we de ademhaling exact begrijpen. Dit meten we in de productiefaciliteit.</p><ul><li><strong>Exacte Quantificatie:</strong> Meet via gasanalyse de snelheid van O2-consumptie en CO2-emissie.</li><li><strong>Tijdwinst:</strong> Krijg resultaten binnen maximaal 4 uur.</li><li><strong>Foutpreventie:</strong> Optimaliseer voor temperatuur en snij-schok vóórdat de folie geproduceerd is.</li></ul>",
-                "s17_case": "<strong>Praktijkcase Iceberg Lettuce: De ademhaling meten</strong><p>Iceberg Lettuce is gevoelig voor 'pinking' (roze oxidatie op het snijvlak). Voor productie plaatsen we een versneden monster in de FRM. We meten de sterkte van de snij-schok. We bepalen zo dat de zuurstofwaarde in de zak gestuurd moet worden naar 0.5-3% voor de meest optimale bewaarconditie.</p>",
-                "s18_title": "Stap 2: PerfoTec Hub - Slimme AMAP software",
-                "s18_text": "<p><strong>Hub rekent en stuurt M2M automatisch.</strong> Biologische ademhalingsdata vereist modellering door geavanceerde software.</p><ul><li><strong>Algoritmische Optimalisatie:</strong> De software kruist ademhalingswaarden met het productgewicht en temperatuurprofielen. Het berekent de Oxygen Transmission Rate (OTR).</li><li><strong>M2M Connectiviteit:</strong> Berekende data wordt volautomatisch naar de laser doorgestuurd. Controle vanuit een centraal punt beperkt invoerfouten.</li></ul>",
-                "s18_case": "<strong>Praktijkcase Iceberg Lettuce: De Blauwdruk</strong><p>De Hub software pakt de FRM-meting erbij en berekent: Voor een 250g consumentenzakje versneden Iceberg Lettuce, bewaard op 4°C, hebben we de exacte permeabiliteit om de zuurstof perfect op 0.5% te stabiliseren. Deze blauwdruk wordt digitaal klaargezet voor de verpakkingslijn.</p>",
-                "s19_title": "Stap 3: Laser Perforatie - Precisie",
-                "s19_text": "<p><strong>Een betrouwbare standaard voor elke producent:</strong> Ons 'Standard Laser Model' maakt micro-perforatie tussen 50 en 200 micron bereikbaar.</p><ul><li><strong>Precieze Perforaties:</strong> Tussen de 50 en 200 micron passen wij de doorlaatbaarheid aan op het product.</li><li><strong>Realtime Correctie:</strong> Foliedikte fluctueert altijd. De laser stelt zich 'on the fly' bij.</li><li><strong>Productie Rapporten:</strong> De laser genereert rapporten, zodat is terug te zien of het programma goed heeft gedraaid.</li></ul>",
-                "s19_case": "<strong>Praktijkcase Iceberg Lettuce: Uitvoering</strong><p>De laser boort perfect gepositioneerde gaatjes in de folie met de berekende grootte en hoeveelheid. Hierdoor beperkt de laser-perforatie oxidatie van de Iceberg Lettuce effectief. Er blijft genoeg zuurstof behouden om fermentatiegeur tegen te gaan.</p>",
-                "s20_title": "Stap 4: O2 Control - Optimale start atmosfeer",
-                "s20_text": "<p><strong>Voorkomt turbulentie in de seal.</strong> Bij versneden gewassen is de gassamenstelling in de allereerste verpakkingsseconde essentieel.</p><ul><li><strong>Eliminatie van Turbulente Flow:</strong> De O2 Control bouwt een egaal, non-turbulent gasschild op.</li><li><strong>Smarter Gas:</strong> Maakt inkoop van pre-mixed gascilinders overbodig door zelf slim te mengen.</li><li><strong>Productie Rapporten:</strong> Genereert gedetailleerde rapporten voor kwaliteitscontrole.</li></ul>",
-                "s20_case": "<strong>Praktijkcase Iceberg Lettuce: Schone Seals</strong><p>Versneden Iceberg Lettuce kleurt snel roze door blootstelling aan lucht. De O2 Control verlaagt het zuurstofniveau in de verpakking, zónder turbulente luchtstromen. De lichte slasnippers waaien hierdoor niet omhoog in de seal.</p>",
-                "s21_title": "Stap 5: Folie - Aansluitend bij MAP + MHP",
-                "s21_t1": "<div class='icon'><i class='fa-solid fa-droplet-slash'></i></div><h3 style='color:#007C27;'>Retail: R+702 Folie</h3><ul><li><strong>Condens-eliminatie:</strong> Voert vocht af door hogere MVTR.</li><li><strong>Behoud van textuur:</strong> Helpt bij het verminderen van derving op het winkelschap.</li></ul>",
-                "s21_t2": "<div class='image-wrapper contain' style='height: 10vh; min-height: 80px; box-shadow: none; background: transparent; margin-bottom: 1vh;'><img src='https://www.perfotec.com/wp-content/uploads/2021/04/PerfoTec-Liner.png' alt='Liner'></div><h3 style='color:#054E9A;'>Bulk: Bio-liners</h3><ul><li><strong>Transitie Zeevracht:</strong> Verlengde opslag mogelijk.</li><li><strong>Ondersteuning:</strong> Betrouwbare bescherming bij langere transittijden.</li></ul>",
-                "s21_t3": "<div class='image-wrapper contain' style='height: 10vh; min-height: 80px; box-shadow: none; background: transparent; margin-bottom: 1vh;'><img src='https://media.licdn.com/dms/image/v2/D4D22AQFPgPlVExiU9g/feedshare-shrink_800/B4DZwpjaw9KYAg-/0/1770223677075?e=2147483647&v=beta&t=LLORb9lqopWrUJ0OLfLW6OyuQWkXk_TzLsRVLQTlZwg' alt='Pallet'></div><h3 style='color:#007C27;'>Logistiek: Pallet Cover</h3><ul><li><strong>Tarmac Protectie:</strong> Beschermt tegen hitte en condens-schokken.</li><li><strong>Stabiliteit:</strong> Helpt 'carton collapse' te voorkomen.</li></ul>",
-                "s21_case": "<strong>Praktijkcase Iceberg Lettuce: Langer vers in het schap</strong><p>Iceberg Lettuce 'zweet'. De PerfoTec R+ folie combineert de berekende gasbalans met een goede vochtdoorlaatbaarheid. Het transpiratievocht ademt deels naar buiten, waardoor de sla beter zijn 'crunch' behoudt.</p>",
-                "s22_title": "Validatie: Testen in de Praktijk",
-                "s22_text": "<p>Voordat we opschalen, is een test-fase cruciaal om theorie en praktijk te verbinden. We verifiëren de resultaten aan de hand van gasmetingen.</p><ul><li><strong>Prognose via de Hub:</strong> We berekenen eerst de verwachte gascondities.</li><li><strong>Praktijktesten:</strong> We meten in de praktijk of de prognose uitkomt.</li><li><strong>Finetunen:</strong> Op basis van de metingen sturen we de perforaties bij waar nodig voor een beter resultaat.</li></ul>",
-                "s23_title": "Praktijkcase Iceberg Lettuce: Impact per Optie",
-                "s23_intro": "Een overzicht van verpakkingsopties voor Iceberg Lettuce:",
-                "s23_table": "<thead><tr><th>Technologie Optie</th><th>Wat gebeurt er in de zak?</th><th>Resultaat (Kwaliteit & Houdbaarheid)</th></tr></thead><tbody><tr><td><strong>1. Ongeperforeerd</strong></td><td>O2 daalt rap naar 0%. Product fermenteert.</td><td>Zure geur. <strong>Korte houdbaarheid.</strong></td></tr><tr><td><strong>2. Over-geperforeerd</strong></td><td>O2 blijft op 21%. Vocht ontsnapt ongeremd.</td><td>Snijvlakken oxideren, vochtverlies. <strong>Beperkte houdbaarheid.</strong></td></tr><tr><td><strong>3. MAP (Laser)</strong></td><td>Ademhaling gestabiliseerd (0.5-3%).</td><td>Betere kwaliteit. <strong>Verlengde houdbaarheid.</strong></td></tr><tr><td><strong>4. MAP + O2 Control</strong></td><td>Zuurstofwaarde direct veiliggesteld zónder turbulentie.</td><td>Minder oxidatie, schonere seals. <strong>Lange houdbaarheid.</strong></td></tr><tr><td><strong>5. PerfoTec Full</strong></td><td>Verbeterde gasbalans én afvoer van vocht.</td><td>Minder condens, knapperige bite behouden. <strong>Langere houdbaarheid en rendement.</strong></td></tr></tbody>",
-                "s24_title": "Data Deep-Dive: Resultaten Iceberg Lettuce",
-                "s24_intro": "Wat brengt de 'PerfoTec Full' oplossing voor de verwerker?",
-                "s24_t1": "<div class='icon'><i class='fa-solid fa-calendar-check'></i></div><h3 style='color:#007C27;'>Verbeterde Houdbaarheid</h3><p><strong>Pinking</strong> (roze verkleuring) wordt geremd met de precieze O2 balans, en <strong>vochtverlies</strong> wordt beperkt.</p>",
-                "s24_t2": "<div class='icon'><i class='fa-solid fa-trash-can-arrow-up'></i></div><h3 style='color:#054E9A;'>Minder Derving (Waste)</h3><p>Waste en uitval in de keten kunnen afnemen. Het risico op 'product-in-seal' vermindert, met minder afkeur als resultaat.</p>",
-                "s24_t3": "<div class='icon'><i class='fa-solid fa-chart-line'></i></div><h3 style='color:#007C27;'>Beter Financieel Rendement</h3><p>Kansen op een betere winstmarge per batch. Verkoopramen kunnen ruimer worden en retourzendingen verminderen.</p>",
-                "s25_title": "<i class='fa-solid fa-link' style='font-size: clamp(40px, 5vh, 60px); color: #007C27; margin-bottom: 2vh;'></i><h1>Een technologische stap vooruit</h1><p class='subtitle' style='max-width: 1000px; margin: 0 auto; line-height: 1.7;'>Bedrijven zoeken voortdurend naar verbetering. Uitsluitend vertrouwen op standaardoplossingen kan leiden tot foutmarges.<br><br>PerfoTec biedt een <strong>geïntegreerde aanpak</strong>. We koppelen biologische meting (Stap 1) aan software (Stap 2) en laser-uitvoering (Stap 3 & 4), ondersteund door folie die fysiologisch is afgestemd (Stap 5). Deze technologie ondersteunt uw rendement.</p>",
-                "s26_title": "Mogelijk Toegevoegde Waarde per Markt (ROI)",
-                "s26_table": "<thead><tr><th>Voor wie?</th><th>Kwantificeerbaar Rendement en Concurrentievoordeel</th></tr></thead><tbody><tr><td><strong>Kwekers & Telers</strong></td><td>Minder vochtverlies. Het gewas behoudt langer zijn versheid.</td></tr><tr><td><strong>Logistiek & Export</strong></td><td>Ondersteunt de transitie naar geconditioneerde zeevracht, wat kan leiden tot <strong>CO2-reductie.</strong></td></tr><tr><td><strong>Verwerkers & Verpakkers</strong></td><td>Verbetering van de OEE efficiëntie op de productielijn.</td></tr><tr><td><strong>Converters (Folie)</strong></td><td>Bied klanten traceerbare en micro-geperforeerde folie aan.</td></tr><tr><td><strong>Retail & Consument</strong></td><td>Potentiële afname van in-store derving op het schap. Een frisser product voor de consument.</td></tr></tbody>",
-                "s27_title": "<h1>Samen transformeren wij de versketen.</h1><p style='margin-bottom: 4vh;'>Elke dag gaat er product verloren door suboptimale verpakkingen. Dit veroorzaakt onnodige ecologische belasting.</p><p style='margin-bottom: 4vh; line-height: 1.5;'><strong>Optimaliseer uw supply chain:</strong><br>Voorkom kapitaalintensieve derving door betere inzichten.<br>Kies voor een technologische benadering.</p><p>Laat het verse product ademen. Werk op basis van data.<br><strong>Integreer vandaag nog de PerfoTec technologie.</strong></p>"
-            },
+                "s1_title_layout": "<h1>Masterclass: De Versketen Transformeren</h1><p class=\"subtitle\">Een complete analyse van post-harvest fysiologie, geavanceerde folietechnieken, producttesten en de datagestuurde PerfoTec methode.</p><div style=\"display: inline-block; background-color: #054E9A; color: white; padding: 1vh 1.5vw; border-radius: 30px; font-weight: 600; font-family: 'Poppins', sans-serif; margin-top: 1vh;\">Inclusief Praktijkcase: Versneden Iceberg Lettuce</div>"
+            }, // Wordt on-the-fly aangevuld bij het openen van de pagina.
             en: {
                 "nav_prev": "<i class='fa-solid fa-chevron-left'></i> Previous",
                 "nav_next": "Next <i class='fa-solid fa-chevron-right'></i>",
-                "s1_h1": "Masterclass: Transforming the Fresh Chain",
-                "s1_sub": "A comprehensive analysis of post-harvest physiology, advanced film technologies, product testing, and the data-driven PerfoTec method.",
-                "s1_badge": "Includes Case Study: Fresh-cut Iceberg Lettuce",
+                "s1_title_layout": "<h1>Masterclass: Transforming the Fresh Chain</h1><p class=\"subtitle\">A comprehensive analysis of post-harvest physiology, advanced film technologies, product testing, and the data-driven PerfoTec method.</p><div style=\"display: inline-block; background-color: #054E9A; color: white; padding: 1vh 1.5vw; border-radius: 30px; font-weight: 600; font-family: 'Poppins', sans-serif; margin-top: 1vh;\">Includes Case Study: Fresh-cut Iceberg Lettuce</div>",
                 "s2_title": "The Challenge: The fresh product is still alive",
                 "s2_text": "<p>The global Fresh Produce sector faces unprecedented challenges regarding logistical inefficiencies and quality preservation. <strong>Globally, a significant portion of all food produced is wasted.</strong> This is not only an ecological disaster but also an economic loss.</p><p>The absolute core of this technological challenge? <strong>Harvested crops are not 'dead' or inert.</strong> They are living organisms that continue their physiological processes unabated after being separated from the plant.</p>",
                 "s2_case": "<strong>Case Study Iceberg Lettuce: The living proof</strong><p>As soon as a fresh head of iceberg lettuce is cut in the factory, it doesn't stop living. The product reacts to the oxygen in the outside air. Without proper packaging, the fragile cut surface oxidizes, turning unappetizing pink and brown.</p>",
@@ -950,9 +880,7 @@
             es: {
                 "nav_prev": "<i class='fa-solid fa-chevron-left'></i> Anterior",
                 "nav_next": "Siguiente <i class='fa-solid fa-chevron-right'></i>",
-                "s1_h1": "Masterclass: Transformando la Cadena de Frescos",
-                "s1_sub": "Un análisis completo de la fisiología poscosecha, la tecnología de películas y el método PerfoTec basado en datos.",
-                "s1_badge": "Incluye Caso Práctico: Iceberg Lettuce",
+                "s1_title_layout": "<h1>Masterclass: Transformando la Cadena de Frescos</h1><p class=\"subtitle\">Un análisis completo de la fisiología poscosecha, la tecnología de películas y el método PerfoTec basado en datos.</p><div style=\"display: inline-block; background-color: #054E9A; color: white; padding: 1vh 1.5vw; border-radius: 30px; font-weight: 600; font-family: 'Poppins', sans-serif; margin-top: 1vh;\">Incluye Caso Práctico: Iceberg Lettuce</div>",
                 "s2_title": "El Desafío: El producto fresco sigue vivo",
                 "s2_text": "<p>El sector mundial de frutas y verduras frescas se enfrenta a desafíos sin precedentes. <strong>A nivel mundial, se desperdicia gran parte de todos los alimentos producidos.</strong></p><p>¿El núcleo absoluto de este desafío? <strong>Los cultivos cosechados no están 'muertos'.</strong> Son organismos vivos que continúan sus procesos fisiológicos tras ser separados de la planta.</p>",
                 "s2_case": "<strong>Caso Práctico Iceberg Lettuce: La prueba viva</strong><p>En cuanto se corta la lechuga en la fábrica, no deja de vivir. Reacciona al oxígeno. Sin el envase adecuado, la superficie se oxida y se tiñe de rosa y marrón.</p>",
@@ -998,7 +926,7 @@
                 "s15_text": "<h3>La pérdida de protección atmosférica</h3><p>Para evitar la limitación de las películas sólidas, a menudo se perforan <strong>macro-perforaciones estáticas</strong> (grandes agujeros).</p><p>El envase es solo una bolsa de plástico. El producto respira aire ambiente. No se crea una atmósfera MAP protectora y la humedad escapa sin obstáculos.</p>",
                 "s16_title": "<i class='fa-solid fa-list-check' style='font-size: clamp(40px, 5vh, 60px); color: #007C27; margin-bottom: 2vh;'></i><h1>La Solución Basada en Datos</h1><p class='subtitle' style='max-width: 900px; margin: 0 auto; line-height: 1.6;'>Para superar las deficiencias de estos envases estándar, elegimos una <strong>calibración adaptativa basada en datos</strong>. Para esto, PerfoTec desarrolló un ecosistema integrado.</p>",
                 "s17_title": "Paso 1: Fast Respiration Meter - Diagnóstico Fisiológico",
-                "s17_text": "<p><strong>Respirar es la característica de la naturaleza.</strong> Para controlarlo, debemos entender exactamente la respiración. Medimos esto en la planta de producción.</p><ul><li><strong>Cuantificación Exacta:</strong> Mide la tasa precisa de consumo de O2 y emisión de CO2 mediante análisis de gases.</li><li><strong>Ahorro de Tiempo:</strong> Obtenga resultados en un máximo de 4 horas.</li><li><strong>Prevención de Errores:</strong> Optimice para la temperatura y el 'choque de corte' antes de producir la película.</li></ul>",
+                "s17_text": "<p><strong>Respirar es la característica de la naturaleza.</strong> Para controlarlo, debemos entender exactamente la respiración. Medimos esto en la planta de producción.</p><ul><li><strong>Cuantificación Exacta:</strong> Mide la tasa precisa de consumo de O2 y emisión de CO2 mediante análisis de gases.</li><li><strong>Ahorro de Tiempo:</strong> Obtenga resultados en un máximo de 4 hours.</li><li><strong>Prevención de Errores:</strong> Optimice para la temperatura y el 'choque de corte' antes de producir la película.</li></ul>",
                 "s17_case": "<strong>Caso Práctico Iceberg Lettuce: Midiendo la Respiración</strong><p>La Iceberg Lettuce es sensible a la oxidación rosa en la superficie de corte. Justo antes de la producción, colocamos una muestra cortada en el FRM. Así determinamos que el valor de oxígeno debe ajustarse a 0.5-3%.</p>",
                 "s18_title": "Paso 2: PerfoTec Hub - Software Inteligente AMAP",
                 "s18_text": "<p><strong>Hub calcula y envía M2M automáticamente.</strong> Los datos biológicos requieren un modelado mediante software avanzado.</p><ul><li><strong>Optimización Algorítmica:</strong> El software cruza los valores de respiración con el peso del producto y los perfiles de temperatura. Calcula la Tasa de Transmisión de Oxígeno (OTR).</li><li><strong>Conectividad M2M:</strong> Los datos se envían automáticamente al láser. El control central limita los errores de entrada.</li></ul>",
@@ -1043,11 +971,13 @@
 
             var userLang = (navigator.language || navigator.userLanguage).substring(0, 2).toLowerCase();
             var supportedLangs = ['nl', 'en', 'es'];
-            currentLang = supportedLangs.includes(userLang) ? userLang : 'en'; 
+            currentLang = supportedLangs.includes(userLang) ? userLang : 'nl'; 
             
             document.getElementById('langSelect').value = currentLang;
             
-            applyLanguage(currentLang);
+            if(currentLang !== 'nl') {
+                applyLanguage(currentLang);
+            }
             updateUI();
         };
 
@@ -1058,6 +988,12 @@
         }
 
         function applyLanguage(lang) {
+            if(lang === 'ar') {
+                document.documentElement.setAttribute('dir', 'rtl');
+            } else {
+                document.documentElement.setAttribute('dir', 'ltr');
+            }
+
             var elements = document.querySelectorAll('[data-key]');
             elements.forEach(function(el) {
                 var key = el.getAttribute('data-key');
