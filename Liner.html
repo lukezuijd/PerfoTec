@@ -436,7 +436,8 @@
 
         .form-group { margin-bottom: 12px; }
         .form-group label { display: block; font-size: 11px; font-weight: bold; margin-bottom: 4px; }
-        .form-group input { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-family: 'Inter', sans-serif; box-sizing: border-box; }
+        .form-group input, .form-group select { padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-family: 'Inter', sans-serif; box-sizing: border-box; }
+        .form-group input { width: 100%; }
         
         .modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
         .btn-cancel { background: #999; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-weight: bold; }
@@ -792,26 +793,55 @@
             <label>Product Naam:</label>
             <input type="text" id="cfgProduct" placeholder="bijv. Frambozen">
         </div>
+
         <div class="form-group">
-            <label>Formaat (Krat/Doos):</label>
-            <input type="text" id="cfgFormat" placeholder="bijv. 60x40cm of 12x125g">
+            <label>Formaat (Krat/Doos) - L x B x H:</label>
+            <div style="display: flex; gap: 5px;">
+                <input type="text" id="cfgFormatL" placeholder="Lengte" style="width: 25%;">
+                <input type="text" id="cfgFormatW" placeholder="Breedte" style="width: 25%;">
+                <input type="text" id="cfgFormatH" placeholder="Hoogte" style="width: 25%;">
+                <select id="cfgFormatUnit" style="width: 25%;">
+                    <option value="mm">mm</option>
+                    <option value="cm" selected>cm</option>
+                    <option value="inch">inch</option>
+                </select>
+            </div>
         </div>
+
         <div class="form-group">
             <label>Gewicht (per verpakking):</label>
-            <input type="text" id="cfgWeight" placeholder="bijv. 5 kg">
+            <div style="display: flex; gap: 5px;">
+                <input type="text" id="cfgWeight" placeholder="bijv. 5 of 5-6" style="width: 70%;">
+                <select id="cfgWeightUnit" style="width: 30%;">
+                    <option value="kg" selected>kg</option>
+                    <option value="g">g</option>
+                    <option value="lbs">lbs</option>
+                    <option value="oz">oz</option>
+                </select>
+            </div>
         </div>
+
         <div class="form-group">
             <label>TV Waarde (Transmissie):</label>
             <input type="text" id="cfgTv" placeholder="bijv. TV 120">
         </div>
+
         <div class="form-group">
             <label>Temperatuur (Range):</label>
-            <input type="text" id="cfgTemp" placeholder="bijv. 2 - 4 °C">
+            <div style="display: flex; gap: 5px;">
+                <input type="text" id="cfgTemp" placeholder="bijv. 2 - 4" style="width: 70%;">
+                <select id="cfgTempUnit" style="width: 30%;">
+                    <option value="°C" selected>°C</option>
+                    <option value="°F">°F</option>
+                </select>
+            </div>
         </div>
+
         <div class="form-group">
             <label>URL Product Foto (optioneel):</label>
             <input type="text" id="cfgProdImg" placeholder="https://...">
         </div>
+
         <div class="form-group">
             <label>URL Klant Logo (optioneel):</label>
             <input type="text" id="cfgClientImg" placeholder="https://...">
@@ -841,7 +871,12 @@
 <script>
     // Custom Settings Data
     let customSettings = {
-        product: "", format: "", weight: "", tv: "", temp: "", clientLogo: "", productImg: "", translations: {}
+        product: "", 
+        formatL: "", formatW: "", formatH: "", formatUnit: "cm", format: "", 
+        weightVal: "", weightUnit: "kg", weight: "", 
+        tv: "", 
+        tempVal: "", tempUnit: "°C", temp: "", 
+        clientLogo: "", productImg: "", translations: {}
     };
 
     // Content Data for 6 Languages based on Word Document Protocol
@@ -1151,10 +1186,20 @@
     function openConfig() {
         document.getElementById('settingsModal').style.display = 'flex';
         document.getElementById('cfgProduct').value = customSettings.product;
-        document.getElementById('cfgFormat').value = customSettings.format;
-        document.getElementById('cfgWeight').value = customSettings.weight;
+        
+        document.getElementById('cfgFormatL').value = customSettings.formatL;
+        document.getElementById('cfgFormatW').value = customSettings.formatW;
+        document.getElementById('cfgFormatH').value = customSettings.formatH;
+        document.getElementById('cfgFormatUnit').value = customSettings.formatUnit || "cm";
+
+        document.getElementById('cfgWeight').value = customSettings.weightVal;
+        document.getElementById('cfgWeightUnit').value = customSettings.weightUnit || "kg";
+
         document.getElementById('cfgTv').value = customSettings.tv;
-        document.getElementById('cfgTemp').value = customSettings.temp;
+
+        document.getElementById('cfgTemp').value = customSettings.tempVal;
+        document.getElementById('cfgTempUnit').value = customSettings.tempUnit || "°C";
+
         document.getElementById('cfgClientImg').value = customSettings.clientLogo;
         document.getElementById('cfgProdImg').value = customSettings.productImg;
     }
@@ -1171,12 +1216,39 @@
             customSettings.translations = {};
             if(newProduct) customSettings.translations[currentLang] = newProduct; 
         }
-
         customSettings.product = newProduct;
-        customSettings.format = document.getElementById('cfgFormat').value.trim();
-        customSettings.weight = document.getElementById('cfgWeight').value.trim();
+
+        // Format
+        customSettings.formatL = document.getElementById('cfgFormatL').value.trim();
+        customSettings.formatW = document.getElementById('cfgFormatW').value.trim();
+        customSettings.formatH = document.getElementById('cfgFormatH').value.trim();
+        customSettings.formatUnit = document.getElementById('cfgFormatUnit').value;
+
+        let fParts = [];
+        if (customSettings.formatL) fParts.push(customSettings.formatL);
+        if (customSettings.formatW) fParts.push(customSettings.formatW);
+        if (customSettings.formatH) fParts.push(customSettings.formatH);
+        
+        if (fParts.length > 0) {
+            customSettings.format = fParts.join(' x ') + ' ' + customSettings.formatUnit;
+        } else {
+            customSettings.format = "";
+        }
+
+        // Weight
+        customSettings.weightVal = document.getElementById('cfgWeight').value.trim();
+        customSettings.weightUnit = document.getElementById('cfgWeightUnit').value;
+        customSettings.weight = customSettings.weightVal ? `${customSettings.weightVal} ${customSettings.weightUnit}` : "";
+
+        // TV
         customSettings.tv = document.getElementById('cfgTv').value.trim();
-        customSettings.temp = document.getElementById('cfgTemp').value.trim();
+
+        // Temp
+        customSettings.tempVal = document.getElementById('cfgTemp').value.trim();
+        customSettings.tempUnit = document.getElementById('cfgTempUnit').value;
+        customSettings.temp = customSettings.tempVal ? `${customSettings.tempVal} ${customSettings.tempUnit}` : "";
+
+        // Images
         customSettings.clientLogo = document.getElementById('cfgClientImg').value.trim();
         customSettings.productImg = document.getElementById('cfgProdImg').value.trim();
 
