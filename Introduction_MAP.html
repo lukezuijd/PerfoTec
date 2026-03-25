@@ -106,7 +106,7 @@
         .two-column { display: flex; gap: 3vw; width: 100%; align-items: flex-start; }
         .two-column > div { flex: 1; display: flex; flex-direction: column; }
 
-        .image-wrapper { border-radius: 12px; width: 100%; height: auto; max-height: 35vh; overflow: hidden; background-color: transparent; display: flex; align-items: center; justify-content: center; } /* Kaders verwijderd */
+        .image-wrapper { border-radius: 12px; width: 100%; height: auto; max-height: 35vh; overflow: hidden; background-color: transparent; display: flex; align-items: center; justify-content: center; }
         .image-wrapper img { width: 100%; height: 100%; object-fit: cover; border-radius: 12px;}
         .image-wrapper.contain img { object-fit: contain; padding: 1vh; max-height: 35vh; }
 
@@ -122,11 +122,45 @@
         .case-study-box-content p { margin: 0; }
         .case-study-box-content strong { display: block; margin-bottom: 0.5vh; color: #007C27; font-size: clamp(16px, 2vh, 20px); font-family: 'Poppins', sans-serif; }
         
-        .table-layout { width: 100%; background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 25px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; margin-top: 2vh; }
+        .table-layout { width: 100%; background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 25px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; margin-top: 1vh; }
         .table-layout table { border-collapse: collapse; width: 100%; }
         .table-layout th, .table-layout td { border-bottom: 1px solid #e2e8f0; padding: 1.2vh 1.2vw; text-align: left; }
         .table-layout th { background-color: #f1f5f9; color: #054E9A; font-size: clamp(16px, 2vh, 20px); font-family: 'Poppins', sans-serif; width: 25%; }
         .table-layout tr:nth-child(even) { background-color: #f8fafc; }
+
+        /* Aangepaste styling voor de zeer compacte tabel op slide 6 */
+        .compact-table th, .compact-table td {
+            padding: 0.6vh 1vw !important;
+            font-size: clamp(11px, 1.4vh, 14px) !important;
+            line-height: 1.3 !important;
+        }
+        .compact-table th {
+            font-size: clamp(12px, 1.5vh, 16px) !important;
+        }
+
+        .insights-box {
+            background-color: #e6f4ea;
+            border-left: 4px solid #007C27;
+            border-radius: 8px;
+            padding: 1.2vh 2vw;
+            margin-top: 1.5vh;
+            width: 100%;
+            text-align: left;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .insights-box ul {
+            margin-bottom: 0;
+            margin-top: 0.5vh;
+        }
+        .insights-box li {
+            margin-bottom: 0.2vh;
+            font-size: clamp(12px, 1.4vh, 15px) !important;
+        }
+        .insights-box strong {
+            font-size: clamp(14px, 1.6vh, 17px) !important;
+            color: #007C27;
+            font-weight: 600;
+        }
 
         .highlight-box { background: rgba(255,255,255,0.9); padding: 5vh 4vw; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); border: 1px solid rgba(0,124,39,0.2); width: 100%; max-width: 1100px; margin: auto; text-align: center; }
 
@@ -182,7 +216,7 @@
                     <h2 class="slide-title" data-key="s2_title">De Uitdaging: Het verse product leeft nog</h2>
                     <div class="two-column">
                         <div data-key="s2_text">
-                            <p>De mondiale Fresh Produce sector wordt geconfronteerd met ongekende uitdagingen rondom logistieke inefficiënties en kwaliteitsbehoud. <strong>Wereldwijd wordt maar liefst 1/3 van al het geproduceerde voedsel verspild.</strong> Dit is niet alleen een ecologische ramp (zware CO2-uitstoot), maar ook een gigantische economische strop.</p>
+                            <p>De mondiale Fresh Produce sector wordt geconfronteerd met ongekende uitdagingen rondom logistieke inefficiënties en kwaliteitsbehoud. <strong>Wereldwijd wordt een aanzienlijk deel van het geproduceerde voedsel verspild.</strong> Dit is niet alleen ecologisch belastend, maar ook een economische strop.</p>
                             <p>De absolute kern van deze technologische uitdaging? <strong>Verse gewassen zijn na de oogst niet 'dood' of inert.</strong> Het zijn levende organismen die hun fysiologische processen onverminderd voortzetten nadat zij van de plant zijn gescheiden.</p>
                         </div>
                         <div><div class="image-wrapper contain"><img src="https://oceanit.com/wp-content/uploads/2024/10/fresh-vegetables-herbs-and-mushrooms-in-wooden-c-2024-10-16-07-40-51-utc-scaled-1.jpg" alt="Vers geoogst product"></div></div>
@@ -191,7 +225,7 @@
                         <i class="fa-solid fa-leaf"></i>
                         <div class="case-study-box-content" data-key="s2_case">
                             <strong>Praktijkcase Iceberg Lettuce: Het levende bewijs</strong>
-                            <p>Zodra een verse krop Iceberg Lettuce wordt versneden in de fabriek, stopt het niet met leven. Het product reageert op de zuurstof in de buitenlucht. Zonder de juiste verpakking oxideert het kwetsbare snijvlak direct, en kleurt de sla razendsnel onsmakelijk roze en bruin.</p>
+                            <p>Zodra een verse krop Iceberg Lettuce wordt versneden in de fabriek, stopt het niet met leven. Het product reageert op de zuurstof in de buitenlucht. Zonder de juiste verpakking oxideert het kwetsbare snijvlak, en kleurt de sla onsmakelijk roze en bruin.</p>
                         </div>
                     </div>
                 </div>
@@ -208,7 +242,7 @@
                             <p>Om na de oogst in leven te blijven, ademt het gewas omgevingslucht in. <strong>De lucht om ons heen bestaat voor ~78% uit stikstof (N2), ~21% zuurstof (O2) en 0,04% CO2.</strong></p>
                             <p>Tijdens dit aerobe proces verbruikt het product deze zuurstof en verbrandt het zijn eigen energiereserves. Hierbij stoot het CO2, waterdamp en warmte uit.</p>
                             <ul>
-                                <li><strong>Respiratiesnelheid (RR):</strong> De belangrijkste graadmeter voor verval. Een snelle ademhaling (hoog zuurstofverbruik) betekent een zéér korte houdbaarheid.</li>
+                                <li><strong>Respiratiesnelheid (RR):</strong> De belangrijkste graadmeter voor verval. Een snelle ademhaling (hoog zuurstofverbruik) betekent een kortere houdbaarheid.</li>
                             </ul>
                         </div>
                     </div>
@@ -229,12 +263,12 @@
                         <div class="tile accent-blue" data-key="s4_t2">
                             <div class="icon"><i class="fa-solid fa-cut"></i></div>
                             <h3>Bewerking</h3>
-                            <p>Hoe fijner of kleiner u het product snijdt in de fabriek, hoe meer wond-oppervlak er ontstaat. De cellen herstellen zich agressief, wat de ademhalingssnelheid in de zak exponentieel verhoogt.</p>
+                            <p>Hoe fijner of kleiner u het product snijdt in de fabriek, hoe meer wond-oppervlak er ontstaat. De cellen herstellen zich, wat de ademhalingssnelheid verhoogt.</p>
                         </div>
                         <div class="tile" data-key="s4_t3">
                             <div class="icon"><i class="fa-solid fa-truck-fast"></i></div>
                             <h3>Handling</h3>
-                            <p>Hard wassen, vallen op transportbanden of zware trillingen veroorzaken fysieke stress voor het plantenweefsel. Ook dit jaagt de ademhaling onmiddellijk omhoog.</p>
+                            <p>Hard wassen, vallen op transportbanden of zware trillingen veroorzaken fysieke stress voor het plantenweefsel. Ook dit jaagt de ademhaling omhoog.</p>
                         </div>
                     </div>
                 </div>
@@ -249,46 +283,63 @@
                         <div class="tile" data-key="s5_t1">
                             <div class="icon"><i class="fa-solid fa-apple-whole"></i></div>
                             <h3>Zachtfruit (bijv. Aardbei)</h3>
-                            <p>Heeft een relatief hoge ademhaling. Tolereert en profiteert juist van zéér hoge CO2-niveaus (soms tot 20%) in de verpakking om schimmelgroei (Botrytis) te onderdrukken zonder weefselschade op te lopen.</p>
+                            <p>Heeft een relatief hoge ademhaling. Tolereert en profiteert juist van aanzienlijk hogere CO2-niveaus (soms tot 20%) in de verpakking om schimmelgroei (Botrytis) te onderdrukken zonder weefselschade op te lopen.</p>
                         </div>
                         <div class="tile accent-blue" data-key="s5_t2">
                             <div class="icon"><i class="fa-solid fa-leaf"></i></div>
                             <h3>Bladgroenten (bijv. Iceberg Lettuce)</h3>
-                            <p>Gemiddelde ademhaling, maar <strong>extreem gevoelig</strong> voor de gasbalans. Te weinig O2 leidt direct tot fermentatie (zure geur). Te veel CO2 leidt tot MAP-stress (roze/bruine verkleuring op de snijvlakken).</p>
+                            <p>Gemiddelde ademhaling, maar <strong>gevoelig</strong> voor de gasbalans. Te weinig O2 leidt tot fermentatie (zure geur). Te veel CO2 leidt tot MAP-stress (roze/bruine verkleuring op de snijvlakken).</p>
                         </div>
                         <div class="tile" data-key="s5_t3">
                             <div class="icon"><i class="fa-solid fa-seedling"></i></div>
                             <h3>Koolgewassen (bijv. Broccoli)</h3>
-                            <p>Bezitten een extreem hoge ademhaling. Dit vereist een verpakking met een zeer hoge zuurstofdoorlaatbaarheid om snelle anaerobe verstikking en penetrante zwavelgeuren te voorkomen.</p>
+                            <p>Bezitten een zeer hoge ademhaling. Dit vereist een verpakking met een aanzienlijke zuurstofdoorlaatbaarheid om snelle anaerobe verstikking en penetrante zwavelgeuren te voorkomen.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- S6: Bewaarcondities Tabel -->
+            <!-- S6: Bewaarcondities Tabel (NIEUW: 10 Categorieën) -->
             <div class="slide-container">
                 <div class="content-area">
                     <h2 class="slide-title" data-key="s6_title">Theorie: Optimale Bewaarcondities per Gewas</h2>
-                    <p data-key="s6_intro">Omdat de fysiologie zo verschilt, heeft elk gewas een eigen Equilibrium Modified Atmosphere (EMA) doelstelling. Een afwijking van slechts 1% in zuurstof kan al het verschil betekenen tussen perfecte kwaliteit of totale derving op het schap.</p>
-                    <div class="table-layout">
+                    <p data-key="s6_intro">Omdat de fysiologie zo verschilt, heeft elk gewas een eigen Equilibrium Modified Atmosphere (EMA) doelstelling. Een kleine afwijking in zuurstof kan al effect hebben op de kwaliteit.</p>
+                    <div class="table-layout compact-table">
                         <table data-key="s6_table">
                             <thead>
                                 <tr>
-                                    <th>Gewas / Product</th>
-                                    <th>Ademhalingssnelheid (Respiratie)</th>
-                                    <th>Ideale Zuurstof (O2)</th>
-                                    <th>Ideale Koolstofdioxide (CO2)</th>
+                                    <th>Categorie (Voorbeelden)</th>
+                                    <th>Kenmerk / Respiratie</th>
+                                    <th>O₂</th>
+                                    <th>CO₂</th>
+                                    <th>Perforatie</th>
+                                    <th>Kritiek Aandachtspunt</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr><td><strong>Iceberg Lettuce (Versneden)</strong></td><td>Gemiddeld (~12 ml/kg/u bij 4°C)</td><td>0.5% - 3%</td><td>5% - 10%</td></tr>
-                                <tr><td><strong>Broccoli (Heel)</strong></td><td>Zeer Hoog (>20 ml/kg/u bij 4°C)</td><td>1% - 2%</td><td>5% - 10%</td></tr>
-                                <tr><td><strong>Frambozen (Bulk / Liner)</strong></td><td>Hoog (Extreme schimmelgevoeligheid)</td><td>5% - 10%</td><td>15% - 20%</td></tr>
-                                <tr><td><strong>Sperziebonen (Heel)</strong></td><td>Hoge Respiratie (Risico op interne hitte)</td><td>3% - 5%</td><td>5% - 10%</td></tr>
+                                <tr><td><strong>1. Brassica's</strong> (Broccoli, Bloemkool)</td><td>Middel-hoog, CO₂-gevoelig</td><td>2-5%</td><td>5-10%</td><td>Middel</td><td>Zwavelgeur bij te hoge CO₂</td></tr>
+                                <tr><td><strong>2. Bladgroenten</strong> (Spinazie, Iceberg Lettuce)</td><td>Zeer hoog, snel kwaliteitsverlies</td><td>2-5%</td><td>5-10%</td><td>Relatief hoog</td><td>Vochtbalans + ROS-burst na openen</td></tr>
+                                <tr><td><strong>3. Verse kruiden</strong> (Basilicum, Koriander)</td><td>Extreem gevoelig (lage O₂ / condens)</td><td>5-10%</td><td>0-5%</td><td>Hoog</td><td>Snel kwaliteitsverlies bij te lage O₂</td></tr>
+                                <tr><td><strong>4. Gesneden fruit</strong> (Mango, Meloen)</td><td>Hoge suikers, fermentatiegevoelig</td><td>3-8%</td><td>5-15%</td><td>Middel</td><td>Fermentatie bij te lage O₂</td></tr>
+                                <tr><td><strong>5. Wortel- & knolgewassen</strong> (Wortel, Zoete aardappel)</td><td>Lage respiratie, stabiel</td><td>5-10%</td><td>0-5%</td><td>Laag</td><td>Uitdroging</td></tr>
+                                <tr><td><strong>6. Allium groenten</strong> (Ui, Prei)</td><td>Middel, microbiologisch gevoelig</td><td>3-8%</td><td>5-10%</td><td>Middel</td><td>Vocht en geurontwikkeling</td></tr>
+                                <tr><td><strong>7. Peulgewassen</strong> (Sperziebonen)</td><td>Middel respiratie, redelijk stabiel</td><td>2-5%</td><td>3-8%</td><td>Middel</td><td>Verkleuring bij verkeerde atmosfeer</td></tr>
+                                <tr><td><strong>8. Stengelgroenten</strong> (Asperge)</td><td>Middel-hoog, textuurgevoelig</td><td>2-5%</td><td>5-10%</td><td>Middel</td><td>Lignificatie / kwaliteitsverlies</td></tr>
+                                <tr><td><strong>9. Kiemgroenten</strong> (Taugé)</td><td>Zeer hoog, hoog microbiologisch risico</td><td>5-10%</td><td>0-5%</td><td>Hoog</td><td>Voedselveiligheid + snelle achteruitgang</td></tr>
+                                <tr><td><strong>10. Zetmeelrijk / Gemengd</strong> (Maïs, mix)</td><td>Variabel gedrag</td><td>3-7%</td><td>3-10%</td><td>Middel</td><td>Altijd afstemmen op meest kritische component</td></tr>
                             </tbody>
                         </table>
                     </div>
-                    <p style="margin-top: 1.5vh; font-style: italic; color: #475569;" data-key="s6_outro">Deze uiterst nauwe marges maken het fysiek onmogelijk om met standaard, generieke folies een optimaal resultaat te behalen.</p>
+                    <div class="insights-box" data-key="s6_insights">
+                        <strong>Belangrijke algemene MAP-inzichten:</strong>
+                        <ul style="margin-top: 0.5vh;">
+                            <li>Producten passen zich aan aan lage O₂ &rarr; té laag leidt tot fermentatie/schade.</li>
+                            <li>Na openen is er risico op een ROS-burst, wat leidt tot versnelde veroudering.</li>
+                            <li>Ethyleengevoeligheid neemt toe na bewaring in MAP.</li>
+                            <li>Vochtbalans is cruciaal (de juiste afstemming tussen condens en uitdroging).</li>
+                            <li>Bij gemengde producten (melanges): stuur altijd op de <strong>zwakste schakel</strong>.</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
@@ -320,7 +371,7 @@
                     <div class="two-column">
                         <div><div class="image-wrapper contain"><img src="https://cleanfoodcrush.com/wp-content/uploads/2020/08/7-layer-fruit-salad.jpg" alt="Versneden fruit"></div></div>
                         <div data-key="s8_text">
-                            <p>Het bewerken en verpakken van fruit is wezenlijk anders en moeilijker dan groenten. Bij fruit beoordeelt de consument visuele bruinkleuring, sterke geur (odour), sapverlies, textuur en zelfs bitterheid direct bij het openen van de bak.</p>
+                            <p>Het bewerken en verpakken van fruit is wezenlijk anders en moeilijker dan groenten. Bij fruit beoordeelt de consument visuele bruinkleuring, geur (odour), sapverlies, textuur en zelfs bitterheid direct bij het openen van de bak.</p>
                             <ul>
                                 <li><strong>Toevoegingen (Dips):</strong> Alleen gas en folie is voor fruit vaak niet genoeg. Vaak worden ingrediënten zoals Calcium of Ascorbinezuur aan het waswater toegevoegd.</li>
                                 <li><strong>Anaerobe Tolerantie:</strong> Bepaalde fruitsoorten presteren, afhankelijk van de was-dip, soms het beste in een verpakking met nagenoeg 100% Stikstof (N2) spoeling.</li>
@@ -337,11 +388,11 @@
                     <div class="two-column">
                         <div data-key="s9_text">
                             <h3>Verlies van celspanning en commerciële waarde</h3>
-                            <p>Naast ademhaling 'zweet' het verse product. Dit vochtverlies (transpiratie) leidt tot een acuut verlies van <strong>Turgor</strong> (de interne celspanning). De plantencellen lopen figuurlijk leeg als een lekke band. In de praktijk resulteert dit in:</p>
+                            <p>Naast ademhaling 'zweet' het verse product. Dit vochtverlies (transpiratie) leidt tot een verlies van <strong>Turgor</strong> (de interne celspanning). De plantencellen verliezen spanning. In de praktijk resulteert dit in:</p>
                             <ul>
                                 <li>Verlies van 'bite' en knapperige textuur.</li>
                                 <li>Zichtbaar verwelken en verschrompelen.</li>
-                                <li>Direct <strong>gewichtsverlies</strong>, wat een onmiddellijke daling van uw omzet betekent (u levert immers kilo's).</li>
+                                <li>Direct <strong>gewichtsverlies</strong>, wat effect heeft op uw opbrengst.</li>
                             </ul>
                         </div>
                         <div><div class="image-wrapper contain"><img src="https://t3.ftcdn.net/jpg/19/35/65/20/360_F_1935652061_jo5KztuK6RZYWQ3HgSaP0ITcko6br57i.jpg" alt="Verlies van celspanning"></div></div>
@@ -363,12 +414,12 @@
                         <div class="tile accent-blue" data-key="s10_t2">
                             <div class="icon"><i class="fa-solid fa-droplet"></i></div>
                             <h3>Vrij Water (Condens)</h3>
-                            <p>Dit resulteert onherroepelijk in de vorming van condensatie (vrij water) aan de binnenzijde. Deze vochtophoping is de primaire katalysator voor bederf.</p>
+                            <p>Dit resulteert onherroepelijk in de vorming van condensatie (vrij water) aan de binnenzijde. Deze vochtophoping is een belangrijke katalysator voor bederf.</p>
                         </div>
                         <div class="tile" data-key="s10_t3">
                             <div class="icon"><i class="fa-solid fa-virus"></i></div>
                             <h3>Infecties & Rot</h3>
-                            <p>Dit biedt de ideale wateractiviteit. Het stimuleert razendsnelle groei van bacteriën en schimmels en leidt tot agressieve weefselrot in de zak.</p>
+                            <p>Dit biedt de ideale wateractiviteit. Het stimuleert de groei van bacteriën en schimmels en leidt tot weefselrot in de zak.</p>
                         </div>
                     </div>
                 </div>
@@ -379,13 +430,13 @@
                 <div class="content-area">
                     <h2 class="slide-title" data-key="s11_title">Conserveringsstrategie: Wat is MAP?</h2>
                     <div class="two-column">
-                        <div><div class="image-wrapper contain"><img src="https://placehold.co/800x600/f8fafc/054E9A?text=[MAP+Gasbalans]" alt="MAP"></div></div>
+                        <div><div class="image-wrapper contain"><img src="https://www.researchgate.net/profile/Dong-Sun-Lee/publication/258391267/figure/fig1/AS:1088987531874318@1636646268809/Comparison-of-the-different-simulation-models-used-to-estimate-the-gas-composition-of-a_Q320.jpg" alt="MAP"></div></div>
                         <div data-key="s11_text">
                             <h3>Modified Atmosphere Packaging (De Gasbalans)</h3>
-                            <p>Om fysiologische afbraak te vertragen, manipuleert MAP de gassen rondom het product. Een gecontroleerde reductie van zuurstof (O2) en een stijging van CO2 remt de ademhaling aanzienlijk. <strong>Echter, de balans is zeer delicaat:</strong></p>
+                            <p>Om fysiologische afbraak te vertragen, manipuleert MAP de gassen rondom het product. Een gecontroleerde reductie van zuurstof (O2) en een stijging van CO2 remt de ademhaling aanzienlijk. <strong>Echter, de balans is delicaat:</strong></p>
                             <ul>
-                                <li>Té laag O2 (<0.5%) dwingt cellen tot <em>anaerobe fermentatie</em>, wat resulteert in ongewenste, zure en bedorven geuren.</li>
-                                <li>Té hoog CO2 veroorzaakt <em>MAP-stress</em>, leidend tot versnelde weefselnecrose en verbruining.</li>
+                                <li>Té laag O2 dwingt cellen tot <em>anaerobe fermentatie</em>, wat resulteert in ongewenste, zure en bedorven geuren.</li>
+                                <li>Té hoog CO2 veroorzaakt <em>MAP-stress</em>, leidend tot weefselnecrose en verbruining.</li>
                             </ul>
                         </div>
                     </div>
@@ -399,8 +450,8 @@
                     <div class="two-column">
                         <div data-key="s12_text">
                             <h3>Modified Humidity Packaging (Vochtbeheersing)</h3>
-                            <p>MHP focust zich uitsluitend op de Relatieve Luchtvochtigheid in de verpakking. Het maakt gebruik van folies met een exact gereguleerde vochtdoorlaatbaarheid (<em>Moisture Vapor Transmission Rate - MVTR</em>).</p>
-                            <p><strong>Het doel is de perfecte vochtbalans:</strong> Overtollig zweet (transpiratievocht) moet efficiënt naar buiten ademen om <strong>dodelijke condensatie te elimineren</strong>, zónder dat het product intern te snel uitdroogt en zijn cellen (turgor) verliest.</p>
+                            <p>MHP focust zich op de Relatieve Luchtvochtigheid in de verpakking. Het maakt gebruik van folies met een gereguleerde vochtdoorlaatbaarheid (<em>Moisture Vapor Transmission Rate - MVTR</em>).</p>
+                            <p><strong>Het doel is de perfecte vochtbalans:</strong> Overtollig zweet (transpiratievocht) moet naar buiten ademen om <strong>condensatie tegen te gaan</strong>, zónder dat het product intern te snel uitdroogt en zijn cellen (turgor) verliest.</p>
                         </div>
                         <div><div class="image-wrapper contain"><img src="https://placehold.co/800x600/f8fafc/007C27?text=[MHP+Vochtbeheersing]" alt="MHP"></div></div>
                     </div>
@@ -411,17 +462,17 @@
             <div class="slide-container">
                 <div class="content-area">
                     <h2 class="slide-title" data-key="s13_title">Huidige Standaard: Eigenschappen van Folies</h2>
-                    <p data-key="s13_intro">De verpakkingsindustrie gebruikt voornamelijk twee soorten mono-folies (naast laminaten). Beiden missen standaard de juiste fysiologische balans.</p>
+                    <p data-key="s13_intro">De verpakkingsindustrie gebruikt voornamelijk twee soorten mono-folies (naast laminaten). Beiden missen standaard vaak de specifieke fysiologische balans.</p>
                     <div class="tiled-content">
                         <div class="tile" data-key="s13_t1">
                             <div class="icon"><i class="fa-solid fa-scroll"></i></div>
                             <h3>OPP (Oriented Polypropylene)</h3>
-                            <p>De retail-standaard. Zeer helder transparant. De scheurweerstand is echter laag en de OTR (gasdoorlaatbaarheid) ligt laag rond de 1400-2150 ml/m2. Een ademend product stikt hierin zonder hulp.</p>
+                            <p>De retail-standaard. Zeer helder transparant. De scheurweerstand is echter relatief laag en de OTR (gasdoorlaatbaarheid) ligt rond de 1400-2150 ml/m2. Een sterk ademend product kan hierin moeite hebben.</p>
                         </div>
                         <div class="tile accent-blue" data-key="s13_t2">
                             <div class="icon"><i class="fa-solid fa-layer-group"></i></div>
                             <h3>PE (Polyethyleen)</h3>
-                            <p>Dit is een veel troebelere ('milky') folie met zeer hoge scheurweerstand. De gasdoorlaatbaarheid is met >3500 ml/m2 hoger, maar nog altijd onvoldoende voor agressief ademende AGF-producten.</p>
+                            <p>Dit is een veel troebelere ('milky') folie met hogere scheurweerstand. De gasdoorlaatbaarheid is met >3500 ml/m2 hoger, maar soms onvoldoende voor agressief ademende AGF-producten.</p>
                         </div>
                     </div>
                 </div>
@@ -435,8 +486,8 @@
                         <div><div class="image-wrapper contain"><img src="image_3dbb64.png" alt="Anaerobe condities"></div></div>
                         <div data-key="s14_text">
                             <h3>De BOPP Paradox: Anaerobe Verstikking</h3>
-                            <p>De industrie gebruikt nog massaal conventionele, volledig dichte OPP-folies. Zoals de grafiek illustreert, blokkeert dit de gasuitwisseling volledig.</p>
-                            <p>De zuurstof raakt in een razend tempo op, en CO2 bouwt zich agressief op. <strong>Gevolg:</strong> Het luchtdicht verpakte product stikt in zijn eigen gassen (0% O2 veroorzaakt fermentatie), loopt ernstige CO2-schade op en rot razendsnel weg in zijn eigen condens.</p>
+                            <p>De industrie gebruikt veel conventionele, dichte OPP-folies. Dit blokkeert de gasuitwisseling in aanzienlijke mate.</p>
+                            <p>De zuurstof raakt op, en CO2 bouwt zich op. <strong>Gevolg:</strong> Het luchtdicht verpakte product fermenteert, loopt CO2-schade op en rot sneller weg in zijn eigen condens.</p>
                         </div>
                     </div>
                 </div>
@@ -449,10 +500,10 @@
                     <div class="two-column">
                         <div data-key="s15_text">
                             <h3>Het verlies van atmosferische bescherming</h3>
-                            <p>Om de verstikking van dichte folies te omzeilen, stansen verpakkers vaak <strong>statische macro-perforaties</strong> (grote fysieke gaten).</p>
-                            <p>Dit is fysiologisch incorrect: de verpakking is enkel nog een plastic tasje. Het product ademt de ongefilterde omgevingslucht. Er ontstaat geen beschermende MAP-atmosfeer, kwetsbare snijvlakken oxideren/bruinen direct, en vocht (gewicht) ontsnapt ongeremd.</p>
+                            <p>Om de beperkingen van dichte folies te omzeilen, stansen verpakkers vaak <strong>statische macro-perforaties</strong> (grote gaten).</p>
+                            <p>De verpakking is dan enkel nog een plastic tasje. Het product ademt de omgevingslucht. Er ontstaat geen beschermende MAP-atmosfeer, snijvlakken oxideren sneller, en vocht (gewicht) ontsnapt ongeremd.</p>
                         </div>
-                        <div><div class="image-wrapper contain"><img src="https://placehold.co/800x600/cbd5e1/475569?text=[Folie+met+Grote+Gaten]" alt="Macro perforaties"></div></div>
+                        <div><div class="image-wrapper contain"><img src="https://www.kmpackaging.com/images/content/sections/5_700x416.jpg?11:04:00&_e=.jpg" alt="Macro perforaties"></div></div>
                     </div>
                 </div>
             </div>
@@ -463,7 +514,7 @@
                     <div class="title-layout" data-key="s16_title">
                         <i class="fa-solid fa-list-check" style="font-size: clamp(40px, 5vh, 60px); color: #007C27; margin-bottom: 2vh;"></i>
                         <h1>De Datagestuurde Oplossing</h1>
-                        <p class="subtitle" style="max-width: 900px; margin: 0 auto; line-height: 1.6;">Om de tekortkomingen van deze standaard verpakkingen te doorbreken en het product wél perfect vers te houden, vereist de theorie een fundamentele verschuiving: van aannames naar <strong>adaptieve, datagestuurde kalibratie</strong>. Hiervoor ontwikkelde PerfoTec een uniek, gesloten 5-stappen ecosysteem.</p>
+                        <p class="subtitle" style="max-width: 900px; margin: 0 auto; line-height: 1.6;">Om de tekortkomingen van deze standaard verpakkingen te doorbreken en het product vers te houden, kiezen we voor <strong>adaptieve, datagestuurde kalibratie</strong>. Hiervoor ontwikkelde PerfoTec een geïntegreerd ecosysteem.</p>
                     </div>
                 </div>
             </div>
@@ -471,15 +522,15 @@
             <!-- S17: STAP 1 FRM -->
             <div class="slide-container">
                 <div class="content-area">
-                    <h2 class="slide-title" data-key="s17_title">Stap 1: Fast Respiration Meter - Fysiologische Diagnostiek</h2>
+                    <h2 class="slide-title" data-key="s17_title">Stap 1: Fast Respiration Meter - Diagnostiek</h2>
                     <div class="two-column">
                         <div><div class="image-wrapper contain"><img src="https://www.npex.nl/wp-content/uploads/2025/04/FRM.png" alt="FRM"></div></div>
                         <div data-key="s17_text">
-                            <p><strong>Ademen is de puurste eigenschap van de natuur.</strong> Om dit te sturen en derving te voorkomen, moeten we de ademhaling exact begrijpen. Dit meten we direct op de productievloer.</p>
+                            <p><strong>Ademen is de eigenschap van de natuur.</strong> Om dit te sturen, moeten we de ademhaling exact begrijpen. Dit meten we in de productiefaciliteit.</p>
                             <ul>
-                                <li><strong>Exacte Quantificatie:</strong> Meet via gasanalyse direct de precieze snelheid van O2-consumptie en CO2-emissie.</li>
-                                <li><strong>Extreme Tijdwinst:</strong> Krijg resultaten binnen maximaal 4 uur, in plaats van logge laboratoria die 2 weken duren.</li>
-                                <li><strong>Foutpreventie:</strong> U optimaliseert direct voor temperatuur en snij-schok vóórdat de folie geproduceerd is.</li>
+                                <li><strong>Exacte Quantificatie:</strong> Meet via gasanalyse de snelheid van O2-consumptie en CO2-emissie.</li>
+                                <li><strong>Tijdwinst:</strong> Krijg resultaten binnen maximaal 4 uur.</li>
+                                <li><strong>Foutpreventie:</strong> Optimaliseer voor temperatuur en snij-schok vóórdat de folie geproduceerd is.</li>
                             </ul>
                         </div>
                     </div>
@@ -487,7 +538,7 @@
                         <i class="fa-solid fa-leaf"></i>
                         <div class="case-study-box-content" data-key="s17_case">
                             <strong>Praktijkcase Iceberg Lettuce: De ademhaling meten</strong>
-                            <p>Iceberg Lettuce is erg gevoelig voor 'pinking' (roze oxidatie op het snijvlak). Vlak voor productie plaatsen we een versneden monster in de FRM. We meten de exacte sterkte van de "snij-schok". We bepalen zo dat de zuurstofwaarde in de zak strak naar 0.5-3% gestuurd moet worden om een optimale bewaarconditie te bereiken.</p>
+                            <p>Iceberg Lettuce is gevoelig voor 'pinking' (roze oxidatie op het snijvlak). Voor productie plaatsen we een versneden monster in de FRM. We meten de sterkte van de snij-schok. We bepalen zo dat de zuurstofwaarde in de zak gestuurd moet worden naar 0.5-3% voor de meest optimale bewaarconditie.</p>
                         </div>
                     </div>
                 </div>
@@ -499,10 +550,10 @@
                     <h2 class="slide-title" data-key="s18_title">Stap 2: PerfoTec Hub - Slimme AMAP software</h2>
                     <div class="two-column">
                         <div data-key="s18_text">
-                            <p><strong>Hub rekent en stuurt M2M automatisch, geen menselijke rekenfouten.</strong> Biologische ademhalingsdata vereist wiskundige modellering door geavanceerde software.</p>
+                            <p><strong>Hub rekent en stuurt M2M automatisch.</strong> Biologische ademhalingsdata vereist modellering door geavanceerde software.</p>
                             <ul>
-                                <li><strong>Algoritmische Optimalisatie:</strong> De software kruist ademhalingswaarden met het productgewicht en temperatuurprofielen. Het berekent exact de Oxygen Transmission Rate (OTR).</li>
-                                <li><strong>M2M Connectiviteit:</strong> Berekende data wordt 100% volautomatisch naar de laser doorgestuurd. Controle vanuit een centraal punt. Zero menselijke invoerfouten.</li>
+                                <li><strong>Algoritmische Optimalisatie:</strong> De software kruist ademhalingswaarden met het productgewicht en temperatuurprofielen. Het berekent de Oxygen Transmission Rate (OTR).</li>
+                                <li><strong>M2M Connectiviteit:</strong> Berekende data wordt volautomatisch naar de laser doorgestuurd. Controle vanuit een centraal punt beperkt invoerfouten.</li>
                             </ul>
                         </div>
                         <div><div class="image-wrapper contain"><img src="https://dms.licdn.com/playlist/vid/v2/D4E05AQFdwLVjjqqDhw/feedshare-video-thumbnail-high/B4EZa1Al7sGcCc-/0/1746793555738?e=2147483647&v=beta&t=P3viVcdB891hbct5T6EfbNSwuaDy0IxU7lsnPhcQkoc" alt="Hub"></div></div>
@@ -511,7 +562,7 @@
                         <i class="fa-solid fa-leaf"></i>
                         <div class="case-study-box-content" data-key="s18_case">
                             <strong>Praktijkcase Iceberg Lettuce: De Blauwdruk</strong>
-                            <p>De Hub software pakt de FRM-meting erbij en berekent razendsnel: "Voor een 250g consumentenzakje versneden Iceberg Lettuce, bewaard op 4°C, hebben we een exacte zuurstofdoorlaatbaarheid nodig om de zuurstof perfect op 0.5% te stabiliseren". Deze wiskundige blauwdruk wordt digitaal klaargezet voor de verpakkingslijn.</p>
+                            <p>De Hub software pakt de FRM-meting erbij en berekent: Voor een 250g consumentenzakje versneden Iceberg Lettuce, bewaard op 4°C, hebben we de exacte permeabiliteit om de zuurstof perfect op 0.5% te stabiliseren. Deze blauwdruk wordt digitaal klaargezet voor de verpakkingslijn.</p>
                         </div>
                     </div>
                 </div>
@@ -520,15 +571,15 @@
             <!-- S19: STAP 3 LASER -->
             <div class="slide-container">
                 <div class="content-area">
-                    <h2 class="slide-title" data-key="s19_title">Stap 3: Laser Perforatie - Micro / Nano precisie</h2>
+                    <h2 class="slide-title" data-key="s19_title">Stap 3: Laser Perforatie - Precisie</h2>
                     <div class="two-column">
-                        <div><div class="image-wrapper contain"><img src="https://www.perfotec.com/wp-content/uploads/2021/04/PerfoTec-Laser-Perforation-System.png" alt="Industriële laser"></div></div>
+                        <div><div class="image-wrapper contain"><img src="https://cdn.prod.website-files.com/68d29bdafa428d7d0bc1bba2/68d5385fcb7fa2b79c2f877b_Standard-model-thumbnail.jpg" alt="Industriële laser"></div></div>
                         <div data-key="s19_text">
-                            <p><strong>De industriestandaard voor elke producent:</strong> Ons 'Standard Laser Model' maakt high-end micro-perforatie tussen 50 en 200 micron financieel bereikbaar.</p>
+                            <p><strong>Een betrouwbare standaard voor elke producent:</strong> Ons 'Standard Laser Model' maakt micro-perforatie tussen 50 en 200 micron bereikbaar.</p>
                             <ul>
-                                <li><strong>Precieze Perforaties:</strong> Onze systemen kunnen perforaties maken tussen de 50 en 200 micron. Dit geeft ons de mogelijkheid de perfecte doorlaatbaarheid af te stemmen op het product.</li>
+                                <li><strong>Precieze Perforaties:</strong> Tussen de 50 en 200 micron passen wij de doorlaatbaarheid aan op het product.</li>
                                 <li><strong>Realtime Correctie:</strong> Foliedikte fluctueert altijd. De laser stelt zich 'on the fly' bij.</li>
-                                <li><strong>Productie Rapporten:</strong> De laser genereert rapporten, zodat u altijd kunt terugzien of het juiste programma goed heeft gedraaid voor de productie.</li>
+                                <li><strong>Productie Rapporten:</strong> De laser genereert rapporten, zodat is terug te zien of het programma goed heeft gedraaid.</li>
                             </ul>
                         </div>
                     </div>
@@ -536,7 +587,7 @@
                         <i class="fa-solid fa-leaf"></i>
                         <div class="case-study-box-content" data-key="s19_case">
                             <strong>Praktijkcase Iceberg Lettuce: Uitvoering</strong>
-                            <p>De laser boort perfect gepositioneerde gaatjes in de folie met de berekende grootte en hoeveelheid. Hierdoor stopt de laser-perforatie de oxidatie (bruine snijranden) van de Iceberg Lettuce effectief. Er blijft exact genoeg zuurstof behouden om zure fermentatiegeur te voorkomen.</p>
+                            <p>De laser boort perfect gepositioneerde gaatjes in de folie met de berekende grootte en hoeveelheid. Hierdoor beperkt de laser-perforatie oxidatie van de Iceberg Lettuce effectief. Er blijft genoeg zuurstof behouden om fermentatiegeur tegen te gaan.</p>
                         </div>
                     </div>
                 </div>
@@ -548,11 +599,11 @@
                     <h2 class="slide-title" data-key="s20_title">Stap 4: O2 Control - Optimale start atmosfeer</h2>
                     <div class="two-column">
                         <div data-key="s20_text">
-                            <p><strong>Voorkomt 'product-in-seal' turbulentie en vermindert afkeur massaal.</strong> Bij versneden gewassen is de gassamenstelling in de allereerste verpakkingsseconde essentieel.</p>
+                            <p><strong>Voorkomt turbulentie in de seal.</strong> Bij versneden gewassen is de gassamenstelling in de allereerste verpakkingsseconde essentieel.</p>
                             <ul>
                                 <li><strong>Eliminatie van Turbulente Flow:</strong> De O2 Control bouwt een egaal, non-turbulent gasschild op.</li>
-                                <li><strong>Smarter Gas:</strong> Maakt de inkoop van extreem dure pre-mixed gascilinders overbodig door zelf lokaal slim te mengen.</li>
-                                <li><strong>Productie Rapporten:</strong> Genereert gedetailleerde productie rapporten voor kwaliteitscontrole achteraf.</li>
+                                <li><strong>Smarter Gas:</strong> Maakt inkoop van pre-mixed gascilinders overbodig door zelf slim te mengen.</li>
+                                <li><strong>Productie Rapporten:</strong> Genereert gedetailleerde rapporten voor kwaliteitscontrole.</li>
                             </ul>
                         </div>
                         <div><div class="image-wrapper contain"><img src="https://www.npex.nl/wp-content/uploads/2025/04/PerfoTec-O2control.png" alt="O2 Control"></div></div>
@@ -561,7 +612,7 @@
                         <i class="fa-solid fa-leaf"></i>
                         <div class="case-study-box-content" data-key="s20_case">
                             <strong>Praktijkcase Iceberg Lettuce: Schone Seals</strong>
-                            <p>Versneden Iceberg Lettuce kleurt razendsnel roze door blootstelling aan lucht. De O2 Control verlaagt het zuurstofniveau in de verpakking direct naar de berekende waarde, volkomen zónder turbulente luchtstromen. De fragiele, lichte slasnippers waaien niet omhoog in de seal.</p>
+                            <p>Versneden Iceberg Lettuce kleurt snel roze door blootstelling aan lucht. De O2 Control verlaagt het zuurstofniveau in de verpakking direct naar de berekende waarde, volkomen zónder turbulente luchtstromen. De lichte slasnippers waaien hierdoor niet omhoog in de seal.</p>
                         </div>
                     </div>
                 </div>
@@ -570,14 +621,14 @@
             <!-- S21: STAP 5 FOLIE -->
             <div class="slide-container">
                 <div class="content-area">
-                    <h2 class="slide-title" data-key="s21_title">Stap 5: Folie - Aansluitend bij MAP + MHP technologie</h2>
+                    <h2 class="slide-title" data-key="s21_title">Stap 5: Folie - Aansluitend bij MAP + MHP</h2>
                     <div class="tiled-content">
                         <div class="tile" data-key="s21_t1">
                             <div class="icon"><i class="fa-solid fa-droplet-slash"></i></div>
                             <h3 style="color:#007C27;">Retail: R+702 Folie</h3>
                             <ul>
-                                <li><strong>Condens-eliminatie:</strong> Voert vocht veilig af door hoge MVTR.</li>
-                                <li><strong>Behoud van textuur:</strong> Vermindert derving op het winkelschap aanzienlijk.</li>
+                                <li><strong>Condens-eliminatie:</strong> Voert vocht af door hogere MVTR.</li>
+                                <li><strong>Behoud van textuur:</strong> Helpt bij het verminderen van derving op het winkelschap.</li>
                             </ul>
                         </div>
                         <div class="tile accent-blue" data-key="s21_t2">
@@ -592,7 +643,7 @@
                             <div class="image-wrapper contain" style="height: 10vh; min-height: 80px; box-shadow: none; background: transparent; margin-bottom: 1vh;"><img src="https://media.licdn.com/dms/image/v2/D4D22AQFPgPlVExiU9g/feedshare-shrink_800/B4DZwpjaw9KYAg-/0/1770223677075?e=2147483647&v=beta&t=LLORb9lqopWrUJ0OLfLW6OyuQWkXk_TzLsRVLQTlZwg" alt="Pallet"></div>
                             <h3 style="color:#007C27;">Logistiek: Pallet Cover</h3>
                             <ul>
-                                <li><strong>Tarmac Protectie:</strong> Beschermt tegen extreme hitte en condens-schokken.</li>
+                                <li><strong>Tarmac Protectie:</strong> Beschermt tegen hitte en condens-schokken.</li>
                                 <li><strong>Stabiliteit:</strong> Helpt 'carton collapse' te voorkomen.</li>
                             </ul>
                         </div>
@@ -600,8 +651,8 @@
                     <div class="case-study-box">
                         <i class="fa-solid fa-leaf"></i>
                         <div class="case-study-box-content" data-key="s21_case">
-                            <strong>Praktijkcase Iceberg Lettuce: Zichtbaar langer vers in het schap</strong>
-                            <p>Iceberg Lettuce 'zweet' hevig. De PerfoTec R+ folie combineert de berekende gasbalans met een hoge vochtdoorlaatbaarheid. Het overtollige transpiratievocht ademt naar buiten, en de sla behoudt zijn iconische 'crunch' zonder in de zak te veranderen in een drassige smurrie.</p>
+                            <strong>Praktijkcase Iceberg Lettuce: Langer vers in het schap</strong>
+                            <p>Iceberg Lettuce 'zweet'. De PerfoTec R+ folie combineert de berekende gasbalans met een goede vochtdoorlaatbaarheid. Het transpiratievocht ademt deels naar buiten, waardoor de sla beter zijn 'crunch' behoudt.</p>
                         </div>
                     </div>
                 </div>
@@ -613,19 +664,19 @@
                     <h2 class="slide-title" data-key="s22_title">Validatie: Testen in de Praktijk</h2>
                     <div class="two-column">
                         <div data-key="s22_text">
-                            <p>Voordat we opschalen op de verpakkingslijn, is een test-fase cruciaal om de theorie met de praktijk te verbinden. We verifiëren de resultaten aan de hand van gasmetingen.</p>
+                            <p>Voordat we opschalen, is een test-fase cruciaal om theorie en praktijk te verbinden. We verifiëren de resultaten aan de hand van gasmetingen.</p>
                             <ul>
-                                <li><strong>Prognose via de Hub:</strong> We berekenen eerst de optimale gascondities voor het product.</li>
-                                <li><strong>Praktijktesten:</strong> We meten in de praktijk middels gasmetingen of de prognose uitkomt.</li>
-                                <li><strong>Finetunen:</strong> Op basis van de gasmetingen in de praktijk sturen we de perforaties bij waar nodig voor het beste resultaat.</li>
+                                <li><strong>Prognose via de Hub:</strong> We berekenen eerst de verwachte gascondities.</li>
+                                <li><strong>Praktijktesten:</strong> We meten in de praktijk of de prognose uitkomt.</li>
+                                <li><strong>Finetunen:</strong> Op basis van de metingen sturen we de perforaties bij waar nodig voor een beter resultaat.</li>
                             </ul>
                         </div>
-                        <div><div class="image-wrapper contain"><img src="https://placehold.co/800x600/f8fafc/054E9A?text=[Verpakking+Test]" alt="Test"></div></div>
+                        <div><div class="image-wrapper contain"><img src="https://www.fdpp.co.uk/wp-content/uploads/2018/03/witt_gas_analyser_oxybaby6_FOOD.jpg" alt="Test"></div></div>
                     </div>
                 </div>
             </div>
 
-            <!-- S23: Tabel Romaine -->
+            <!-- S23: Tabel Iceberg -->
             <div class="slide-container">
                 <div class="content-area">
                     <h2 class="slide-title" data-key="s23_title">Praktijkcase Iceberg Lettuce: Impact per Optie</h2>
@@ -640,11 +691,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr><td><strong>1. Ongeperforeerd</strong></td><td>O2 daalt rap naar 0%. Product fermenteert in eigen condensvocht.</td><td>Zure geur, weefselrot. <strong>Korte houdbaarheid.</strong></td></tr>
-                                <tr><td><strong>2. Over-geperforeerd</strong></td><td>O2 blijft op 21%. Vocht ontsnapt ongeremd.</td><td>Snijvlakken oxideren (bruin), vochtverlies. <strong>Beperkte houdbaarheid.</strong></td></tr>
-                                <tr><td><strong>3. MAP (Laser)</strong></td><td>Ademhaling gestabiliseerd rond ideale zuurstof (0.5-3%).</td><td>Betere kwaliteit. <strong>Verlengde houdbaarheid.</strong></td></tr>
-                                <tr><td><strong>4. MAP + O2 Control</strong></td><td>Zuurstofwaarde direct veiliggesteld zónder turbulente luchtstromen.</td><td>Minder initiële oxidatie, schonere seals. <strong>Lange houdbaarheid.</strong></td></tr>
-                                <tr><td><strong>5. PerfoTec Full</strong></td><td>Verbeterde gasbalans én afvoer van vocht (MHP folie).</td><td>Minder condens, knapperige bite behouden. <strong>Langere houdbaarheid en rendement.</strong></td></tr>
+                                <tr><td><strong>1. Ongeperforeerd</strong></td><td>O2 daalt rap naar 0%. Product fermenteert.</td><td>Zure geur. <strong>Korte houdbaarheid.</strong></td></tr>
+                                <tr><td><strong>2. Over-geperforeerd</strong></td><td>O2 blijft op 21%. Vocht ontsnapt ongeremd.</td><td>Snijvlakken oxideren, vochtverlies. <strong>Beperkte houdbaarheid.</strong></td></tr>
+                                <tr><td><strong>3. MAP (Laser)</strong></td><td>Ademhaling gestabiliseerd (0.5-3%).</td><td>Betere kwaliteit. <strong>Verlengde houdbaarheid.</strong></td></tr>
+                                <tr><td><strong>4. MAP + O2 Control</strong></td><td>Zuurstofwaarde direct veiliggesteld zónder turbulentie.</td><td>Minder oxidatie, schonere seals. <strong>Lange houdbaarheid.</strong></td></tr>
+                                <tr><td><strong>5. PerfoTec Full</strong></td><td>Verbeterde gasbalans én afvoer van vocht.</td><td>Minder condens, knapperige bite behouden. <strong>Langere houdbaarheid en rendement.</strong></td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -655,17 +706,17 @@
             <div class="slide-container">
                 <div class="content-area">
                     <h2 class="slide-title" data-key="s24_title">Data Deep-Dive: Resultaten Iceberg Lettuce</h2>
-                    <p style="text-align: center; max-width: 900px; margin: 0 auto 4vh auto;" data-key="s24_intro">Wat brengt de 'PerfoTec Full' oplossing voor de verwerker en supermarkt?</p>
+                    <p style="text-align: center; max-width: 900px; margin: 0 auto 4vh auto;" data-key="s24_intro">Wat brengt de 'PerfoTec Full' oplossing voor de verwerker?</p>
                     <div class="tiled-content">
                         <div class="tile" data-key="s24_t1">
                             <div class="icon"><i class="fa-solid fa-calendar-check"></i></div>
-                            <h3 style="color:#007C27;">Verbeterde Houdbaarheid (Shelf-life)</h3>
+                            <h3 style="color:#007C27;">Verbeterde Houdbaarheid</h3>
                             <p><strong>Pinking</strong> (roze verkleuring) wordt geremd met de precieze O2 balans, en <strong>vochtverlies</strong> wordt beperkt.</p>
                         </div>
                         <div class="tile accent-blue" data-key="s24_t2">
                             <div class="icon"><i class="fa-solid fa-trash-can-arrow-up"></i></div>
                             <h3 style="color:#054E9A;">Minder Derving (Waste)</h3>
-                            <p>Waste en uitval in de keten kunnen afnemen. Het risico op 'product-in-seal' vermindert (dankzij O2 Control), en de supermarkt ziet <strong>minder afkeur</strong> wegens condens-rot.</p>
+                            <p>Waste en uitval in de keten kunnen afnemen. Het risico op 'product-in-seal' vermindert, met minder afkeur als resultaat.</p>
                         </div>
                         <div class="tile" data-key="s24_t3">
                             <div class="icon"><i class="fa-solid fa-chart-line"></i></div>
@@ -682,7 +733,7 @@
                     <div class="title-layout" data-key="s25_title">
                         <i class="fa-solid fa-link" style="font-size: clamp(40px, 5vh, 60px); color: #007C27; margin-bottom: 2vh;"></i>
                         <h1>Een technologische stap vooruit</h1>
-                        <p class="subtitle" style="max-width: 1000px; margin: 0 auto; line-height: 1.7;">Bedrijven in de sterk concurrerende markt zoeken voortdurend naar verbetering. Uitsluitend vertrouwen op standaardoplossingen kan leiden tot foutmarges.<br><br>PerfoTec biedt een <strong>geïntegreerde aanpak</strong>. We koppelen biologische meting (Stap 1) aan thermodynamische software (Stap 2) en laser-uitvoering (Stap 3 & 4), ondersteund door folie die fysiologisch is afgestemd (Stap 5). Deze <em>gerichte technologie</em> ondersteunt uw rendement en pakt de grootste uitdagingen in de supply chain aan.</p>
+                        <p class="subtitle" style="max-width: 1000px; margin: 0 auto; line-height: 1.7;">Bedrijven zoeken voortdurend naar verbetering. Uitsluitend vertrouwen op standaardoplossingen kan leiden tot foutmarges.<br><br>PerfoTec biedt een <strong>geïntegreerde aanpak</strong>. We koppelen biologische meting (Stap 1) aan software (Stap 2) en laser-uitvoering (Stap 3 & 4), ondersteund door folie die fysiologisch is afgestemd (Stap 5). Deze technologie ondersteunt uw rendement.</p>
                     </div>
                 </div>
             </div>
@@ -697,10 +748,10 @@
                                 <tr><th>Voor wie?</th><th>Kwantificeerbaar Rendement en Concurrentievoordeel</th></tr>
                             </thead>
                             <tbody>
-                                <tr><td><strong>Kwekers & Telers</strong></td><td>Minder vochtverlies. Het gewas behoudt langer zijn versheid, wat kansen biedt voor strategische afzet.</td></tr>
-                                <tr><td><strong>Logistiek & Export</strong></td><td>Ondersteunt de transitie van luchtvracht naar geconditioneerde zeevracht, wat kan leiden tot aanzienlijke <strong>CO2-reductie.</strong></td></tr>
-                                <tr><td><strong>Verwerkers & Verpakkers</strong></td><td>Verbetering van de OEE efficiëntie op de productielijn door minder onjuist gesealde verpakkingen (dankzij O2 Control).</td></tr>
-                                <tr><td><strong>Converters (Folie)</strong></td><td>Bied klanten traceerbare en micro-geperforeerde folie aan. Versterk uw rol als technologische partner.</td></tr>
+                                <tr><td><strong>Kwekers & Telers</strong></td><td>Minder vochtverlies. Het gewas behoudt langer zijn versheid.</td></tr>
+                                <tr><td><strong>Logistiek & Export</strong></td><td>Ondersteunt de transitie naar geconditioneerde zeevracht, wat kan leiden tot <strong>CO2-reductie.</strong></td></tr>
+                                <tr><td><strong>Verwerkers & Verpakkers</strong></td><td>Verbetering van de OEE efficiëntie op de productielijn.</td></tr>
+                                <tr><td><strong>Converters (Folie)</strong></td><td>Bied klanten traceerbare en micro-geperforeerde folie aan.</td></tr>
                                 <tr><td><strong>Retail & Consument</strong></td><td>Potentiële afname van in-store derving op het schap. Een frisser product voor de consument.</td></tr>
                             </tbody>
                         </table>
@@ -713,13 +764,13 @@
                 <div class="content-area">
                     <div class="highlight-box" data-key="s27_title">
                         <h1>Samen transformeren wij de versketen.</h1>
-                        <p style="margin-bottom: 4vh;">Elke dag gaat er hoogwaardig product in de afvalstroom door suboptimale verpakkingen. Dit veroorzaakt onnodige ecologische belasting en raakt het rendement.</p>
+                        <p style="margin-bottom: 4vh;">Elke dag gaat er product verloren door suboptimale verpakkingen. Dit veroorzaakt onnodige ecologische belasting.</p>
                         <p style="margin-bottom: 4vh; line-height: 1.5;">
                             <strong>Optimaliseer uw supply chain:</strong><br>
                             Voorkom kapitaalintensieve derving door betere inzichten.<br>
-                            Kies voor een technologische benadering die streeft naar een extra lange houdbaarheid.
+                            Kies voor een technologische benadering.
                         </p>
-                        <p>Laat het verse product ademen. Werk op basis van data. Ondersteun uw marges.<br><strong>Integreer vandaag nog de PerfoTec technologie.</strong></p>
+                        <p>Laat het verse product ademen. Werk op basis van data.<br><strong>Integreer vandaag nog de PerfoTec technologie.</strong></p>
                     </div>
                 </div>
             </div>
@@ -763,8 +814,8 @@
                 "s5_t3": "<div class='icon'><i class='fa-solid fa-seedling'></i></div><h3>Koolgewassen (bijv. Broccoli)</h3><p>Bezitten een zeer hoge ademhaling. Dit vereist een verpakking met een aanzienlijke zuurstofdoorlaatbaarheid om snelle anaerobe verstikking en penetrante zwavelgeuren te voorkomen.</p>",
                 "s6_title": "Theorie: Optimale Bewaarcondities per Gewas",
                 "s6_intro": "Omdat de fysiologie zo verschilt, heeft elk gewas een eigen Equilibrium Modified Atmosphere (EMA) doelstelling. Een kleine afwijking in zuurstof kan al effect hebben op de kwaliteit.",
-                "s6_table": "<thead><tr><th>Gewas / Product</th><th>Ademhalingssnelheid (Respiratie)</th><th>Ideale Zuurstof (O2)</th><th>Ideale Koolstofdioxide (CO2)</th></tr></thead><tbody><tr><td><strong>Iceberg Lettuce (Versneden)</strong></td><td>Gemiddeld (~12 ml/kg/u bij 4°C)</td><td>0.5% - 3%</td><td>5% - 10%</td></tr><tr><td><strong>Broccoli (Heel)</strong></td><td>Zeer Hoog (>20 ml/kg/u bij 4°C)</td><td>1% - 2%</td><td>5% - 10%</td></tr><tr><td><strong>Frambozen (Bulk / Liner)</strong></td><td>Hoog (Schimmelgevoeligheid)</td><td>5% - 10%</td><td>15% - 20%</td></tr><tr><td><strong>Sperziebonen (Heel)</strong></td><td>Hoge Respiratie (Risico op interne hitte)</td><td>3% - 5%</td><td>5% - 10%</td></tr></tbody>",
-                "s6_outro": "Deze uiterst nauwe marges maken het lastig om met standaard, generieke folies een optimaal resultaat te behalen.",
+                "s6_table": "<thead><tr><th>Categorie (Voorbeelden)</th><th>Kenmerk / Respiratie</th><th>O₂</th><th>CO₂</th><th>Perforatie</th><th>Kritiek Aandachtspunt</th></tr></thead><tbody><tr><td><strong>1. Brassica's</strong> (Broccoli, Bloemkool)</td><td>Middel-hoog, CO₂-gevoelig</td><td>2-5%</td><td>5-10%</td><td>Middel</td><td>Zwavelgeur bij te hoge CO₂</td></tr><tr><td><strong>2. Bladgroenten</strong> (Spinazie, Iceberg Lettuce)</td><td>Zeer hoog, snel kwaliteitsverlies</td><td>2-5%</td><td>5-10%</td><td>Relatief hoog</td><td>Vochtbalans + ROS-burst na openen</td></tr><tr><td><strong>3. Verse kruiden</strong> (Basilicum, Koriander)</td><td>Extreem gevoelig (lage O₂ / condens)</td><td>5-10%</td><td>0-5%</td><td>Hoog</td><td>Snel kwaliteitsverlies bij te lage O₂</td></tr><tr><td><strong>4. Gesneden fruit</strong> (Mango, Meloen)</td><td>Hoge suikers, fermentatiegevoelig</td><td>3-8%</td><td>5-15%</td><td>Middel</td><td>Fermentatie bij te lage O₂</td></tr><tr><td><strong>5. Wortel- & knolgewassen</strong> (Wortel, Zoete aardappel)</td><td>Lage respiratie, stabiel</td><td>5-10%</td><td>0-5%</td><td>Laag</td><td>Uitdroging</td></tr><tr><td><strong>6. Allium groenten</strong> (Ui, Prei)</td><td>Middel, microbiologisch gevoelig</td><td>3-8%</td><td>5-10%</td><td>Middel</td><td>Vocht en geurontwikkeling</td></tr><tr><td><strong>7. Peulgewassen</strong> (Sperziebonen)</td><td>Middel respiratie, redelijk stabiel</td><td>2-5%</td><td>3-8%</td><td>Middel</td><td>Verkleuring bij verkeerde atmosfeer</td></tr><tr><td><strong>8. Stengelgroenten</strong> (Asperge)</td><td>Middel-hoog, textuurgevoelig</td><td>2-5%</td><td>5-10%</td><td>Middel</td><td>Lignificatie / kwaliteitsverlies</td></tr><tr><td><strong>9. Kiemgroenten</strong> (Taugé)</td><td>Zeer hoog, hoog microbiologisch risico</td><td>5-10%</td><td>0-5%</td><td>Hoog</td><td>Voedselveiligheid + snelle achteruitgang</td></tr><tr><td><strong>10. Zetmeelrijk / Gemengd</strong> (Maïs, mix)</td><td>Variabel gedrag</td><td>3-7%</td><td>3-10%</td><td>Middel</td><td>Altijd afstemmen op meest kritische component</td></tr></tbody>",
+                "s6_insights": "<strong>Belangrijke algemene MAP-inzichten:</strong><ul style='margin-top: 0.5vh;'><li>Producten passen zich aan aan lage O₂ &rarr; té laag leidt tot fermentatie/schade.</li><li>Na openen is er risico op een ROS-burst, wat leidt tot versnelde veroudering.</li><li>Ethyleengevoeligheid neemt toe na bewaring in MAP.</li><li>Vochtbalans is cruciaal (de juiste afstemming tussen condens en uitdroging).</li><li>Bij gemengde producten (melanges): stuur altijd op de <strong>zwakste schakel</strong>.</li></ul>",
                 "s7_title": "Theorie: De Complexiteit van Productmixen",
                 "s7_text": "<p>Consumenten vragen steeds vaker om gemengde salades en roerbakmixen. Het verpakken hiervan is fysiologisch complex, omdat u meerdere levende organismen – met allemaal een ándere ademhaling – in één gesloten zak plaatst.</p><p>Gelukkig kunnen we de ademhalingsbehoefte van de totale mix wiskundig berekenen op basis van de individuele ingrediënten. Als product 1 snel stikt, en product 2 snel rot, vereist de totale mix een compleet nieuw verpakkings-evenwicht.</p>",
                 "s7_case": "<strong>Rekenvoorbeeld Melangesla</strong><p>Stel, uw mix bestaat voor 50% uit Iceberg Lettuce (RR: 12 ml/kg), 20% Rucola (RR: 16 ml/kg) en 30% Spinazie (RR: 17 ml/kg). We kunnen de totale zuurstofbehoefte mathematisch berekenen. Hierna bepalen we exact de folie-permeabiliteit die voorkomt dat de agressief ademende rucola alle zuurstof verbruikt en de overige ingrediënten laat stikken.</p>",
@@ -791,7 +842,7 @@
                 "s15_text": "<h3>Het verlies van atmosferische bescherming</h3><p>Om de beperkingen van dichte folies te omzeilen, stansen verpakkers vaak <strong>statische macro-perforaties</strong> (grote gaten).</p><p>De verpakking is dan enkel nog een plastic tasje. Het product ademt de omgevingslucht. Er ontstaat geen beschermende MAP-atmosfeer, snijvlakken oxideren sneller, en vocht (gewicht) ontsnapt ongeremd.</p>",
                 "s16_title": "<i class='fa-solid fa-list-check' style='font-size: clamp(40px, 5vh, 60px); color: #007C27; margin-bottom: 2vh;'></i><h1>De Datagestuurde Oplossing</h1><p class='subtitle' style='max-width: 900px; margin: 0 auto; line-height: 1.6;'>Om de tekortkomingen van deze standaard verpakkingen te doorbreken en het product vers te houden, kiezen we voor <strong>adaptieve, datagestuurde kalibratie</strong>. Hiervoor ontwikkelde PerfoTec een geïntegreerd ecosysteem.</p>",
                 "s17_title": "Stap 1: Fast Respiration Meter - Fysiologische Diagnostiek",
-                "s17_text": "<p><strong>Ademen is de eigenschap van de natuur.</strong> Om dit te sturen, moeten we de ademhaling exact begrijpen. Dit meten we direct op de productievloer.</p><ul><li><strong>Exacte Quantificatie:</strong> Meet via gasanalyse de snelheid van O2-consumptie en CO2-emissie.</li><li><strong>Tijdwinst:</strong> Krijg resultaten binnen maximaal 4 uur.</li><li><strong>Foutpreventie:</strong> Optimaliseer voor temperatuur en snij-schok vóórdat de folie geproduceerd is.</li></ul>",
+                "s17_text": "<p><strong>Ademen is de eigenschap van de natuur.</strong> Om dit te sturen, moeten we de ademhaling exact begrijpen. Dit meten we in de productiefaciliteit.</p><ul><li><strong>Exacte Quantificatie:</strong> Meet via gasanalyse de snelheid van O2-consumptie en CO2-emissie.</li><li><strong>Tijdwinst:</strong> Krijg resultaten binnen maximaal 4 uur.</li><li><strong>Foutpreventie:</strong> Optimaliseer voor temperatuur en snij-schok vóórdat de folie geproduceerd is.</li></ul>",
                 "s17_case": "<strong>Praktijkcase Iceberg Lettuce: De ademhaling meten</strong><p>Iceberg Lettuce is gevoelig voor 'pinking' (roze oxidatie op het snijvlak). Voor productie plaatsen we een versneden monster in de FRM. We meten de sterkte van de snij-schok. We bepalen zo dat de zuurstofwaarde in de zak gestuurd moet worden naar 0.5-3% voor de meest optimale bewaarconditie.</p>",
                 "s18_title": "Stap 2: PerfoTec Hub - Slimme AMAP software",
                 "s18_text": "<p><strong>Hub rekent en stuurt M2M automatisch.</strong> Biologische ademhalingsdata vereist modellering door geavanceerde software.</p><ul><li><strong>Algoritmische Optimalisatie:</strong> De software kruist ademhalingswaarden met het productgewicht en temperatuurprofielen. Het berekent de Oxygen Transmission Rate (OTR).</li><li><strong>M2M Connectiviteit:</strong> Berekende data wordt volautomatisch naar de laser doorgestuurd. Controle vanuit een centraal punt beperkt invoerfouten.</li></ul>",
@@ -805,13 +856,13 @@
                 "s21_title": "Stap 5: Folie - Aansluitend bij MAP + MHP",
                 "s21_t1": "<div class='icon'><i class='fa-solid fa-droplet-slash'></i></div><h3 style='color:#007C27;'>Retail: R+702 Folie</h3><ul><li><strong>Condens-eliminatie:</strong> Voert vocht af door hogere MVTR.</li><li><strong>Behoud van textuur:</strong> Helpt bij het verminderen van derving op het winkelschap.</li></ul>",
                 "s21_t2": "<div class='image-wrapper contain' style='height: 10vh; min-height: 80px; box-shadow: none; background: transparent; margin-bottom: 1vh;'><img src='https://www.perfotec.com/wp-content/uploads/2021/04/PerfoTec-Liner.png' alt='Liner'></div><h3 style='color:#054E9A;'>Bulk: Bio-liners</h3><ul><li><strong>Transitie Zeevracht:</strong> Verlengde opslag mogelijk.</li><li><strong>Ondersteuning:</strong> Betrouwbare bescherming bij langere transittijden.</li></ul>",
-                "s21_t3": "<div class='image-wrapper contain' style='height: 10vh; min-height: 80px; box-shadow: none; background: transparent; margin-bottom: 1vh;'><img src='https://media.licdn.com/dms/image/v2/D4D22AQFPgPlVExiU9g/feedshare-shrink_800/B4DZwpjaw9KYAg-/0/1770223677075?e=2147483647&v=beta&t=LLORb9lqopWrUJ0OLfLW6OyuQWkXk_TzLsRVLQTlZwg' alt='Pallet'></div><h3 style='color:#007C27;'>Logistiek: Pallet Cover</h3><ul><li><strong>Tarmac Protectie:</strong> Beschermt tegen hitte en condens-schokken.</li><li><strong>Stabiliteit:</strong> Helpt 'carton collapse' te voorkomen.</li></ul>",
+                "s21_t3": "<div class='image-wrapper contain' style='height: 10vh; min-height: 80px; box-shadow: none; background: transparent; margin-bottom: 1vh;'><img src='https://media.licdn.com/dms/image/v2/D4D22AQFPgPlVExiU9g/feedshare-shrink_800/B4DZwpjaw9KYAg-/0/1770223677075?e=2147483647&v=beta&t=LLORb9lqopWrUJ0OLfLW6OyuQWkXk_TzLsRVLQTlZwg' alt='Pallet'></div><h3 style='color:#007C27;'>Logistiek: Pallet Cover</h3><ul><li><strong>Tarmac Protectie:</strong> Beschermt tegen extreme hitte en condens-schokken.</li><li><strong>Stabiliteit:</strong> Helpt 'carton collapse' te voorkomen.</li></ul>",
                 "s21_case": "<strong>Praktijkcase Iceberg Lettuce: Langer vers in het schap</strong><p>Iceberg Lettuce 'zweet'. De PerfoTec R+ folie combineert de berekende gasbalans met een goede vochtdoorlaatbaarheid. Het transpiratievocht ademt deels naar buiten, waardoor de sla beter zijn 'crunch' behoudt.</p>",
                 "s22_title": "Validatie: Testen in de Praktijk",
                 "s22_text": "<p>Voordat we opschalen, is een test-fase cruciaal om theorie en praktijk te verbinden. We verifiëren de resultaten aan de hand van gasmetingen.</p><ul><li><strong>Prognose via de Hub:</strong> We berekenen eerst de verwachte gascondities.</li><li><strong>Praktijktesten:</strong> We meten in de praktijk of de prognose uitkomt.</li><li><strong>Finetunen:</strong> Op basis van de metingen sturen we de perforaties bij waar nodig voor een beter resultaat.</li></ul>",
                 "s23_title": "Praktijkcase Iceberg Lettuce: Impact per Optie",
                 "s23_intro": "Een overzicht van verpakkingsopties voor Iceberg Lettuce:",
-                "s23_table": "<thead><tr><th>Technologie Optie</th><th>Wat gebeurt er in de zak?</th><th>Resultaat (Kwaliteit & Houdbaarheid)</th></tr></thead><tbody><tr><td><strong>1. Ongeperforeerd</strong></td><td>O2 daalt rap naar 0%. Product fermenteert.</td><td>Zure geur. <strong>Korte houdbaarheid.</strong></td></tr><tr><td><strong>2. Over-geperforeerd</strong></td><td>O2 blijft op 21%. Vocht ontsnapt ongeremd.</td><td>Snijvlakken oxideren, vochtverlies. <strong>Beperkte houdbaarheid.</strong></td></tr><tr><td><strong>3. MAP (Laser)</strong></td><td>Ademhaling gestabiliseerd (0.5-3%).</td><td>Betere kwaliteit. <strong>Verlengde houdbaarheid.</strong></td></tr><tr><td><strong>4. MAP + O2 Control</strong></td><td>Zuurstofwaarde direct veiliggesteld zónder turbulentie.</td><td>Minder oxidatie, schonere seals. <strong>Lange houdbaarheid.</strong></td></tr><tr><td><strong>5. PerfoTec Full</strong></td><td>Verbeterde gasbalans én afvoer van vocht.</td><td>Minder condens, knapperige bite. <strong>Langere houdbaarheid en rendement.</strong></td></tr></tbody>",
+                "s23_table": "<thead><tr><th>Technologie Optie</th><th>Wat gebeurt er in de zak?</th><th>Resultaat (Kwaliteit & Houdbaarheid)</th></tr></thead><tbody><tr><td><strong>1. Ongeperforeerd</strong></td><td>O2 daalt rap naar 0%. Product fermenteert.</td><td>Zure geur. <strong>Korte houdbaarheid.</strong></td></tr><tr><td><strong>2. Over-geperforeerd</strong></td><td>O2 blijft op 21%. Vocht ontsnapt ongeremd.</td><td>Snijvlakken oxideren, vochtverlies. <strong>Beperkte houdbaarheid.</strong></td></tr><tr><td><strong>3. MAP (Laser)</strong></td><td>Ademhaling gestabiliseerd (0.5-3%).</td><td>Betere kwaliteit. <strong>Verlengde houdbaarheid.</strong></td></tr><tr><td><strong>4. MAP + O2 Control</strong></td><td>Zuurstofwaarde direct veiliggesteld zónder turbulentie.</td><td>Minder oxidatie, schonere seals. <strong>Lange houdbaarheid.</strong></td></tr><tr><td><strong>5. PerfoTec Full</strong></td><td>Verbeterde gasbalans én afvoer van vocht.</td><td>Minder condens, knapperige bite behouden. <strong>Langere houdbaarheid en rendement.</strong></td></tr></tbody>",
                 "s24_title": "Data Deep-Dive: Resultaten Iceberg Lettuce",
                 "s24_intro": "Wat brengt de 'PerfoTec Full' oplossing voor de verwerker?",
                 "s24_t1": "<div class='icon'><i class='fa-solid fa-calendar-check'></i></div><h3 style='color:#007C27;'>Verbeterde Houdbaarheid</h3><p><strong>Pinking</strong> (roze verkleuring) wordt geremd met de precieze O2 balans, en <strong>vochtverlies</strong> wordt beperkt.</p>",
@@ -845,8 +896,8 @@
                 "s5_t3": "<div class='icon'><i class='fa-solid fa-seedling'></i></div><h3>Cabbage crops (e.g. Broccoli)</h3><p>Possess extremely high respiration. This requires packaging with a very high oxygen permeability to prevent rapid anaerobic suffocation and pungent sulfur odors.</p>",
                 "s6_title": "Theory: Optimal Storage Conditions per Crop",
                 "s6_intro": "Because physiology differs so much, each crop has its own Equilibrium Modified Atmosphere (EMA) target. A deviation in oxygen can have an effect on the quality.",
-                "s6_table": "<thead><tr><th>Crop / Product</th><th>Respiration Rate</th><th>Ideal Oxygen (O2)</th><th>Ideal Carbon Dioxide (CO2)</th></tr></thead><tbody><tr><td><strong>Iceberg Lettuce (Cut)</strong></td><td>Average (~12 ml/kg/h at 4°C)</td><td>0.5% - 3%</td><td>5% - 10%</td></tr><tr><td><strong>Broccoli (Whole)</strong></td><td>Very High (>20 ml/kg/h at 4°C)</td><td>1% - 2%</td><td>5% - 10%</td></tr><tr><td><strong>Raspberries (Bulk / Liner)</strong></td><td>High (Mold sensitivity)</td><td>5% - 10%</td><td>15% - 20%</td></tr><tr><td><strong>Green Beans (Whole)</strong></td><td>High Respiration (Risk of internal heat)</td><td>3% - 5%</td><td>5% - 10%</td></tr></tbody>",
-                "s6_outro": "These narrow margins make it difficult to achieve an optimal result with standard, generic films.",
+                "s6_table": "<thead><tr><th>Category (Examples)</th><th>Characteristic / Respiration</th><th>O₂</th><th>CO₂</th><th>Perforation</th><th>Critical Attention Point</th></tr></thead><tbody><tr><td><strong>1. Brassicas</strong> (Broccoli, Cauliflower)</td><td>Medium-high, CO₂ sensitive</td><td>2-5%</td><td>5-10%</td><td>Medium</td><td>Sulfur odor at too high CO₂</td></tr><tr><td><strong>2. Leafy greens</strong> (Spinach, Iceberg Lettuce)</td><td>Very high, rapid quality loss</td><td>2-5%</td><td>5-10%</td><td>Rel. high</td><td>Moisture balance + ROS-burst after opening</td></tr><tr><td><strong>3. Fresh herbs</strong> (Basil, Coriander)</td><td>Extremely sensitive (low O₂ / condensation)</td><td>5-10%</td><td>0-5%</td><td>High</td><td>Rapid quality loss at too low O₂</td></tr><tr><td><strong>4. Fresh-cut fruit</strong> (Mango, Melon)</td><td>High sugars, fermentation sensitive</td><td>3-8%</td><td>5-15%</td><td>Medium</td><td>Fermentation at too low O₂</td></tr><tr><td><strong>5. Root & tuber crops</strong> (Carrot, Sweet potato)</td><td>Low respiration, stable</td><td>5-10%</td><td>0-5%</td><td>Low</td><td>Dehydration</td></tr><tr><td><strong>6. Allium vegetables</strong> (Onion, Leek)</td><td>Medium, microbiologically sensitive</td><td>3-8%</td><td>5-10%</td><td>Medium</td><td>Moisture and odor development</td></tr><tr><td><strong>7. Legumes</strong> (Green beans)</td><td>Medium respiration, fairly stable</td><td>2-5%</td><td>3-8%</td><td>Medium</td><td>Discoloration in incorrect atmosphere</td></tr><tr><td><strong>8. Stem vegetables</strong> (Asparagus)</td><td>Medium-high, texture sensitive</td><td>2-5%</td><td>5-10%</td><td>Medium</td><td>Lignification / quality loss</td></tr><tr><td><strong>9. Sprouts</strong> (Bean sprouts)</td><td>Very high, high microbiological risk</td><td>5-10%</td><td>0-5%</td><td>High</td><td>Food safety + rapid decline</td></tr><tr><td><strong>10. Starchy / Mixed</strong> (Corn, mix)</td><td>Variable behavior</td><td>3-7%</td><td>3-10%</td><td>Medium</td><td>Always tune to the most critical component</td></tr></tbody>",
+                "s6_insights": "<strong>Important general MAP insights:</strong><ul style='margin-top: 0.5vh;'><li>Products adapt to low O₂ &rarr; too low leads to fermentation/damage.</li><li>After opening, there is a risk of a ROS-burst, leading to accelerated aging.</li><li>Ethylene sensitivity increases after storage in MAP.</li><li>Moisture balance is crucial (the right balance between condensation and dehydration).</li><li>With mixed products, always manage based on the weakest link.</li></ul>",
                 "s7_title": "Theory: The Complexity of Product Mixes",
                 "s7_text": "<p>Consumers increasingly ask for mixed salads and stir-fry mixes. Packaging these is physiologically complex because you place multiple living organisms – all with a different respiration – in one closed bag.</p><p>Fortunately, we can mathematically calculate the respiration needs of the total mix based on the individual ingredients. If product 1 suffocates quickly, and product 2 rots quickly, the total mix requires a completely new packaging equilibrium.</p>",
                 "s7_case": "<strong>Calculation Example Mixed Salad</strong><p>Suppose your mix consists of 50% Iceberg lettuce (RR: 12), 20% Arugula (RR: 16) and 30% Spinach (RR: 17). We mathematically calculate the total oxygen demand. We then determine the exact film permeability to prevent the aggressively respiring arugula from consuming all the oxygen and suffocating the other ingredients.</p>",
@@ -899,7 +950,7 @@
                 "s24_t1": "<div class='icon'><i class='fa-solid fa-calendar-check'></i></div><h3 style='color:#007C27;'>Improved Shelf-life</h3><p><strong>Pinking</strong> is inhibited with the precise O2 balance, and <strong>moisture loss</strong> is limited.</p>",
                 "s24_t2": "<div class='icon'><i class='fa-solid fa-trash-can-arrow-up'></i></div><h3 style='color:#054E9A;'>Less Waste</h3><p>Waste and fallout in the chain can decrease. The risk of 'product-in-seal' decreases, resulting in less rejection.</p>",
                 "s24_t3": "<div class='icon'><i class='fa-solid fa-chart-line'></i></div><h3 style='color:#007C27;'>Better Financial Return</h3><p>Opportunities for a better profit margin per batch. Sales windows can become wider and returns decrease.</p>",
-                "s25_title": "<i class='fa-solid fa-link' style='font-size: clamp(40px, 5vh, 60px); color: #007C27; margin-bottom: 2vh;'></i><h1>A technological step forward</h1><p class='subtitle' style='max-width: 1000px; margin: 0 auto; line-height: 1.7;'>Companies in the highly competitive market are constantly looking for improvement. Relying exclusively on standard solutions can lead to margins of error.<br><br>PerfoTec offers an <strong>integrated approach</strong>. We link biological measurement (Step 1) to software (Step 2) and laser execution (Step 3 & 4), supported by physiologically tuned film (Step 5). This <em>targeted technology</em> supports your return and tackles the biggest challenges in the supply chain.</p>",
+                "s25_title": "<i class='fa-solid fa-link' style='font-size: clamp(40px, 5vh, 60px); color: #007C27; margin-bottom: 2vh;'></i><h1>A technological step forward</h1><p class='subtitle' style='max-width: 1000px; margin: 0 auto; line-height: 1.7;'>Companies in the highly competitive market are constantly looking for improvement. Relying exclusively on standard solutions can lead to margins of error.<br><br>PerfoTec offers an <strong>integrated approach</strong>. We link biological measurement (Step 1) to software (Step 2) and laser execution (Step 3 & 4), supported by physiologically tuned film (Step 5). This technology supports your return.</p>",
                 "s26_title": "Potential Added Value per Market (ROI)",
                 "s26_table": "<thead><tr><th>For whom?</th><th>Quantifiable Return and Competitive Advantage</th></tr></thead><tbody><tr><td><strong>Growers & Farmers</strong></td><td>Less moisture loss. The crop retains its freshness longer, offering opportunities for strategic sales.</td></tr><tr><td><strong>Logistics & Export</strong></td><td>Supports the transition to conditioned sea freight, which can lead to significant <strong>CO2 reduction.</strong></td></tr><tr><td><strong>Processors & Packers</strong></td><td>Improvement of OEE efficiency on the production line due to fewer incorrectly sealed packages (thanks to O2 Control).</td></tr><tr><td><strong>Converters (Film)</strong></td><td>Offer customers traceable and micro-perforated film. Strengthen your role as a technological partner.</td></tr><tr><td><strong>Retail & Consumer</strong></td><td>Potential decrease of in-store waste on the shelf. A fresher product for the consumer.</td></tr></tbody>",
                 "s27_title": "<h1>Together we transform the fresh chain.</h1><p style='margin-bottom: 4vh;'>Every day, product is lost due to suboptimal packaging. This causes unnecessary ecological strain and affects returns.</p><p style='margin-bottom: 4vh; line-height: 1.5;'><strong>Optimize your supply chain:</strong><br>Prevent capital-intensive waste through better insights.<br>Choose a technological approach that aims for an extra long shelf life.</p><p>Let the fresh product breathe. Work data-driven. Support your margins.<br><strong>Integrate the PerfoTec technology today.</strong></p>"
@@ -927,8 +978,8 @@
                 "s5_t3": "<div class='icon'><i class='fa-solid fa-seedling'></i></div><h3>Cultivos de Col (Broccoli)</h3><p>Respiración extremadamente alta. Requiere una permeabilidad al oxígeno muy alta.</p>",
                 "s6_title": "Teoría: Condiciones Óptimas de Almacenamiento por Cultivo",
                 "s6_intro": "Debido a que la fisiología difiere tanto, cada cultivo tiene su propio objetivo de Atmósfera Modificada en Equilibrio (EMA).",
-                "s6_table": "<thead><tr><th>Cultivo / Producto</th><th>Tasa de Respiración</th><th>Oxígeno Ideal (O2)</th><th>Dióxido de Carbono Ideal (CO2)</th></tr></thead><tbody><tr><td><strong>Iceberg Lettuce (Cortada)</strong></td><td>Media (~12 ml/kg/h a 4°C)</td><td>0.5% - 3%</td><td>5% - 10%</td></tr><tr><td><strong>Broccoli (Entero)</strong></td><td>Muy Alta (>20 ml/kg/h a 4°C)</td><td>1% - 2%</td><td>5% - 10%</td></tr><tr><td><strong>Frambuesas (Granel / Liner)</strong></td><td>Alta (Sensibilidad al moho)</td><td>5% - 10%</td><td>15% - 20%</td></tr><tr><td><strong>Judías Verdes (Enteras)</strong></td><td>Respiración Alta (Riesgo de calor interno)</td><td>3% - 5%</td><td>5% - 10%</td></tr></tbody>",
-                "s6_outro": "Estos márgenes estrechos hacen difícil lograr un resultado óptimo con películas estándar y genéricas.",
+                "s6_table": "<thead><tr><th>Categoría (Ejemplos)</th><th>Característica / Respiración</th><th>O₂</th><th>CO₂</th><th>Perforación</th><th>Punto de Atención Crítico</th></tr></thead><tbody><tr><td><strong>1. Brasicáceas</strong> (Brócoli, Coliflor)</td><td>Medio-alto, sensible al CO₂</td><td>2-5%</td><td>5-10%</td><td>Medio</td><td>Olor a azufre con CO₂ demasiado alto</td></tr><tr><td><strong>2. Hojas verdes</strong> (Espinaca, Iceberg Lettuce)</td><td>Muy alta, pérdida rápida de calidad</td><td>2-5%</td><td>5-10%</td><td>Rel. alto</td><td>Equilibrio de humedad + brote ROS al abrir</td></tr><tr><td><strong>3. Hierbas frescas</strong> (Albahaca, Cilantro)</td><td>Extremadamente sensible (bajo O₂ / condensación)</td><td>5-10%</td><td>0-5%</td><td>Alto</td><td>Pérdida rápida de calidad con O₂ demasiado bajo</td></tr><tr><td><strong>4. Fruta cortada</strong> (Mango, Melón)</td><td>Altos azúcares, sensible a la fermentación</td><td>3-8%</td><td>5-15%</td><td>Medio</td><td>Fermentación con O₂ demasiado bajo</td></tr><tr><td><strong>5. Raíces y tubérculos</strong> (Zanahoria, Batata)</td><td>Baja respiración, estable</td><td>5-10%</td><td>0-5%</td><td>Bajo</td><td>Deshidratación</td></tr><tr><td><strong>6. Verduras Allium</strong> (Cebolla, Puerro)</td><td>Medio, microbiológicamente sensible</td><td>3-8%</td><td>5-10%</td><td>Medio</td><td>Desarrollo de humedad y olores</td></tr><tr><td><strong>7. Legumbres</strong> (Judías verdes)</td><td>Respiración media, bastante estable</td><td>2-5%</td><td>3-8%</td><td>Medio</td><td>Decoloración en atmósfera incorrecta</td></tr><tr><td><strong>8. Verduras de tallo</strong> (Espárragos)</td><td>Medio-alto, sensible a la textura</td><td>2-5%</td><td>5-10%</td><td>Medio</td><td>Lignificación / pérdida de calidad</td></tr><tr><td><strong>9. Brotes</strong> (Brotes de soja)</td><td>Muy alto, alto riesgo microbiológico</td><td>5-10%</td><td>0-5%</td><td>Alto</td><td>Seguridad alimentaria + deterioro rápido</td></tr><tr><td><strong>10. Almidonados / Mixtos</strong> (Maíz, mezcla)</td><td>Comportamiento variable</td><td>3-7%</td><td>3-10%</td><td>Medio</td><td>Ajustar siempre al componente más crítico</td></tr></tbody>",
+                "s6_insights": "<strong>Perspectivas generales importantes de MAP:</strong><ul style='margin-top: 0.5vh;'><li>Los productos se adaptan a un O₂ bajo &rarr; demasiado bajo provoca fermentación/daño.</li><li>Después de abrir, existe el riesgo de un brote de ROS, lo que lleva a un envejecimiento acelerado.</li><li>La sensibilidad al etileno aumenta después del almacenamiento en MAP.</li><li>El equilibrio de la humedad es crucial (el equilibrio adecuado entre condensación y deshidratación).</li><li>Con productos mixtos, controle siempre basándose en el eslabón más débil.</li></ul>",
                 "s7_title": "Teoría: La Complejidad de las Mezclas de Productos",
                 "s7_text": "<p>Los consumidores piden cada vez más ensaladas mixtas. El envasado de estas es fisiológicamente complejo porque se colocan múltiples organismos vivos, todos con diferentes tasas de respiración, en una sola bolsa cerrada.</p><p>Afortunadamente, podemos calcular matemáticamente las necesidades de respiración de la mezcla total en función de los ingredientes individuales.</p>",
                 "s7_case": "<strong>Ejemplo de Cálculo: Mezcla de Ensalada</strong><p>Supongamos que su mezcla consiste en un 50% de Iceberg Lettuce (RR: 12), un 20% de Rúcula (RR: 16) y un 30% de Espinaca (RR: 17). Calculamos matemáticamente la demanda total de oxígeno.</p>",
@@ -983,15 +1034,14 @@
                 "s24_t3": "<div class='icon'><i class='fa-solid fa-chart-line'></i></div><h3 style='color:#007C27;'>Mejor Retorno Financiero</h3><p>Oportunidades para un mejor margen de beneficio por lote. Las ventanas de venta pueden ser más amplias.</p>",
                 "s25_title": "<i class='fa-solid fa-link' style='font-size: clamp(40px, 5vh, 60px); color: #007C27; margin-bottom: 2vh;'></i><h1>Un paso tecnológico adelante</h1><p class='subtitle' style='max-width: 1000px; margin: 0 auto; line-height: 1.7;'>Las empresas buscan constantemente mejorar. Confiar exclusivamente en soluciones estándar puede llevar a márgenes de error.<br><br>PerfoTec ofrece un <strong>enfoque integrado</strong>. Vinculamos la medición biológica (Paso 1) con el software (Paso 2) y la ejecución láser (Paso 3 y 4), respaldado por una película ajustada fisiológicamente (Paso 5). Esta tecnología apoya su retorno.</p>",
                 "s26_title": "Posible Valor Añadido por Mercado (ROI)",
-                "s26_table": "<thead><tr><th>¿Para quién?</th><th>Retorno Cuantificable y Ventaja Competitiva</th></tr></thead><tbody><tr><td><strong>Agricultores y Productores</strong></td><td>Menos pérdida de humedad. El cultivo mantiene su frescura más tiempo.</td></tr><tr><td><strong>Logística y Exportación</strong></td><td>Apoya la transición al flete marítimo, lo que puede llevar a <strong>reducción de CO2.</strong></td></tr><tr><td><strong>Procesadores y Empacadores</strong></td><td>Mejora de la eficiencia OEE en la línea de producción.</td></tr><tr><td><strong>Convertidores (Película)</strong></td><td>Ofrezca a sus clientes película rastreable y microperforada.</td></tr><tr><td><strong>Retail y Consumidor</strong></td><td>Potencial disminución del desperdicio en las tiendas. Un producto más fresco.</td></tr></tbody>",
+                "s26_table": "<thead><tr><th>¿Para quién?</th><th>Retorno Cuantificable y Ventaja Competitiva</th></tr></thead><tbody><tr><td><strong>Agricultores y Productores</strong></td><td>Menos pérdida de humedad. El cultivo mantiene su frescura más tiempo.</td></tr><tr><td><strong>Logística y Exportación</strong></td><td>Apoya la transición al flete marítimo, lo que puede llevar a <strong>reducción de CO2.</strong></td></tr><tr><td><strong>Procesadores y Empacadores</strong></td><td>Mejora de la eficiencia OEE en la línea de producción.</td></tr><tr><td><strong>Convertidores (Película)</strong></td><td>Ofrezca a sus clientes película rastreable y microperforada.</td></tr><tr><td><strong>Retail y Consumidor</strong></td><td>Potencial disminución del desperdicio en las tiendas. Un producto más fresco para el consumidor.</td></tr></tbody>",
                 "s27_title": "<h1>Juntos transformamos la cadena de frescos.</h1><p style='margin-bottom: 4vh;'>Cada día, se pierde producto debido a envases subóptimos. Esto causa una carga ecológica innecesaria.</p><p style='margin-bottom: 4vh; line-height: 1.5;'><strong>Optimice su cadena de suministro:</strong><br>Prevenga el desperdicio intensivo en capital mediante mejores conocimientos.<br>Elija un enfoque tecnológico.</p><p>Deje que el producto fresco respire. Trabaje en base a datos.<br><strong>Integre hoy la tecnología de PerfoTec.</strong></p>"
             }
         };
 
-        var currentLang = 'nl'; // Fallback
+        var currentLang = 'nl'; 
         
         window.onload = function() {
-            // BEWAAR ORIGINELE NEDERLANDSE HTML VOORDAT WE VERTALEN
             content['nl'] = {};
             var allDataKeys = document.querySelectorAll('[data-key]');
             allDataKeys.forEach(function(el) {
@@ -999,14 +1049,12 @@
                 content['nl'][key] = el.innerHTML;
             });
 
-            // Automatische Taaldetectie
             var userLang = (navigator.language || navigator.userLanguage).substring(0, 2).toLowerCase();
             var supportedLangs = ['nl', 'en', 'es'];
             currentLang = supportedLangs.includes(userLang) ? userLang : 'en'; 
             
             document.getElementById('langSelect').value = currentLang;
             
-            // Pas taal toe
             applyLanguage(currentLang);
             updateUI();
         };
@@ -1042,14 +1090,12 @@
 
                 if(index === currentSlideIndex) {
                     slide.classList.add('active');
-                    // Reset interne scroll naar boven
                     var contentArea = slide.querySelector('.content-area-wrapper');
                     if (contentArea) contentArea.scrollTop = 0;
                 } else {
                     slide.classList.remove('active');
                 }
                 
-                // Dynamische slide-teller
                 if (slideCounter) {
                     slideCounter.textContent = (currentSlideIndex + 1) + ' / ' + slides.length;
                 }
