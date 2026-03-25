@@ -13,10 +13,10 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { background-color: #f0fdf4; width: 100vw; height: 100vh; overflow: hidden; font-family: 'Inter', sans-serif; color: #1e293b; }
         
-        /* UNIFORME LETTERGROOTTE VOOR ALLE INHOUDELIJKE TEKSTEN */
-        p, li, td, .case-study-box-content p { 
-            font-size: clamp(14px, 1.8vh, 18px) !important; 
-            line-height: 1.6 !important; 
+        /* UNIFORME LETTERGROOTTE VOOR STANDAARD INHOUDELIJKE TEKSTEN */
+        p, li, .case-study-box-content p { 
+            font-size: clamp(14px, 1.8vh, 18px); 
+            line-height: 1.6; 
         }
         
         p { margin-bottom: 1.5vh; }
@@ -106,7 +106,7 @@
         .two-column { display: flex; gap: 3vw; width: 100%; align-items: flex-start; }
         .two-column > div { flex: 1; display: flex; flex-direction: column; }
 
-        .image-wrapper { border-radius: 12px; width: 100%; height: auto; max-height: 35vh; overflow: hidden; background-color: transparent; display: flex; align-items: center; justify-content: center; }
+        .image-wrapper { border-radius: 12px; width: 100%; height: auto; max-height: 35vh; overflow: hidden; background-color: transparent; display: flex; align-items: center; justify-content: center; } 
         .image-wrapper img { width: 100%; height: 100%; object-fit: cover; border-radius: 12px;}
         .image-wrapper.contain img { object-fit: contain; padding: 1vh; max-height: 35vh; }
 
@@ -122,45 +122,35 @@
         .case-study-box-content p { margin: 0; }
         .case-study-box-content strong { display: block; margin-bottom: 0.5vh; color: #007C27; font-size: clamp(16px, 2vh, 20px); font-family: 'Poppins', sans-serif; }
         
-        .table-layout { width: 100%; background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 25px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; margin-top: 1vh; }
+        /* STANDAARD TABEL STYLING */
+        .table-layout { width: 100%; background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 25px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; margin-top: 2vh; }
         .table-layout table { border-collapse: collapse; width: 100%; }
-        .table-layout th, .table-layout td { border-bottom: 1px solid #e2e8f0; padding: 1.2vh 1.2vw; text-align: left; }
+        .table-layout th, .table-layout td { border-bottom: 1px solid #e2e8f0; padding: 1.2vh 1.2vw; text-align: left; font-size: clamp(13px, 1.6vh, 17px); line-height: 1.4; }
         .table-layout th { background-color: #f1f5f9; color: #054E9A; font-size: clamp(16px, 2vh, 20px); font-family: 'Poppins', sans-serif; width: 25%; }
         .table-layout tr:nth-child(even) { background-color: #f8fafc; }
 
-        /* Aangepaste styling voor de zeer compacte tabel op slide 6 */
+        /* COMPACTE STYLING SPECIFIEK VOOR SLIDE 6 (Om scrollen te voorkomen bij de grote tabel) */
+        .compact-table-container { margin-top: 0.5vh !important; }
         .compact-table th, .compact-table td {
-            padding: 0.6vh 1vw !important;
-            font-size: clamp(11px, 1.4vh, 14px) !important;
-            line-height: 1.3 !important;
+            padding: 0.5vh 0.8vw !important;
+            font-size: clamp(11px, 1.35vh, 14px) !important;
+            line-height: 1.2 !important;
         }
-        .compact-table th {
-            font-size: clamp(12px, 1.5vh, 16px) !important;
-        }
-
+        .compact-table th { font-size: clamp(12px, 1.45vh, 15px) !important; padding: 0.6vh 0.8vw !important; }
+        
         .insights-box {
-            background-color: #e6f4ea;
-            border-left: 4px solid #007C27;
-            border-radius: 8px;
-            padding: 1.2vh 2vw;
-            margin-top: 1.5vh;
-            width: 100%;
-            text-align: left;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            background-color: #e6f4ea; border-left: 4px solid #007C27; border-radius: 8px;
+            padding: 1vh 1.5vw; margin-top: 1vh; width: 100%; box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
-        .insights-box ul {
-            margin-bottom: 0;
-            margin-top: 0.5vh;
-        }
+        .insights-box ul { margin-bottom: 0; }
         .insights-box li {
             margin-bottom: 0.2vh;
-            font-size: clamp(12px, 1.4vh, 15px) !important;
+            font-size: clamp(11px, 1.35vh, 14px) !important;
+            line-height: 1.3 !important;
+            padding-left: 20px;
         }
-        .insights-box strong {
-            font-size: clamp(14px, 1.6vh, 17px) !important;
-            color: #007C27;
-            font-weight: 600;
-        }
+        .insights-box li::before { top: 1px; font-size: 13px; }
+        .insights-box strong { font-size: clamp(12px, 1.45vh, 15px) !important; color: #007C27; font-weight: 600; display: block; margin-bottom: 0.5vh;}
 
         .highlight-box { background: rgba(255,255,255,0.9); padding: 5vh 4vw; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); border: 1px solid rgba(0,124,39,0.2); width: 100%; max-width: 1100px; margin: auto; text-align: center; }
 
@@ -299,13 +289,14 @@
                 </div>
             </div>
 
-            <!-- S6: Bewaarcondities Tabel (NIEUW: 10 Categorieën) -->
+            <!-- S6: Bewaarcondities Tabel (COMPACT MET 10 CATEGORIEËN) -->
             <div class="slide-container">
                 <div class="content-area">
                     <h2 class="slide-title" data-key="s6_title">Theorie: Optimale Bewaarcondities per Gewas</h2>
-                    <p data-key="s6_intro">Omdat de fysiologie zo verschilt, heeft elk gewas een eigen Equilibrium Modified Atmosphere (EMA) doelstelling. Een kleine afwijking in zuurstof kan al effect hebben op de kwaliteit.</p>
-                    <div class="table-layout compact-table">
-                        <table data-key="s6_table">
+                    <p style="margin-bottom: 1vh;" data-key="s6_intro">Omdat de fysiologie zo verschilt, heeft elk gewas een eigen Equilibrium Modified Atmosphere (EMA) doelstelling. Een kleine afwijking kan al effect hebben op de kwaliteit.</p>
+                    
+                    <div class="table-layout compact-table-container">
+                        <table class="compact-table" data-key="s6_table">
                             <thead>
                                 <tr>
                                     <th>Categorie (Voorbeelden)</th>
@@ -317,22 +308,23 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr><td><strong>1. Brassica's</strong> (Broccoli, Bloemkool)</td><td>Middel-hoog, CO₂-gevoelig</td><td>2-5%</td><td>5-10%</td><td>Middel</td><td>Zwavelgeur bij te hoge CO₂</td></tr>
-                                <tr><td><strong>2. Bladgroenten</strong> (Spinazie, Iceberg Lettuce)</td><td>Zeer hoog, snel kwaliteitsverlies</td><td>2-5%</td><td>5-10%</td><td>Relatief hoog</td><td>Vochtbalans + ROS-burst na openen</td></tr>
-                                <tr><td><strong>3. Verse kruiden</strong> (Basilicum, Koriander)</td><td>Extreem gevoelig (lage O₂ / condens)</td><td>5-10%</td><td>0-5%</td><td>Hoog</td><td>Snel kwaliteitsverlies bij te lage O₂</td></tr>
-                                <tr><td><strong>4. Gesneden fruit</strong> (Mango, Meloen)</td><td>Hoge suikers, fermentatiegevoelig</td><td>3-8%</td><td>5-15%</td><td>Middel</td><td>Fermentatie bij te lage O₂</td></tr>
-                                <tr><td><strong>5. Wortel- & knolgewassen</strong> (Wortel, Zoete aardappel)</td><td>Lage respiratie, stabiel</td><td>5-10%</td><td>0-5%</td><td>Laag</td><td>Uitdroging</td></tr>
+                                <tr><td><strong>1. Brassica's</strong> (Broccoli)</td><td>Middel-hoog, CO₂-gevoelig</td><td>2-5%</td><td>5-10%</td><td>Middel</td><td>Zwavelgeur bij te hoge CO₂</td></tr>
+                                <tr><td><strong>2. Bladgroenten</strong> (Iceberg Lettuce)</td><td>Zeer hoog, snel kwaliteitsverlies</td><td>2-5%</td><td>5-10%</td><td>Rel. hoog</td><td>Vochtbalans + ROS-burst na openen</td></tr>
+                                <tr><td><strong>3. Verse kruiden</strong> (Basilicum)</td><td>Extreem gevoelig (lage O₂ / condens)</td><td>5-10%</td><td>0-5%</td><td>Hoog</td><td>Snel kwaliteitsverlies bij te lage O₂</td></tr>
+                                <tr><td><strong>4. Gesneden fruit</strong> (Mango)</td><td>Hoge suikers, fermentatiegevoelig</td><td>3-8%</td><td>5-15%</td><td>Middel</td><td>Fermentatie bij te lage O₂</td></tr>
+                                <tr><td><strong>5. Wortel-/knolgewassen</strong> (Wortel)</td><td>Lage respiratie, stabiel</td><td>5-10%</td><td>0-5%</td><td>Laag</td><td>Uitdroging</td></tr>
                                 <tr><td><strong>6. Allium groenten</strong> (Ui, Prei)</td><td>Middel, microbiologisch gevoelig</td><td>3-8%</td><td>5-10%</td><td>Middel</td><td>Vocht en geurontwikkeling</td></tr>
                                 <tr><td><strong>7. Peulgewassen</strong> (Sperziebonen)</td><td>Middel respiratie, redelijk stabiel</td><td>2-5%</td><td>3-8%</td><td>Middel</td><td>Verkleuring bij verkeerde atmosfeer</td></tr>
                                 <tr><td><strong>8. Stengelgroenten</strong> (Asperge)</td><td>Middel-hoog, textuurgevoelig</td><td>2-5%</td><td>5-10%</td><td>Middel</td><td>Lignificatie / kwaliteitsverlies</td></tr>
                                 <tr><td><strong>9. Kiemgroenten</strong> (Taugé)</td><td>Zeer hoog, hoog microbiologisch risico</td><td>5-10%</td><td>0-5%</td><td>Hoog</td><td>Voedselveiligheid + snelle achteruitgang</td></tr>
-                                <tr><td><strong>10. Zetmeelrijk / Gemengd</strong> (Maïs, mix)</td><td>Variabel gedrag</td><td>3-7%</td><td>3-10%</td><td>Middel</td><td>Altijd afstemmen op meest kritische component</td></tr>
+                                <tr><td><strong>10. Gemengd</strong> (Salade mix)</td><td>Variabel gedrag</td><td>3-7%</td><td>3-10%</td><td>Middel</td><td>Afstemmen op meest kritische component</td></tr>
                             </tbody>
                         </table>
                     </div>
+                    
                     <div class="insights-box" data-key="s6_insights">
                         <strong>Belangrijke algemene MAP-inzichten:</strong>
-                        <ul style="margin-top: 0.5vh;">
+                        <ul>
                             <li>Producten passen zich aan aan lage O₂ &rarr; té laag leidt tot fermentatie/schade.</li>
                             <li>Na openen is er risico op een ROS-burst, wat leidt tot versnelde veroudering.</li>
                             <li>Ethyleengevoeligheid neemt toe na bewaring in MAP.</li>
@@ -503,7 +495,7 @@
                             <p>Om de beperkingen van dichte folies te omzeilen, stansen verpakkers vaak <strong>statische macro-perforaties</strong> (grote gaten).</p>
                             <p>De verpakking is dan enkel nog een plastic tasje. Het product ademt de omgevingslucht. Er ontstaat geen beschermende MAP-atmosfeer, snijvlakken oxideren sneller, en vocht (gewicht) ontsnapt ongeremd.</p>
                         </div>
-                        <div><div class="image-wrapper contain"><img src="https://www.kmpackaging.com/images/content/sections/5_700x416.jpg?11:04:00&_e=.jpg" alt="Macro perforaties"></div></div>
+                        <div><div class="image-wrapper contain"><img src="https://www.kmpackaging.com/images/content/sections/5_700x416.jpg?11:04:00&_e=.jpg" alt="Macro perforaties in folie"></div></div>
                     </div>
                 </div>
             </div>
@@ -612,7 +604,7 @@
                         <i class="fa-solid fa-leaf"></i>
                         <div class="case-study-box-content" data-key="s20_case">
                             <strong>Praktijkcase Iceberg Lettuce: Schone Seals</strong>
-                            <p>Versneden Iceberg Lettuce kleurt snel roze door blootstelling aan lucht. De O2 Control verlaagt het zuurstofniveau in de verpakking direct naar de berekende waarde, volkomen zónder turbulente luchtstromen. De lichte slasnippers waaien hierdoor niet omhoog in de seal.</p>
+                            <p>Versneden Iceberg Lettuce kleurt snel roze door blootstelling aan lucht. De O2 Control verlaagt het zuurstofniveau in de verpakking, zónder turbulente luchtstromen. De lichte slasnippers waaien hierdoor niet omhoog in de seal.</p>
                         </div>
                     </div>
                 </div>
@@ -671,7 +663,7 @@
                                 <li><strong>Finetunen:</strong> Op basis van de metingen sturen we de perforaties bij waar nodig voor een beter resultaat.</li>
                             </ul>
                         </div>
-                        <div><div class="image-wrapper contain"><img src="https://www.fdpp.co.uk/wp-content/uploads/2018/03/witt_gas_analyser_oxybaby6_FOOD.jpg" alt="Test"></div></div>
+                        <div><div class="image-wrapper contain"><img src="https://www.fdpp.co.uk/wp-content/uploads/2018/03/witt_gas_analyser_oxybaby6_FOOD.jpg" alt="Gasmeting apparatuur"></div></div>
                     </div>
                 </div>
             </div>
@@ -813,8 +805,8 @@
                 "s5_t2": "<div class='icon'><i class='fa-solid fa-leaf'></i></div><h3>Bladgroenten (bijv. Iceberg Lettuce)</h3><p>Gemiddelde ademhaling, maar <strong>gevoelig</strong> voor de gasbalans. Te weinig O2 leidt tot fermentatie (zure geur). Te veel CO2 leidt tot MAP-stress (roze/bruine verkleuring op de snijvlakken).</p>",
                 "s5_t3": "<div class='icon'><i class='fa-solid fa-seedling'></i></div><h3>Koolgewassen (bijv. Broccoli)</h3><p>Bezitten een zeer hoge ademhaling. Dit vereist een verpakking met een aanzienlijke zuurstofdoorlaatbaarheid om snelle anaerobe verstikking en penetrante zwavelgeuren te voorkomen.</p>",
                 "s6_title": "Theorie: Optimale Bewaarcondities per Gewas",
-                "s6_intro": "Omdat de fysiologie zo verschilt, heeft elk gewas een eigen Equilibrium Modified Atmosphere (EMA) doelstelling. Een kleine afwijking in zuurstof kan al effect hebben op de kwaliteit.",
-                "s6_table": "<thead><tr><th>Categorie (Voorbeelden)</th><th>Kenmerk / Respiratie</th><th>O₂</th><th>CO₂</th><th>Perforatie</th><th>Kritiek Aandachtspunt</th></tr></thead><tbody><tr><td><strong>1. Brassica's</strong> (Broccoli, Bloemkool)</td><td>Middel-hoog, CO₂-gevoelig</td><td>2-5%</td><td>5-10%</td><td>Middel</td><td>Zwavelgeur bij te hoge CO₂</td></tr><tr><td><strong>2. Bladgroenten</strong> (Spinazie, Iceberg Lettuce)</td><td>Zeer hoog, snel kwaliteitsverlies</td><td>2-5%</td><td>5-10%</td><td>Relatief hoog</td><td>Vochtbalans + ROS-burst na openen</td></tr><tr><td><strong>3. Verse kruiden</strong> (Basilicum, Koriander)</td><td>Extreem gevoelig (lage O₂ / condens)</td><td>5-10%</td><td>0-5%</td><td>Hoog</td><td>Snel kwaliteitsverlies bij te lage O₂</td></tr><tr><td><strong>4. Gesneden fruit</strong> (Mango, Meloen)</td><td>Hoge suikers, fermentatiegevoelig</td><td>3-8%</td><td>5-15%</td><td>Middel</td><td>Fermentatie bij te lage O₂</td></tr><tr><td><strong>5. Wortel- & knolgewassen</strong> (Wortel, Zoete aardappel)</td><td>Lage respiratie, stabiel</td><td>5-10%</td><td>0-5%</td><td>Laag</td><td>Uitdroging</td></tr><tr><td><strong>6. Allium groenten</strong> (Ui, Prei)</td><td>Middel, microbiologisch gevoelig</td><td>3-8%</td><td>5-10%</td><td>Middel</td><td>Vocht en geurontwikkeling</td></tr><tr><td><strong>7. Peulgewassen</strong> (Sperziebonen)</td><td>Middel respiratie, redelijk stabiel</td><td>2-5%</td><td>3-8%</td><td>Middel</td><td>Verkleuring bij verkeerde atmosfeer</td></tr><tr><td><strong>8. Stengelgroenten</strong> (Asperge)</td><td>Middel-hoog, textuurgevoelig</td><td>2-5%</td><td>5-10%</td><td>Middel</td><td>Lignificatie / kwaliteitsverlies</td></tr><tr><td><strong>9. Kiemgroenten</strong> (Taugé)</td><td>Zeer hoog, hoog microbiologisch risico</td><td>5-10%</td><td>0-5%</td><td>Hoog</td><td>Voedselveiligheid + snelle achteruitgang</td></tr><tr><td><strong>10. Zetmeelrijk / Gemengd</strong> (Maïs, mix)</td><td>Variabel gedrag</td><td>3-7%</td><td>3-10%</td><td>Middel</td><td>Altijd afstemmen op meest kritische component</td></tr></tbody>",
+                "s6_intro": "Omdat de fysiologie zo verschilt, heeft elk gewas een eigen Equilibrium Modified Atmosphere (EMA) doelstelling. Een kleine afwijking kan al effect hebben op de kwaliteit.",
+                "s6_table": "<thead><tr><th>Categorie (Voorbeelden)</th><th>Kenmerk / Respiratie</th><th>O₂</th><th>CO₂</th><th>Perforatie</th><th>Kritiek Aandachtspunt</th></tr></thead><tbody><tr><td><strong>1. Brassica's</strong> (Broccoli, Bloemkool)</td><td>Middel-hoog, CO₂-gevoelig</td><td>2-5%</td><td>5-10%</td><td>Middel</td><td>Zwavelgeur bij te hoge CO₂</td></tr><tr><td><strong>2. Bladgroenten</strong> (Spinazie, Iceberg Lettuce)</td><td>Zeer hoog, snel kwaliteitsverlies</td><td>2-5%</td><td>5-10%</td><td>Rel. hoog</td><td>Vochtbalans + ROS-burst na openen</td></tr><tr><td><strong>3. Verse kruiden</strong> (Basilicum, Koriander)</td><td>Extreem gevoelig (lage O₂ / condens)</td><td>5-10%</td><td>0-5%</td><td>Hoog</td><td>Snel kwaliteitsverlies bij te lage O₂</td></tr><tr><td><strong>4. Gesneden fruit</strong> (Mango, Meloen)</td><td>Hoge suikers, fermentatiegevoelig</td><td>3-8%</td><td>5-15%</td><td>Middel</td><td>Fermentatie bij te lage O₂</td></tr><tr><td><strong>5. Wortel- & knolgewassen</strong> (Wortel, Zoete aardappel)</td><td>Lage respiratie, stabiel</td><td>5-10%</td><td>0-5%</td><td>Laag</td><td>Uitdroging</td></tr><tr><td><strong>6. Allium groenten</strong> (Ui, Prei)</td><td>Middel, microbiologisch gevoelig</td><td>3-8%</td><td>5-10%</td><td>Middel</td><td>Vocht en geurontwikkeling</td></tr><tr><td><strong>7. Peulgewassen</strong> (Sperziebonen)</td><td>Middel respiratie, redelijk stabiel</td><td>2-5%</td><td>3-8%</td><td>Middel</td><td>Verkleuring bij verkeerde atmosfeer</td></tr><tr><td><strong>8. Stengelgroenten</strong> (Asperge)</td><td>Middel-hoog, textuurgevoelig</td><td>2-5%</td><td>5-10%</td><td>Middel</td><td>Lignificatie / kwaliteitsverlies</td></tr><tr><td><strong>9. Kiemgroenten</strong> (Taugé)</td><td>Zeer hoog, hoog microbiologisch risico</td><td>5-10%</td><td>0-5%</td><td>Hoog</td><td>Voedselveiligheid + snelle achteruitgang</td></tr><tr><td><strong>10. Gemengd</strong> (Salade mix)</td><td>Variabel gedrag</td><td>3-7%</td><td>3-10%</td><td>Middel</td><td>Afstemmen op meest kritische component</td></tr></tbody>",
                 "s6_insights": "<strong>Belangrijke algemene MAP-inzichten:</strong><ul style='margin-top: 0.5vh;'><li>Producten passen zich aan aan lage O₂ &rarr; té laag leidt tot fermentatie/schade.</li><li>Na openen is er risico op een ROS-burst, wat leidt tot versnelde veroudering.</li><li>Ethyleengevoeligheid neemt toe na bewaring in MAP.</li><li>Vochtbalans is cruciaal (de juiste afstemming tussen condens en uitdroging).</li><li>Bij gemengde producten (melanges): stuur altijd op de <strong>zwakste schakel</strong>.</li></ul>",
                 "s7_title": "Theorie: De Complexiteit van Productmixen",
                 "s7_text": "<p>Consumenten vragen steeds vaker om gemengde salades en roerbakmixen. Het verpakken hiervan is fysiologisch complex, omdat u meerdere levende organismen – met allemaal een ándere ademhaling – in één gesloten zak plaatst.</p><p>Gelukkig kunnen we de ademhalingsbehoefte van de totale mix wiskundig berekenen op basis van de individuele ingrediënten. Als product 1 snel stikt, en product 2 snel rot, vereist de totale mix een compleet nieuw verpakkings-evenwicht.</p>",
@@ -841,7 +833,7 @@
                 "s15_title": "Huidige Standaard: Macro perforaties",
                 "s15_text": "<h3>Het verlies van atmosferische bescherming</h3><p>Om de beperkingen van dichte folies te omzeilen, stansen verpakkers vaak <strong>statische macro-perforaties</strong> (grote gaten).</p><p>De verpakking is dan enkel nog een plastic tasje. Het product ademt de omgevingslucht. Er ontstaat geen beschermende MAP-atmosfeer, snijvlakken oxideren sneller, en vocht (gewicht) ontsnapt ongeremd.</p>",
                 "s16_title": "<i class='fa-solid fa-list-check' style='font-size: clamp(40px, 5vh, 60px); color: #007C27; margin-bottom: 2vh;'></i><h1>De Datagestuurde Oplossing</h1><p class='subtitle' style='max-width: 900px; margin: 0 auto; line-height: 1.6;'>Om de tekortkomingen van deze standaard verpakkingen te doorbreken en het product vers te houden, kiezen we voor <strong>adaptieve, datagestuurde kalibratie</strong>. Hiervoor ontwikkelde PerfoTec een geïntegreerd ecosysteem.</p>",
-                "s17_title": "Stap 1: Fast Respiration Meter - Fysiologische Diagnostiek",
+                "s17_title": "Stap 1: Fast Respiration Meter - Diagnostiek",
                 "s17_text": "<p><strong>Ademen is de eigenschap van de natuur.</strong> Om dit te sturen, moeten we de ademhaling exact begrijpen. Dit meten we in de productiefaciliteit.</p><ul><li><strong>Exacte Quantificatie:</strong> Meet via gasanalyse de snelheid van O2-consumptie en CO2-emissie.</li><li><strong>Tijdwinst:</strong> Krijg resultaten binnen maximaal 4 uur.</li><li><strong>Foutpreventie:</strong> Optimaliseer voor temperatuur en snij-schok vóórdat de folie geproduceerd is.</li></ul>",
                 "s17_case": "<strong>Praktijkcase Iceberg Lettuce: De ademhaling meten</strong><p>Iceberg Lettuce is gevoelig voor 'pinking' (roze oxidatie op het snijvlak). Voor productie plaatsen we een versneden monster in de FRM. We meten de sterkte van de snij-schok. We bepalen zo dat de zuurstofwaarde in de zak gestuurd moet worden naar 0.5-3% voor de meest optimale bewaarconditie.</p>",
                 "s18_title": "Stap 2: PerfoTec Hub - Slimme AMAP software",
@@ -856,7 +848,7 @@
                 "s21_title": "Stap 5: Folie - Aansluitend bij MAP + MHP",
                 "s21_t1": "<div class='icon'><i class='fa-solid fa-droplet-slash'></i></div><h3 style='color:#007C27;'>Retail: R+702 Folie</h3><ul><li><strong>Condens-eliminatie:</strong> Voert vocht af door hogere MVTR.</li><li><strong>Behoud van textuur:</strong> Helpt bij het verminderen van derving op het winkelschap.</li></ul>",
                 "s21_t2": "<div class='image-wrapper contain' style='height: 10vh; min-height: 80px; box-shadow: none; background: transparent; margin-bottom: 1vh;'><img src='https://www.perfotec.com/wp-content/uploads/2021/04/PerfoTec-Liner.png' alt='Liner'></div><h3 style='color:#054E9A;'>Bulk: Bio-liners</h3><ul><li><strong>Transitie Zeevracht:</strong> Verlengde opslag mogelijk.</li><li><strong>Ondersteuning:</strong> Betrouwbare bescherming bij langere transittijden.</li></ul>",
-                "s21_t3": "<div class='image-wrapper contain' style='height: 10vh; min-height: 80px; box-shadow: none; background: transparent; margin-bottom: 1vh;'><img src='https://media.licdn.com/dms/image/v2/D4D22AQFPgPlVExiU9g/feedshare-shrink_800/B4DZwpjaw9KYAg-/0/1770223677075?e=2147483647&v=beta&t=LLORb9lqopWrUJ0OLfLW6OyuQWkXk_TzLsRVLQTlZwg' alt='Pallet'></div><h3 style='color:#007C27;'>Logistiek: Pallet Cover</h3><ul><li><strong>Tarmac Protectie:</strong> Beschermt tegen extreme hitte en condens-schokken.</li><li><strong>Stabiliteit:</strong> Helpt 'carton collapse' te voorkomen.</li></ul>",
+                "s21_t3": "<div class='image-wrapper contain' style='height: 10vh; min-height: 80px; box-shadow: none; background: transparent; margin-bottom: 1vh;'><img src='https://media.licdn.com/dms/image/v2/D4D22AQFPgPlVExiU9g/feedshare-shrink_800/B4DZwpjaw9KYAg-/0/1770223677075?e=2147483647&v=beta&t=LLORb9lqopWrUJ0OLfLW6OyuQWkXk_TzLsRVLQTlZwg' alt='Pallet'></div><h3 style='color:#007C27;'>Logistiek: Pallet Cover</h3><ul><li><strong>Tarmac Protectie:</strong> Beschermt tegen hitte en condens-schokken.</li><li><strong>Stabiliteit:</strong> Helpt 'carton collapse' te voorkomen.</li></ul>",
                 "s21_case": "<strong>Praktijkcase Iceberg Lettuce: Langer vers in het schap</strong><p>Iceberg Lettuce 'zweet'. De PerfoTec R+ folie combineert de berekende gasbalans met een goede vochtdoorlaatbaarheid. Het transpiratievocht ademt deels naar buiten, waardoor de sla beter zijn 'crunch' behoudt.</p>",
                 "s22_title": "Validatie: Testen in de Praktijk",
                 "s22_text": "<p>Voordat we opschalen, is een test-fase cruciaal om theorie en praktijk te verbinden. We verifiëren de resultaten aan de hand van gasmetingen.</p><ul><li><strong>Prognose via de Hub:</strong> We berekenen eerst de verwachte gascondities.</li><li><strong>Praktijktesten:</strong> We meten in de praktijk of de prognose uitkomt.</li><li><strong>Finetunen:</strong> Op basis van de metingen sturen we de perforaties bij waar nodig voor een beter resultaat.</li></ul>",
